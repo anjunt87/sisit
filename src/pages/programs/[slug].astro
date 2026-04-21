@@ -1,0 +1,105 @@
+---
+// src/pages/programs/[slug].astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { programs, colorMap } from "../../data/programs";
+import type { ColorKey } from "../../data/programs";
+
+export function getStaticPaths() {
+  return programs.map((p) => ({
+    params: { slug: p.slug },
+    props: { program: p },
+  }));
+}
+
+const { program } = Astro.props;
+const style = colorMap[program.color as ColorKey];
+---
+
+<BaseLayout
+  title={`${program.title} — Nurul Imam Islamic School`}
+  description={program.desc}
+>
+  <!-- Hero -->
+  <section class={`bg-gradient-to-br py-40 px-6 ${style.bg}`}>
+    <div class="max-w-5xl mx-auto flex flex-col items-center text-center gap-6">
+      <!-- Icon -->
+      <div
+        class={`flex h-24 w-24 items-center justify-center rounded-3xl text-4xl text-white shadow-lg ${style.icon}`}
+      >
+        <i class={`fa-solid ${program.icon}`}></i>
+      </div>
+
+      <!-- Badge -->
+      <span
+        class={`rounded-full px-4 py-1 text-sm font-semibold ${style.badge}`}
+      >
+        Program Unggulan
+      </span>
+
+      <!-- Title -->
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800">
+        {program.title}
+      </h1>
+
+      <!-- Headline -->
+      <p class={`text-xl font-medium ${style.text}`}>
+        {program.details.headline}
+      </p>
+
+      <!-- Desc -->
+      <p class="max-w-2xl text-gray-600 text-lg">
+        {program.desc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16 px-6">
+    <div class="max-w-5xl mx-auto grid gap-10 md:grid-cols-3">
+      <!-- Points -->
+      <div class="md:col-span-2 bg-white rounded-2xl shadow-md p-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+          Yang Akan Kamu Dapatkan
+        </h2>
+        <ul class="space-y-4">
+          {
+            program.details.points.map((point) => (
+              <li class="flex items-start gap-3">
+                <span
+                  class={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white text-xs ${style.icon}`}
+                >
+                  <i class="fa-solid fa-check" />
+                </span>
+                <span class="text-gray-700">{point}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Highlights -->
+      <div class="flex flex-col gap-4">
+        {
+          program.details.highlights.map((h) => (
+            <div
+              class={`rounded-2xl border p-6 text-center bg-gradient-to-br shadow ${style.bg} ${style.border}`}
+            >
+              <div class={`text-3xl font-bold ${style.text}`}>{h.value}</div>
+              <div class="mt-1 text-sm text-gray-500">{h.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-6 text-center">
+    <a
+      href="/contact"
+      class={`inline-block rounded-full px-8 py-4 text-white font-semibold text-lg shadow-lg transition hover:opacity-90 hover:-translate-y-1 ${style.icon}`}
+    >
+      Daftar Sekarang <i class="fa-solid fa-arrow-right ml-2"></i>
+    </a>
+  </section>
+</BaseLayout>

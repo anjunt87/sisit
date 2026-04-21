@@ -1,0 +1,482 @@
+---
+// src/components/landing/Navbar.astro
+
+import logoWhite from "../../assets/images/logo-niis-putih.png";
+import logoColor from "../../assets/images/logo-niis-warna.png";
+
+const menuItems = [
+  { label: "Beranda", href: "/" },
+
+  {
+    label: "Tentang",
+    children: [
+      { label: "Profil Sekolah", href: "/about" },
+      { label: "Visi & Misi", href: "/schoolProfile#visi-misi" },
+      { label: "Tujuan", href: "/schoolProfile#tujuan" },
+      { label: "Fasilitas", href: "/schoolProfile#facilities" },
+      { label: "Struktur Organisasi", href: "/schoolProfile#struktur" },
+    ],
+  },
+
+  // { label: "Program", href: "/#programs" },
+  // { label: "Fasilitas", href: "/schoolProfile#facilities" },
+
+  {
+    label: "Unit Sekolah",
+    children: [
+      {
+        label: "NIIS 1",
+        children: [
+          { label: "TK NIIS 1", href: "/niis1/tk" },
+          { label: "SD NIIS 1", href: "/niis1/sd" },
+          { label: "SMP NIIS 1", href: "/niis1/smp" },
+        ],
+      },
+
+      {
+        label: "NIIS 2",
+        children: [
+          { label: "TK NIIS 2", href: "/niis2/tk" },
+          { label: "SD NIIS 2", href: "/niis2/sd" },
+          { label: "SMP NIIS 2", href: "/niis2/smp" },
+        ],
+      },
+
+      {
+        label: "NIIS 3",
+        children: [
+          { label: "TK NIIS 3", href: "/niis3/tk" },
+          { label: "SD NIIS 3", href: "/niis3/sd" },
+          { label: "SMP NIIS 3", href: "/niis3/smp" },
+        ],
+      },
+    ],
+  },
+
+  { label: "Berita", href: "/#berita" },
+  { label: "PPDB", href: "/ppdb" },
+  { label: "Kontak", href: "/#contact" },
+];
+---
+
+<nav 
+  id="navbar" 
+  class="fixed top-0 z-50 w-full 
+         bg-transparent      
+         text-white 
+         transition-all duration-500">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img
+          id="navbar-logo"
+          src={logoWhite.src}
+          alt="Logo NIIS"
+          class="h-10 w-auto object-contain transition-all duration-300"
+        />
+      </div>
+
+      <!-- ====================== DESKTOP ONLY FIX ====================== -->
+
+<div class="hidden md:flex items-center gap-1">
+  {
+    menuItems.map((item) =>
+      item.children ? (
+        <div class="relative group">
+          <!-- Parent -->
+          <button class="nav-link flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg hover:bg-white/10 transition">
+            {item.label}
+
+            <svg
+              class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Level 1 -->
+          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 rounded-xl bg-white shadow-xl border border-gray-100 py-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            {
+              item.children.map((child) =>
+                child.children ? (
+                  <div class="relative group/sub">
+                    <!-- Has Child -->
+                    <button class="w-full flex justify-between items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition">
+                      {child.label}
+
+                      <svg
+                        class="w-3.5 h-3.5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2.5"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+
+                    <!-- Level 2 -->
+                    <div class="absolute top-0 left-full ml-1 w-56 rounded-xl bg-white shadow-xl border border-gray-100 py-1.5 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                      {
+                        child.children.map((sub) => (
+                          <a
+                            href={sub.href}
+                            class="dropdown-link block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition"
+                          >
+                            {sub.label}
+                          </a>
+                        ))
+                      }
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href={child.href}
+                    class="dropdown-link block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition"
+                  >
+                    {child.label}
+                  </a>
+                ),
+              )
+            }
+          </div>
+        </div>
+      ) : (
+        <a
+          href={item.href}
+          class="nav-link px-3 py-2 text-sm font-medium rounded-lg hover:bg-white/10 transition"
+        >
+          {item.label}
+        </a>
+      ),
+    )
+  }
+</div>
+
+<!-- Right Side -->
+<div class="flex items-center gap-2">
+  <!-- Desktop Button -->
+  <a
+    href="/login"
+    class="hidden sm:inline-flex items-center rounded-xl bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition"
+  >
+    Masuk
+  </a>
+
+  <a
+    href="/daftar"
+    class="hidden sm:inline-flex items-center rounded-xl bg-yellow-400 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-yellow-500 transition"
+  >
+    Daftar
+  </a>
+
+  <!-- Hamburger -->
+  <button
+    id="hamburger"
+    class="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/10 transition"
+    aria-label="Toggle Menu"
+    aria-expanded="false"
+  >
+    <span
+      id="line1"
+      class="absolute w-6 h-0.5 bg-current rounded-full transition-all duration-300 -translate-y-2"
+    ></span>
+
+    <span
+      id="line2"
+      class="absolute w-6 h-0.5 bg-current rounded-full transition-all duration-300"
+    ></span>
+
+    <span
+      id="line3"
+      class="absolute w-6 h-0.5 bg-current rounded-full transition-all duration-300 translate-y-2"
+    ></span>
+  </button>
+</div>
+</div>
+
+<!-- Mobile Menu -->
+<div
+  id="mobile-menu"
+  class="md:hidden overflow-hidden max-h-0 transition-all duration-300"
+>
+  <div
+    class="mt-2 mb-3 rounded-2xl bg-white text-gray-800 shadow-2xl border border-gray-100 p-3 space-y-1"
+  >
+  
+    {
+      menuItems.map((item) =>
+        item.children ? (
+          <div class="mobile-dropdown">
+            <!-- Parent -->
+            <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-3 py-2.5 rounded-xl text-sm font-medium text-green-700 hover:bg-green-50 transition">
+              {item.label}
+
+              <svg
+                class="mobile-chevron w-4 h-4 transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            <!-- Dropdown -->
+            <div class="mobile-dropdown-panel grid grid-rows-[0fr] transition-all duration-300">
+              <div class="overflow-hidden">
+                <div class="pl-2 pt-1 pb-1 space-y-1">
+                  {
+                    item.children.map((child) =>
+                      child.children ? (
+                        <div class="mobile-sub-dropdown">
+                          <button class="mobile-sub-toggle w-full flex justify-between items-center px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition">
+                            {child.label}
+
+                            <svg
+                              class="mobile-sub-chevron w-4 h-4 transition-transform duration-300"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </button>
+
+                          <div class="mobile-sub-panel grid grid-rows-[0fr] transition-all duration-300">
+                            <div class="overflow-hidden">
+                              <div class="pl-3 py-1 space-y-1">
+                                {
+                                  child.children.map((sub) => (
+                                    <a
+                                      href={sub.href}
+                                      class="mobile-link block px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 transition"
+                                    >
+                                      {sub.label}
+                                    </a>
+                                  ))
+                                }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <a
+                          href={child.href}
+                          class="mobile-link block px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 transition"
+                        >
+                          {child.label}
+                        </a>
+                      ),
+                    )
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-medium text-green-700 hover:bg-green-50 transition"
+          >
+            {item.label}
+          </a>
+        ),
+      )
+    }
+
+    <!-- Mobile Buttons -->
+    <div class="grid grid-cols-2 gap-2 pt-3 border-t border-gray-100">
+      <a
+        href="/login"
+        class="rounded-xl bg-green-600 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-green-700 transition"
+      >
+        Masuk
+      </a>
+
+      <a
+        href="/daftar"
+        class="rounded-xl bg-yellow-400 px-4 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-yellow-500 transition"
+      >
+        Daftar
+      </a>
+    </div>
+    </div>
+  </div>
+</div>
+</nav>
+
+<script define:vars={{ whiteLogo: logoWhite.src, colorLogo: logoColor.src }}>
+  function initNavbar() {
+    const navbar = document.getElementById("navbar");
+    const logo = document.getElementById("navbar-logo");
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const line1 = document.getElementById("line1");
+    const line2 = document.getElementById("line2");
+    const line3 = document.getElementById("line3");
+
+    if (!navbar || !hamburger) return;
+
+    let open = false;
+
+    function updateNavbar() {
+      const scrolled = window.scrollY > 30;
+      const menuOpen = hamburger.getAttribute("aria-expanded") === "true";
+
+      if (scrolled || menuOpen) {
+        navbar.classList.remove("bg-transparent", "text-white");
+        navbar.classList.add("bg-white/80", "backdrop-blur-md", "shadow-lg", "text-green-700");
+        logo.src = colorLogo;
+      } else {
+        navbar.classList.remove("bg-white/80", "backdrop-blur-md", "shadow-lg", "text-green-700");
+        navbar.classList.add("bg-transparent", "text-white");
+        logo.src = whiteLogo;
+      }
+    }
+
+    function closeMenu() {
+      open = false;
+      hamburger.setAttribute("aria-expanded", "false");
+      mobileMenu.style.maxHeight = "0px";
+      line1.style.transform = "translateY(-2px) rotate(0)";
+      line2.style.opacity = "1";
+      line3.style.transform = "translateY(2px) rotate(0)";
+      updateNavbar();
+    }
+
+    function openMenu() {
+      open = true;
+      hamburger.setAttribute("aria-expanded", "true");
+      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 200 + "px";
+      line1.style.transform = "translateY(8px) rotate(45deg)";
+      line2.style.opacity = "0";
+      line3.style.transform = "translateY(-8px) rotate(-45deg)";
+      updateNavbar();
+    }
+
+    hamburger.addEventListener("click", () => (open ? closeMenu() : openMenu()));
+
+    // Mobile links
+    document.querySelectorAll(".mobile-link, .dropdown-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          e.preventDefault();
+          closeMenu();
+          const target = document.querySelector(href);
+          if (target) {
+            setTimeout(() => {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 300);
+          }
+        } else {
+          closeMenu();
+        }
+      });
+    });
+
+    // Level 1 accordion
+    document.querySelectorAll(".mobile-dropdown-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const panel = btn.nextElementSibling;
+        const chevron = btn.querySelector(".mobile-chevron");
+        const isOpen = panel.style.gridTemplateRows === "1fr";
+
+        document.querySelectorAll(".mobile-dropdown-panel").forEach((p) => {
+          p.style.gridTemplateRows = "0fr";
+        });
+        document.querySelectorAll(".mobile-chevron").forEach((c) => {
+          c.style.transform = "";
+        });
+        document.querySelectorAll(".mobile-sub-panel").forEach((p) => {
+          p.style.gridTemplateRows = "0fr";
+        });
+        document.querySelectorAll(".mobile-sub-chevron").forEach((c) => {
+          c.style.transform = "";
+        });
+
+        if (!isOpen) {
+          panel.style.gridTemplateRows = "1fr";
+          chevron.style.transform = "rotate(180deg)";
+        }
+
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 400 + "px";
+      });
+    });
+
+    // Level 2 accordion
+    document.querySelectorAll(".mobile-sub-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const panel = btn.nextElementSibling;
+        const chevron = btn.querySelector(".mobile-sub-chevron");
+        const isOpen = panel.style.gridTemplateRows === "1fr";
+
+        const parentDropdown = btn.closest(".mobile-dropdown-panel");
+        parentDropdown.querySelectorAll(".mobile-sub-panel").forEach((p) => {
+          p.style.gridTemplateRows = "0fr";
+        });
+        parentDropdown.querySelectorAll(".mobile-sub-chevron").forEach((c) => {
+          c.style.transform = "";
+        });
+
+        if (!isOpen) {
+          panel.style.gridTemplateRows = "1fr";
+          chevron.style.transform = "rotate(180deg)";
+        }
+
+        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 400 + "px";
+      });
+    });
+
+    // Scroll listener — simpan referensi agar bisa di-remove
+    window.addEventListener("scroll", updateNavbar);
+    updateNavbar();
+
+    // Cleanup saat View Transitions berpindah halaman
+    document.addEventListener("astro:before-swap", () => {
+      window.removeEventListener("scroll", updateNavbar);
+    }, { once: true });
+
+    // Smooth scroll untuk desktop nav
+document.querySelectorAll(".nav-link, .dropdown-link").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  });
+});
+  }
+
+  // Jalankan saat pertama load DAN setelah setiap page transition
+  initNavbar();
+  document.addEventListener("astro:after-swap", initNavbar);
+</script>

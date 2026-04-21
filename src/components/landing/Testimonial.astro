@@ -1,0 +1,171 @@
+---
+// src/components/landing/Testimonial.astro
+import { testimonials } from "../../data/testimonials";
+---
+
+<section class="py-20 px-6 relative overflow-hidden bg-gray-50">
+  <!-- Background -->
+  <svg
+    class="absolute inset-0 w-full h-full opacity-10"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice"
+  >
+    <defs>
+      <pattern
+        id="star"
+        patternUnits="userSpaceOnUse"
+        width="50"
+        height="50"
+      >
+        <path
+          d="M25 0 L30 20 L50 25 L30 30 L25 50 L20 30 L0 25 L20 20 Z"
+          fill="none"
+          stroke="#16610E"
+          stroke-width="1"
+        >
+        </path>
+      </pattern>
+    </defs>
+    <rect
+      width="100%"
+      height="100%"
+      fill="url(#star)"
+    >
+    </rect>
+  </svg>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Heading -->
+    <div class="text-center mb-16">
+      <span
+        class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+      >
+        Testimoni
+      </span>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+        Apa Kata <span class="text-green-600">Mereka</span>
+      </h2>
+    </div>
+
+    <!-- Swiper -->
+    <div class="swiper testimonial-swiper">
+      <div class="swiper-wrapper pb-12">
+        {
+          testimonials.map((item) => (
+            <div class="swiper-slide">
+              <div class="testimonial-card p-8 bg-white rounded-2xl shadow-lg h-full flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-lime-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shrink-0">
+                      {item.initial}
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-gray-800">{item.name}</h4>
+                      <p class="text-sm text-gray-500">{item.role}</p>
+                    </div>
+                  </div>
+                  <p class="text-gray-700 mb-5 leading-relaxed line-clamp-4">
+                    "{item.message}"
+                  </p>
+                </div>
+                <div class="flex text-yellow-400 gap-1">
+                  {Array.from({ length: item.rating }).map((_, i) => (
+                    <i class="fas fa-star" />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .swiper-slide {
+    height: auto;
+  }
+
+  .testimonial-card {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .testimonial-swiper {
+    padding-bottom: 3rem !important;
+  }
+
+  .testimonial-swiper .swiper-pagination {
+    bottom: 0;
+  }
+
+  .testimonial-swiper .swiper-pagination-bullet {
+    background: #10b981;
+    opacity: 0.4;
+    width: 8px;
+    height: 8px;
+  }
+
+  .testimonial-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #059669;
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  /* Fallback line-clamp jika plugin Tailwind tidak aktif */
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+<script>
+  import Swiper from "swiper";
+  import { Autoplay, Pagination } from "swiper/modules";
+
+  let swiper = null;
+
+  function init() {
+    if (swiper) {
+      swiper.destroy(true, true);
+      swiper = null;
+    }
+    const el = document.querySelector(".testimonial-swiper");
+    if (!el) return;
+    swiper = new Swiper(".testimonial-swiper", {
+      modules: [Autoplay, Pagination],
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: {
+        el: ".testimonial-swiper .swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+  document.addEventListener("astro:before-swap", () => {
+    if (swiper) {
+      swiper.destroy(true, true);
+      swiper = null;
+    }
+  });
+</script>

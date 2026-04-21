@@ -1,0 +1,217 @@
+:root {
+  --green-deep: #1a3a2a;
+  --green-mid: #2d6a4f;
+  --green-accent: #52b788;
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --cream: #f8fff5;
+}
+
+#ppdb-banner {
+  font-family: "Tajawal", sans-serif;
+}
+
+.font-display {
+  font-family: "Playfair Display", serif;
+}
+
+.islamic-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M30 0l8.66 15H21.34L30 0zm0 60l-8.66-15h17.32L30 60zM0 30l15-8.66v17.32L0 30zm60 0l-15 8.66V21.34L60 30zM30 22.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Countdown */
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 14px 20px 10px;
+  min-width: 72px;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s;
+}
+
+.countdown-box:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.countdown-num {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  color: var(--green-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* CTA */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--green-deep);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition:
+    background 0.25s,
+    transform 0.2s,
+    box-shadow 0.25s;
+  box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4);
+}
+
+.cta-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
+}
+
+.cta-btn svg {
+  transition: transform 0.2s;
+}
+
+.cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Secondary */
+.sec-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  color: white;
+  font-size: 0.95rem;
+  padding: 12px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition:
+    border-color 0.25s,
+    background 0.25s;
+}
+
+.sec-btn:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.1);
+}
+
+/* Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-open {
+  background: rgba(82, 183, 136, 0.2);
+  border: 1px solid rgba(82, 183, 136, 0.5);
+  color: #85e0b3;
+}
+
+.badge-closed {
+  background: rgba(220, 80, 80, 0.2);
+  border: 1px solid rgba(220, 80, 80, 0.5);
+  color: #f4a0a0;
+}
+
+.badge-soon {
+  background: rgba(201, 168, 76, 0.2);
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  color: var(--gold-light);
+}
+
+/* Pulse */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #52b788;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.6);
+    opacity: 0.6;
+  }
+}
+
+/* Info */
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 16px;
+  transition: background 0.3s;
+}
+
+.info-item:hover {
+  background: rgba(255,255,255,0.09);
+}
+
+/* Progress */
+#ppdb-progress-fill {
+  height: 6px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--green-accent), var(--gold));
+  transition: width 1s ease;
+}
+
+/* Ornament */
+.ornament-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.ornament-line::before,
+.ornament-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .countdown-num {
+    font-size: 1.8rem;
+  }
+
+  .countdown-box {
+    min-width: 56px;
+    padding: 10px 12px 8px;
+  }
+
+  .cta-btn {
+    font-size: 0.9rem;
+    padding: 12px 24px;
+  }
+}

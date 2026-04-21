@@ -1,0 +1,85 @@
+---
+//src\layouts\BaseLayout.astro
+import "../styles/global.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+export { initMobileMenu } from "../scripts/mobileMenu";
+export { initSmoothScroll } from "../scripts/smoothScroll";
+export { initBackToTop } from "../scripts/backToTop";
+// export { initChatBot } from "../scripts/chatBot";
+export { initLazyImage } from "../scripts/lazyImage";
+export { initContactForm } from "../scripts/contactForm";
+
+import Navbar from "../components/landing/Navbar.astro";
+import Footer from "../components/landing/Footer.astro";
+import FloatingButtons from "../components/ui/FloatingButtons.astro";
+import Chatbot from "../components/ui/Chatbot.astro";
+
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Nurul Imam Islamic School",
+  description = "Sekolah Islam terbaik di Karawang",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <title>{title}</title>
+    <meta
+      name="description"
+      content={description}
+    />
+    <meta
+      name="theme-color"
+      content="#059669"
+    />
+
+    <link
+      rel="icon"
+      href="/favicon.png"
+    />
+
+    <!-- <ClientRouter /> -->
+  </head>
+
+  <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
+    <Navbar />
+
+    <main>
+      <slot />
+    </main>
+    <FloatingButtons />
+    <Chatbot />
+    <Footer />
+  </body>
+  <script>
+    import {
+      initMobileMenu,
+      initSmoothScroll,
+      initBackToTop,
+      initLazyImage,
+      initContactForm,
+      // initChatBot,
+    } from "../scripts/main";
+
+    initMobileMenu();
+    initSmoothScroll("mobileMenu");
+    initBackToTop();
+    initLazyImage();
+    initContactForm();
+    // initChatBot();
+  </script>
+</html>

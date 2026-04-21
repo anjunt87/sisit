@@ -1,0 +1,349 @@
+---
+
+---
+
+<!-- Floating Button -->
+<div class="fixed bottom-20 right-4 z-40">
+  <button
+    id="chatbotToggle"
+    type="button"
+    class="w-12 h-12 bg-white/20 text-green-600 rounded-full flex items-center justify-center shadow-xl backdrop-blur-md hover:bg-white/30 transition-all hover:scale-110 cursor-pointer"
+    title="Buka Chatbot"
+  >
+    <i class="fas fa-comment-alt text-xl"></i>
+  </button>
+</div>
+
+<!-- Chatbox -->
+<div
+  id="chatbotBox"
+  class="fixed bottom-24 right-6 z-50 w-96 max-w-[calc(100vw-2rem)] bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-2xl flex-col overflow-hidden"
+  style="display: none;"
+>
+  <!-- Header -->
+  <div
+    class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex justify-between items-center"
+  >
+    <div class="flex items-center space-x-2">
+      <div
+        class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
+      >
+        <i class="fas fa-robot text-sm"></i>
+      </div>
+      <div>
+        <h3 class="font-semibold">Asisten Sekolah</h3>
+        <p
+          class="text-xs opacity-90"
+          id="chatbotStatus"
+        >
+          Online
+        </p>
+      </div>
+    </div>
+    <button
+      id="closeChatbot"
+      class="text-white/80 hover:text-white text-xl transition-colors"
+    >
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Messages Area -->
+  <div
+    id="chatMessages"
+    class="relative flex-1 overflow-y-auto h-80 p-4 space-y-3 bg-white/10 backdrop-blur-sm border-t border-white/20"
+  >
+    <svg
+      class="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <defs>
+        <pattern
+          id="starBot"
+          patternUnits="userSpaceOnUse"
+          width="20"
+          height="20"
+        >
+          <path
+            d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z"
+            fill="none"
+            stroke="#16610E"
+            stroke-width="0.8"
+          >
+          </path>
+        </pattern>
+      </defs>
+      <rect
+        width="100%"
+        height="100%"
+        fill="url(#starBot)"
+      >
+      </rect>
+    </svg>
+
+    <!-- Welcome message -->
+    <div class="text-left chat-animation relative z-10">
+      <div
+        class="inline-block bg-white text-gray-700 px-4 py-2 rounded-2xl rounded-tl-sm shadow-sm max-w-xs"
+      >
+        <p class="text-sm">
+          Halo! Saya asisten virtual sekolah. Ada yang bisa saya bantu?
+        </p>
+      </div>
+      <p class="text-xs text-gray-500 mt-1 ml-2">Barusan</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div
+    id="quickActions"
+    class="px-4 py-2 bg-white/30 backdrop-blur-sm border-t border-white/20"
+  >
+    <p class="text-xs text-gray-500 mb-2">Pertanyaan populer:</p>
+    <div class="flex flex-wrap gap-1">
+      <button
+        class="quick-btn px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs hover:bg-green-200 transition-colors"
+        data-message="Bagaimana cara daftar?"
+      >
+        📝 Pendaftaran
+      </button>
+      <button
+        class="quick-btn px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs hover:bg-blue-200 transition-colors"
+        data-message="Program apa saja yang ada?"
+      >
+        📚 Program
+      </button>
+      <button
+        class="quick-btn px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs hover:bg-purple-200 transition-colors"
+        data-message="Jam belajar berapa?"
+      >
+        🕐 Jadwal
+      </button>
+      <button
+        class="quick-btn px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs hover:bg-orange-200 transition-colors"
+        data-message="Dimana lokasi sekolah?"
+      >
+        📍 Lokasi
+      </button>
+    </div>
+  </div>
+
+  <!-- Input Form -->
+  <div class="p-4 bg-white/30 backdrop-blur-sm border-t border-white/20">
+    <form
+      id="chatbotForm"
+      class="flex gap-2"
+    >
+      <input
+        type="text"
+        id="chatInput"
+        placeholder="Ketik pertanyaan..."
+        class="flex-1 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm bg-white/70 backdrop-blur-md"
+      />
+      <button
+        type="submit"
+        id="sendBtn"
+        class="px-4 py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <i class="fas fa-paper-plane text-sm"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .typing-indicator {
+    width: 8px;
+    height: 8px;
+    background: #9ca3af;
+    border-radius: 50%;
+    animation: typing 1.2s infinite ease-in-out;
+  }
+  .typing-indicator:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .typing-indicator:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  @keyframes typing {
+    0%,
+    80%,
+    100% {
+      transform: scale(0.7);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .chat-animation {
+    animation: fadeInUp 0.3s ease-out;
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const chatbotToggle = document.getElementById("chatbotToggle")!;
+  const chatbotBox = document.getElementById("chatbotBox")! as HTMLElement;
+  const closeChatbot = document.getElementById("closeChatbot")!;
+  const chatbotForm = document.getElementById(
+    "chatbotForm",
+  )! as HTMLFormElement;
+  const chatInput = document.getElementById("chatInput")! as HTMLInputElement;
+  const chatMessages = document.getElementById("chatMessages")!;
+  const sendBtn = document.getElementById("sendBtn")! as HTMLButtonElement;
+  const quickActions = document.getElementById("quickActions")! as HTMLElement;
+  const statusEl = document.getElementById("chatbotStatus")!;
+
+  let isLoading = false;
+  let conversationHistory: { role: string; content: string }[] = [];
+
+  // ── Toggle buka/tutup ───────────────────────────────────────
+  chatbotToggle.addEventListener("click", () => {
+    const isOpen = chatbotBox.style.display === "flex";
+    chatbotBox.style.display = isOpen ? "none" : "flex";
+    if (!isOpen) chatInput.focus();
+  });
+
+  closeChatbot.addEventListener("click", () => {
+    chatbotBox.style.display = "none";
+  });
+
+  // ── Quick action buttons ────────────────────────────────────
+  document.querySelectorAll(".quick-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const message = (btn as HTMLElement).dataset.message ?? "";
+      chatInput.value = message;
+      sendMessage();
+    });
+  });
+
+  // ── Form submit ─────────────────────────────────────────────
+  chatbotForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    sendMessage();
+  });
+
+  // ── Kirim pesan ─────────────────────────────────────────────
+  function sendMessage() {
+    const userMessage = chatInput.value.trim();
+    if (!userMessage || isLoading) return;
+
+    quickActions.style.display = "none";
+    addMessage(userMessage, "user");
+    chatInput.value = "";
+    showTypingIndicator();
+
+    conversationHistory.push({ role: "user", content: userMessage });
+
+    fetch("/api/chatbot/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: userMessage,
+        history: conversationHistory,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        removeTypingIndicator();
+        const reply = data.reply ?? "Maaf, tidak ada respons.";
+        addMessage(reply, "bot");
+        conversationHistory.push({ role: "assistant", content: reply });
+
+        if (Array.isArray(data.actions)) renderQuickActions(data.actions);
+      })
+      .catch((err) => {
+        console.error("[Chatbot]", err);
+        removeTypingIndicator();
+        addMessage("Maaf, terjadi kesalahan. Silakan coba lagi.", "bot");
+      });
+  }
+
+  // ── Tambah bubble pesan ─────────────────────────────────────
+  function addMessage(message: string, sender: "user" | "bot") {
+    const time = new Date().toLocaleTimeString("id-ID", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const div = document.createElement("div");
+    div.className = `${sender === "user" ? "text-right" : "text-left"} chat-animation relative z-10`;
+
+    div.innerHTML =
+      sender === "user"
+        ? `<div class="inline-block bg-green-500 text-white px-4 py-2 rounded-2xl rounded-tr-sm shadow-sm max-w-xs">
+           <p class="text-sm">${message}</p>
+         </div>
+         <p class="text-xs text-gray-500 mt-1 mr-2">${time}</p>`
+        : `<div class="inline-block bg-white text-gray-700 px-4 py-2 rounded-2xl rounded-tl-sm shadow-sm max-w-xs">
+           <p class="text-sm">${message}</p>
+         </div>
+         <p class="text-xs text-gray-500 mt-1 ml-2">${time}</p>`;
+
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // ── Typing indicator ────────────────────────────────────────
+  function showTypingIndicator() {
+    isLoading = true;
+    sendBtn.disabled = true;
+    statusEl.textContent = "Mengetik...";
+
+    const div = document.createElement("div");
+    div.id = "typingIndicator";
+    div.className = "text-left relative z-10";
+    div.innerHTML = `
+      <div class="inline-block bg-white text-gray-700 px-4 py-3 rounded-2xl rounded-tl-sm shadow-sm">
+        <div class="flex space-x-1">
+          <div class="typing-indicator"></div>
+          <div class="typing-indicator"></div>
+          <div class="typing-indicator"></div>
+        </div>
+      </div>`;
+
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    document.getElementById("typingIndicator")?.remove();
+    isLoading = false;
+    sendBtn.disabled = false;
+    statusEl.textContent = "Online";
+  }
+
+  // ── Render quick actions dinamis ────────────────────────────
+  function renderQuickActions(actions: { label: string; message: string }[]) {
+    quickActions.style.display = "block";
+    const container = quickActions.querySelector(".flex.flex-wrap")!;
+    container.innerHTML = "";
+
+    actions.forEach((action) => {
+      const btn = document.createElement("button");
+      btn.className =
+        "quick-btn px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs hover:bg-green-200 transition-colors";
+      btn.textContent = action.label;
+      btn.dataset.message = action.message;
+      btn.addEventListener("click", () => {
+        chatInput.value = action.message;
+        sendMessage();
+      });
+      container.appendChild(btn);
+    });
+  }
+</script>

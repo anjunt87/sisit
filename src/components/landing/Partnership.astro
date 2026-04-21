@@ -1,0 +1,146 @@
+---
+// src/components/landing/Partnership.astro
+
+import logoUIN from "../../assets/images/partnership/logo-UIN.png";
+import logoUI from "../../assets/images/partnership/logo-UI.png";
+import logoMUI from "../../assets/images/partnership/logo-MUI.png";
+import logoBaznas from "../../assets/images/partnership/logo-baznas.png";
+import logoRumahTahfidz from "../../assets/images/partnership/logo-rumah-tahfidz.png";
+import logoODOJ from "../../assets/images/partnership/logo-odoj-karawang.png";
+import logoUMMI from "../../assets/images/partnership/logo-UMMI.png";
+
+const partners = [
+  { name: "UIN SGD Bandung", logo: logoUIN },
+  { name: "Universitas Islam Indonesia", logo: logoUI },
+  { name: "Majelis Ulama Indonesia", logo: logoMUI },
+  { name: "BAZNAS", logo: logoBaznas },
+  { name: "Rumah Tahfidz", logo: logoRumahTahfidz },
+  { name: "ODOJ Karawang", logo: logoODOJ },
+  { name: "UMMI", logo: logoUMMI },
+];
+---
+
+<section class="py-14 bg-gradient-to-br from-blue-50 to-green-50 px-6">
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-10 fade-up delay-0">
+      <span
+        class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+      >
+        Kerja Sama
+      </span>
+
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+        Partnership <span class="text-green-600">Strategis</span>
+      </h2>
+
+      <p class="text-gray-600 max-w-xl mx-auto">
+        Kami menjalin kemitraan dengan lembaga keislaman dan universitas
+        terkemuka untuk mendukung pengembangan pendidikan Islami berkualitas.
+      </p>
+    </div>
+
+    <!-- Swiper -->
+    <div class="swiper kerja-sama-swiper fade-up delay-0">
+      <div class="swiper-wrapper pb-10">
+        {
+          partners.map((item) => (
+            <div class="swiper-slide flex items-center justify-center">
+              <div class="bg-white shadow-md rounded-xl p-6 w-full h-36 flex items-center justify-center">
+                <img
+                  src={item.logo.src}
+                  alt={item.name}
+                  class="h-12 object-contain grayscale hover:grayscale-0 transition duration-300"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination mt-10 flex justify-center"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kerja-sama-swiper .swiper-pagination-bullet {
+    background: #10b981;
+    opacity: 0.5;
+  }
+
+  .kerja-sama-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #059669;
+  }
+
+  .kerja-sama-swiper .swiper-button-next,
+  .kerja-sama-swiper .swiper-button-prev {
+    color: #059669;
+  }
+
+  .kerja-sama-swiper .swiper-button-next:hover,
+  .kerja-sama-swiper .swiper-button-prev:hover {
+    color: #10b981;
+  }
+
+  .swiper-slide {
+    transition: transform 0.3s ease;
+  }
+
+  .swiper-slide:hover {
+    transform: translateY(-5px);
+  }
+</style>
+
+<!-- Import Swiper CSS & JS dari CDN -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<script
+  src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+  is:inline
+>
+</script>
+<script>
+  import Swiper from "swiper";
+  import { Autoplay, Pagination } from "swiper/modules";
+
+  let swiper = null;
+
+  function init() {
+    if (swiper) {
+      swiper.destroy(true, true);
+      swiper = null;
+    }
+    const el = document.querySelector(".kerja-sama-swiper");
+    if (!el) return;
+    swiper = new Swiper(".kerja-sama-swiper", {
+      modules: [Autoplay, Pagination],
+      slidesPerView: 2,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      pagination: {
+        el: ".kerja-sama-swiper .swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        640: { slidesPerView: 3 },
+        768: { slidesPerView: 4 },
+        1024: { slidesPerView: 5 },
+      },
+    });
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", init);
+  document.addEventListener("astro:before-swap", () => {
+    if (swiper) {
+      swiper.destroy(true, true);
+      swiper = null;
+    }
+  });
+</script>

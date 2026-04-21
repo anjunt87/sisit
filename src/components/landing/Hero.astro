@@ -1,0 +1,368 @@
+---
+// src/components/landing/About.astro
+
+const slides = [
+  {
+    id: 1,
+    image:
+      "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=2072&q=80",
+    unit: "Playgroup & TK Islam",
+    ageRange: "Usia 2–6 Tahun",
+    title: "Fondasi Iman Sejak Dini",
+    description:
+      "Membangun karakter Islami dan kecintaan belajar sejak usia emas. Anak-anak tumbuh dalam lingkungan yang penuh kasih, aman, dan bernuansa Qurani.",
+    color: "#D97706",   // amber
+    accentBg: "bg-amber-600/30",
+    accentBorder: "border-amber-300",
+    btnBg: "bg-amber-600 hover:bg-amber-700",
+    dotActive: "bg-amber-400",
+    icon: "🌱",
+  },
+  {
+    id: 2,
+    image:
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=2022&q=80",
+    unit: "SDIT (SD Islam Terpadu)",
+    ageRange: "Kelas 1–6 · Usia 6–12 Tahun",
+    title: "Mengakar Ilmu, Mekar Akhlak",
+    description:
+      "Kurikulum nasional terintegrasi dengan pendidikan Al-Quran, tahfidz, dan akhlak Islami. Siswa dibekali literasi digital dan kecakapan abad 21.",
+    color: "#16A34A",   // green
+    accentBg: "bg-green-600/30",
+    accentBorder: "border-green-300",
+    btnBg: "bg-green-600 hover:bg-green-700",
+    dotActive: "bg-green-400",
+    icon: "📖",
+  },
+  {
+    id: 3,
+    image:
+      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=2032&q=80",
+    unit: "SMPIT (SMP Islam Terpadu)",
+    ageRange: "Kelas 7–9 · Usia 12–15 Tahun",
+    title: "Generasi Qur'ani Berprestasi",
+    description:
+      "Masa remaja yang penuh potensi diarahkan dengan bimbingan agama, program tahfidz intensif, olimpiade sains, dan pengembangan kepemimpinan Islami.",
+    color: "#0284C7",   // sky
+    accentBg: "bg-sky-600/30",
+    accentBorder: "border-sky-300",
+    btnBg: "bg-sky-600 hover:bg-sky-700",
+    dotActive: "bg-sky-400",
+    icon: "🏆",
+  },
+  {
+    id: 4,
+    image:
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=2071&q=80",
+    unit: "SMAIT (SMA Islam Terpadu)",
+    ageRange: "Kelas 10–12 · Usia 15–18 Tahun",
+    title: "Ulul Albab Siap Mendunia",
+    description:
+      "Disiapkan untuk perguruan tinggi terkemuka dalam dan luar negeri. Menggabungkan keunggulan akademik, hafalan Quran, dan jiwa entrepreneur Islami.",
+    color: "#7C3AED",   // violet
+    accentBg: "bg-violet-600/30",
+    accentBorder: "border-violet-300",
+    btnBg: "bg-violet-600 hover:bg-violet-700",
+    dotActive: "bg-violet-400",
+    icon: "🎓",
+  },
+];
+---
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+  #about {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .slide-panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .slide-panel.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .unit-badge {
+    font-family: 'Amiri', serif;
+    letter-spacing: 0.04em;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: white;
+    transform-origin: left;
+    animation: none;
+    width: 0%;
+    transition: width linear;
+  }
+
+  .progress-bar.running {
+    width: 100%;
+    transition: width 5s linear;
+  }
+
+  .nav-unit-btn {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transition: all 0.3s ease;
+  }
+
+  .slide-content-inner {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+  }
+
+  .slide-panel.active .slide-content-inner {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Arabic pattern overlay */
+  .pattern-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .arabesque {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    letter-spacing: 0.08em;
+  }
+</style>
+
+<section id="hero" class="bg-[#f7f3ee]">
+  <!-- Slideshow wrapper -->
+  <div class="relative h-screen overflow-hidden">
+
+    <!-- Slides -->
+    {slides.map((slide, i) => (
+      <div class={`slide-panel ${i === 0 ? 'active' : ''}`} data-index={i}>
+        <!-- BG image -->
+        <div
+          class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[8000ms]"
+          style={`background-image:url(${slide.image})`}
+        />
+        <!-- Dark + color overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/20" />
+        <!-- Pattern texture -->
+        <div class="pattern-overlay absolute inset-0" />
+
+        <!-- Content -->
+        <div class="relative z-10 h-full flex items-center">
+          <div class="max-w-7xl mx-auto px-6 lg:px-16 w-full">
+            <div class="max-w-2xl">
+              <div class="slide-content-inner space-y-6">
+
+                <!-- Top arabic text -->
+                <p class="arabesque text-white/60">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+
+                <!-- Unit badge -->
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class={`unit-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white ${slide.accentBg} border ${slide.accentBorder} backdrop-blur-sm`}>
+                    <span class="text-base">{slide.icon}</span>
+                    {slide.unit}
+                  </span>
+                  <span class="text-white/60 text-sm border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                    {slide.ageRange}
+                  </span>
+                </div>
+
+                <!-- Title -->
+                <h2 class="text-4xl lg:text-6xl font-bold text-white leading-tight" style="font-family:'Amiri',serif">
+                  {slide.title}
+                </h2>
+
+                <!-- Description -->
+                <p class="text-base lg:text-lg text-gray-200 leading-relaxed max-w-xl">
+                  {slide.description}
+                </p>
+
+                <!-- CTA -->
+                <div class="flex flex-wrap gap-4 pt-2">
+                  <a
+                    href="#programs"
+                    class={`inline-flex items-center gap-2 text-white ${slide.btnBg} px-6 py-3 rounded-xl font-semibold transition-all shadow-lg`}
+                  >
+                    Lihat Program
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </a>
+                  <a
+                    href="#contact"
+                    class="inline-flex items-center gap-2 text-white border border-white/30 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-all"
+                  >
+                    Daftar Sekarang
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="absolute bottom-0 left-0 right-0 z-20 h-[3px] bg-white/10">
+          <div class={`progress-bar ${i === 0 ? 'running' : ''}`} data-bar={i} style={`background:${slide.color}`} />
+        </div>
+      </div>
+    ))}
+
+    <!-- Vertical unit navigation (right side) -->
+    <div class="absolute right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col gap-2">
+      {slides.map((slide, i) => (
+        <button
+          class={`nav-unit-btn group relative px-2 py-4 text-xs font-semibold tracking-widest uppercase rounded-lg transition-all duration-300 ${i === 0 ? 'text-white bg-white/15 backdrop-blur-sm' : 'text-white/40 hover:text-white/80'}`}
+          data-goto={i}
+          title={slide.unit}
+        >
+          <span>{slide.icon}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Bottom controls -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30">
+      <div class="flex items-center gap-3 rounded-2xl bg-black/30 backdrop-blur-md px-6 py-3 border border-white/15 shadow-xl">
+        
+        <button id="prevBtn" class="text-white/70 hover:text-white transition text-lg w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10">
+          ❮
+        </button>
+
+        <!-- Unit dots with labels -->
+        <div id="dots" class="flex items-center gap-3">
+          {slides.map((slide, i) => (
+            <button
+              class={`dot group flex flex-col items-center gap-1 transition-all duration-300`}
+              data-dot={i}
+            >
+              <div class={`w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'w-6' : 'bg-white/30 hover:bg-white/60'}`}
+                style={i === 0 ? `background:${slide.color}` : ''}
+                data-dot-bar={i}
+              />
+              <span class={`text-[9px] font-semibold uppercase tracking-wider transition-all ${i === 0 ? 'text-white' : 'text-white/40'}`} data-dot-label={i}>
+                {slide.unit.split(' ')[0]}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <button id="nextBtn" class="text-white/70 hover:text-white transition text-lg w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10">
+          ❯
+        </button>
+      </div>
+    </div>
+
+    <!-- Unit stats bar (top) -->
+    <!-- <div class="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/40 to-transparent pt-4 pb-8">
+      <div class="max-w-7xl mx-auto px-6 lg:px-16 flex items-center justify-between">
+        <div class="hidden md:flex items-center gap-2 text-xs text-white/70">
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/15">4 Unit Pendidikan</span>
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/15">Playgroup s/d SMAIT</span>
+          <span class="px-3 py-1 rounded-full bg-white/10 border border-white/15">Terakreditasi A</span>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</section>
+
+<script define:vars={{ slidesData: slides }}>
+  const panels = document.querySelectorAll('.slide-panel');
+  const dots = document.querySelectorAll('[data-dot]');
+  const dotBars = document.querySelectorAll('[data-dot-bar]');
+  const dotLabels = document.querySelectorAll('[data-dot-label]');
+  const bars = document.querySelectorAll('[data-bar]');
+  const navBtns = document.querySelectorAll('[data-goto]');
+
+  let current = 0;
+  let autoplayTimer;
+
+  const colors = slidesData.map(s => s.color);
+
+  function showSlide(index) {
+    // Panels
+    panels.forEach((p, i) => {
+      p.classList.toggle('active', i === index);
+    });
+
+    // Progress bars
+    bars.forEach((bar, i) => {
+      bar.classList.remove('running');
+      bar.style.width = '0%';
+      if (i === index) {
+        // Force reflow
+        void bar.offsetWidth;
+        bar.classList.add('running');
+      }
+    });
+
+    // Dot bars + labels
+    dotBars.forEach((db, i) => {
+      if (i === index) {
+        db.style.background = colors[i];
+        db.style.width = '24px';
+      } else {
+        db.style.background = '';
+        db.style.width = '8px';
+      }
+    });
+    dotLabels.forEach((dl, i) => {
+      dl.classList.toggle('text-white', i === index);
+      dl.classList.toggle('text-white/40', i !== index);
+    });
+
+    // Right nav
+    navBtns.forEach((btn, i) => {
+      btn.classList.toggle('text-white', i === index);
+      btn.classList.toggle('bg-white/15', i === index);
+      btn.classList.toggle('backdrop-blur-sm', i === index);
+      btn.classList.toggle('text-white/40', i !== index);
+    });
+
+    current = index;
+  }
+
+  function startAutoplay() {
+    autoplayTimer = setInterval(() => {
+      showSlide((current + 1) % panels.length);
+    }, 5000);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  document.getElementById('prevBtn')?.addEventListener('click', () => {
+    showSlide((current - 1 + panels.length) % panels.length);
+    resetAutoplay();
+  });
+
+  document.getElementById('nextBtn')?.addEventListener('click', () => {
+    showSlide((current + 1) % panels.length);
+    resetAutoplay();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      showSlide(i);
+      resetAutoplay();
+    });
+  });
+
+  navBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      showSlide(i);
+      resetAutoplay();
+    });
+  });
+
+  startAutoplay();
+</script>

@@ -1,0 +1,63 @@
+---
+import { programs, colorMap } from "../../data/programs";
+import type { ColorKey } from "../../data/programs";
+---
+
+<section
+  id="programs"
+  class="bg-white py-20 px-6"
+>
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16 text-center">
+      <span
+        class="mb-4 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-600"
+      >
+        Program Unggulan
+      </span>
+
+      <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+        Keunggulan
+        <span class="text-green-600">Nurul Imam Islamic School</span>
+      </h2>
+
+      <p class="mx-auto max-w-3xl text-lg text-gray-600">
+        Program-program inovatif yang dirancang untuk mengembangkan potensi
+        siswa secara maksimal
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {
+        programs.map((program) => {
+          const style = colorMap[program.color as ColorKey];
+          return (
+            <a
+              href={`/programs/${program.slug}`}
+              class={`group rounded-2xl border bg-gradient-to-br p-8 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl ${style.bg} ${style.border}`}
+            >
+              <div
+                class={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl text-2xl text-white transition group-hover:scale-110 ${style.icon}`}
+              >
+                <i class={`fa-solid ${program.icon}`} />
+              </div>
+
+              <h3 class="mb-4 text-xl font-bold text-gray-800">
+                {program.title}
+              </h3>
+
+              <p class="mb-6 text-gray-600">{program.desc}</p>
+
+              <div
+                class={`font-semibold transition group-hover:translate-x-2 ${style.text}`}
+              >
+                Pelajari Lebih Lanjut →
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

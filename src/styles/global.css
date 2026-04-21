@@ -1,0 +1,6 @@
+@import "tailwindcss";
+.glassmorph {
+  @apply bg-white/70 backdrop-blur-md shadow-lg;
+}
+@import "swiper/css";
+@import "swiper/css/pagination";

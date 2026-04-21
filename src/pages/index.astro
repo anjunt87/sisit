@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import { ClientRouter } from "astro:transitions";
+
+import FloatingButtons from "../components/ui/FloatingButtons.astro";
+import Chatbot from "../components/ui/Chatbot.astro";
+
+import Navbar from "../components/landing/Navbar.astro";
+import Hero from "../components/landing/Hero.astro";
+// import About from "../components/landing/About.astro";
+import Programs from "../components/landing/Programs.astro";
+import Achievements from "../components/landing/Achievements.astro";
+import Facilities from "../components/landing/Facilities.astro";
+import Testimonial from "../components/landing/Testimonial.astro";
+import Berita from "../components/landing/Berita.astro";
+import SchoolCalendar from "../components/landing/SchoolCalendar.astro";
+import Faq from "../components/landing/Faq.astro";
+import SchoolLocation from "../components/landing/SchoolLocation.astro";
+import Partnership from "../components/landing/Partnership.astro";
+import Contact from "../components/landing/Contact.astro";
+import Footer from "../components/landing/Footer.astro";
+
+import ppdb from "../pages/ppdb.astro";
+---
+
+<Layout title=" — Sekolah Islam Terpadu">
+  <!-- <Navbar /> -->
+  <Hero />
+  <!-- <About /> -->
+  <Berita />
+  <!-- <Programs /> -->
+  <!-- <Achievements /> -->
+  <!-- <Facilities /> -->
+  <Testimonial />
+  <SchoolCalendar />
+  <Faq />
+  <SchoolLocation />
+  <Partnership />
+  <Contact />
+  <!-- <Footer /> -->
+  <!-- <FloatingButtons />
+  <Chatbot /> -->
+</Layout>

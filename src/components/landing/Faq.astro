@@ -1,0 +1,118 @@
+---
+// src/components/landing/FAQ.astro
+
+const faqs = [
+  {
+    q: "Bagaimana sistem tahfidz di sekolah ini?",
+    a: "Kami menggunakan metode talaqqi dengan target hafalan per pekan, evaluasi rutin, serta laporan perkembangan ke orang tua melalui aplikasi.",
+  },
+  {
+    q: "Bagaimana sistem pembayaran SPP dan pendaftaran?",
+    a: "Pembayaran bisa dilakukan melalui transfer bank. Detail biaya akan diinformasikan saat pendaftaran atau melalui brosur resmi sekolah.",
+  },
+  {
+    q: "Apakah sekolah memiliki sistem full day?",
+    a: "Ya, sistem full day diberlakukan mulai dari pagi hingga sore dengan pembelajaran akademik, diniyah, tahfidz, dan kegiatan karakter.",
+  },
+  {
+    q: "Apakah orang tua bisa memantau perkembangan anak secara online?",
+    a: "Tentu. Kami memiliki sistem informasi sekolah berbasis web (SISIT-App) yang memungkinkan wali murid memantau nilai, hafalan, absensi, dan pengumuman.",
+  },
+];
+---
+
+<section
+  id="pertanyaan"
+  class="py-20 bg-green-50"
+>
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span
+        class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+      >
+        Pertanyaan
+      </span>
+
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        Pertanyaan<span class="text-green-600">Umum</span>
+      </h2>
+
+      <p class="text-gray-600 text-lg">
+        Temukan jawaban dari pertanyaan yang sering diajukan oleh orang tua
+        calon siswa
+      </p>
+    </div>
+
+    <!-- Accordion -->
+    <div class="space-y-4">
+      {
+        faqs.map((faq) => (
+          <div class="faq-item border border-green-100 rounded-xl overflow-hidden shadow-sm">
+            <button
+              class="faq-toggle w-full px-6 py-4 text-left flex justify-between items-center bg-green-50 hover:bg-green-100 transition-colors duration-200"
+              aria-expanded="false"
+            >
+              <span class="font-medium text-gray-800">{faq.q}</span>
+
+              <svg
+                class="faq-icon w-5 h-5 text-green-600 transition-transform duration-300 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            <div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 ease-in-out bg-white">
+              <div class="overflow-hidden">
+                <p class="px-6 py-4 text-gray-600">{faq.a}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".faq-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".faq-item")!;
+      const answer = item.querySelector<HTMLElement>(".faq-answer")!;
+      const icon = btn.querySelector<SVGElement>(".faq-icon")!;
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+      // Tutup semua item lain
+      document.querySelectorAll(".faq-item").forEach((other) => {
+        if (other !== item) {
+          other.querySelector<HTMLElement>(
+            ".faq-answer",
+          )!.style.gridTemplateRows = "0fr";
+          other
+            .querySelector<HTMLButtonElement>(".faq-toggle")!
+            .setAttribute("aria-expanded", "false");
+          other.querySelector<SVGElement>(".faq-icon")!.style.transform = "";
+        }
+      });
+
+      // Toggle item ini
+      if (isOpen) {
+        answer.style.gridTemplateRows = "0fr";
+        btn.setAttribute("aria-expanded", "false");
+        icon.style.transform = "";
+      } else {
+        answer.style.gridTemplateRows = "1fr";
+        btn.setAttribute("aria-expanded", "true");
+        icon.style.transform = "rotate(180deg)";
+      }
+    });
+  });
+</script>

@@ -1,0 +1,581 @@
+---
+// src/components/landing/SchoolCalendar.astro
+import { schoolCalendar } from "../../data/school-calendar";
+const eventsJson = JSON.stringify(schoolCalendar);
+---
+
+<section
+  id="calendar"
+  class="py-20 bg-white px-6"
+>
+  <div class="max-w-7xl mx-auto">
+    <div
+      class="text-center mb-12"
+      data-aos="fade-down"
+    >
+      <span
+        class="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+      >
+        Calendar
+      </span>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+        School <span class="text-green-600">Events</span>
+      </h2>
+      <p class="text-gray-500 max-w-2xl mx-auto text-sm">
+        Important schedules, activities, and special student moments throughout
+        the academic year.
+      </p>
+    </div>
+
+    <div
+      class="border border-gray-200 rounded-2xl overflow-hidden shadow-sm"
+      data-aos="fade-up"
+    >
+      <!-- Top Bar -->
+      <div
+        class="flex items-center justify-between px-5 py-3 border-b border-gray-200 bg-white"
+      >
+        <div class="flex items-center gap-3">
+          <button
+            id="cal-prev"
+            class="cal-nav-btn"
+          >
+            &#8249;
+          </button>
+          <h3
+            id="cal-title"
+            class="text-base font-semibold text-gray-800 min-w-[140px]"
+          >
+          </h3>
+          <button
+            id="cal-next"
+            class="cal-nav-btn"
+          >
+            &#8250;
+          </button>
+          <button
+            id="cal-today"
+            class="cal-today-btn"
+          >
+            Today
+          </button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="flex">
+        <!-- Sidebar -->
+        <div class="hidden md:block cal-sidebar">
+          <div class="flex items-center justify-between mb-2">
+            <span
+              id="mini-title"
+              class="mini-month-title"
+            >
+            </span>
+          </div>
+          <div class="mini-day-labels">
+            {
+              ["S", "M", "T", "W", "T", "F", "S"].map((l) => (
+                <div class="mini-day-label">{l}</div>
+              ))
+            }
+          </div>
+          <div
+            id="mini-grid"
+            class="mini-grid"
+          >
+          </div>
+          <div class="mt-4">
+            <p class="upcoming-label">Upcoming</p>
+            <div id="sidebar-upcoming"></div>
+          </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="flex-1 min-w-0">
+          <div class="grid grid-cols-7 border-b border-gray-200">
+            {
+              ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
+                <div class="day-header-label">{d}</div>
+              ))
+            }
+          </div>
+          <div
+            class="grid grid-cols-7"
+            id="cal-grid"
+          >
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Detail -->
+      <div
+        id="event-detail"
+        class="event-detail-panel"
+      >
+        <p class="event-detail-empty">Click an event to see details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .cal-nav-btn {
+    padding: 4px 8px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 18px;
+    line-height: 1;
+    transition: background 0.15s;
+  }
+  .cal-nav-btn:hover {
+    background: #f3f4f6;
+  }
+
+  .cal-today-btn {
+    margin-left: 4px;
+    font-size: 12px;
+    padding: 4px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    background: transparent;
+    cursor: pointer;
+    color: #374151;
+    transition: background 0.15s;
+  }
+  .cal-today-btn:hover {
+    background: #f9fafb;
+  }
+
+  .cal-sidebar {
+    width: 192px;
+    flex-shrink: 0;
+    border-right: 1px solid #f0f0f0;
+    background: #f9fafb;
+    padding: 16px;
+  }
+
+  .mini-month-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mini-day-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .mini-day-label {
+    font-size: 10px;
+    color: #9ca3af;
+    padding: 2px 0;
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: 1px;
+  }
+
+  .mini-day {
+    font-size: 11px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: #374151;
+    transition: background 0.15s;
+  }
+  .mini-day:hover {
+    background: #f3f4f6;
+  }
+  .mini-day.other-month {
+    color: #d1d5db;
+  }
+  .mini-day.has-event {
+    background: #dcfce7;
+    color: #15803d;
+    font-weight: 600;
+  }
+  .mini-day.today {
+    background: #16a34a;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .upcoming-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .event-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    cursor: pointer;
+    padding: 3px 0;
+  }
+  .event-row:hover .event-row-title {
+    color: #15803d;
+  }
+
+  .event-row-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #22c55e;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .event-row-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+
+  .event-row-date {
+    font-size: 10px;
+    color: #9ca3af;
+  }
+
+  .day-header-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #9ca3af;
+    padding: 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .cal-cell {
+    min-height: 88px;
+    border-right: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 4px 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .cal-cell:hover {
+    background: #f9fafb;
+  }
+  .cal-cell:nth-child(7n) {
+    border-right: none;
+  }
+
+  .cell-date {
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+    border-radius: 9999px;
+    color: #374151;
+  }
+
+  .cal-cell.today .cell-date {
+    background: #16a34a;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .cal-cell.other-month .cell-date {
+    color: #d1d5db;
+  }
+
+  .event-chip {
+    font-size: 11px;
+    padding: 1px 6px;
+    background: #dcfce7;
+    color: #15803d;
+    border-left: 2px solid #16a34a;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: block;
+  }
+  .event-chip:hover {
+    background: #bbf7d0;
+  }
+
+  .event-detail-panel {
+    border-top: 1px solid #f0f0f0;
+    background: #f9fafb;
+    padding: 16px 24px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+  }
+
+  .event-detail-empty {
+    font-size: 13px;
+    color: #9ca3af;
+  }
+
+  .event-detail-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2px;
+  }
+
+  .event-detail-meta {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+
+  .event-detail-desc {
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 1.5;
+  }
+</style>
+<script define:vars={{ eventsJson }}>
+  function initCalendar() {
+    // Cek elemen ada dulu
+    if (!document.getElementById("cal-grid")) return;
+
+    const rawEvents = JSON.parse(eventsJson);
+
+    const monthMap = {
+      Jan: 0,
+      Feb: 1,
+      Mar: 2,
+      Apr: 3,
+      May: 4,
+      Jun: 5,
+      Jul: 6,
+      Aug: 7,
+      Sep: 8,
+      Oct: 9,
+      Nov: 10,
+      Dec: 11,
+    };
+
+    const events = rawEvents.map((e) => ({
+      ...e,
+      monthIndex: monthMap[e.month.slice(0, 3)],
+      dayNum: parseInt(e.day),
+      year: 2026,
+    }));
+
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const today = new Date();
+    let cur = { year: today.getFullYear(), month: today.getMonth() };
+
+    function getEvents(d, m, y) {
+      return events.filter(
+        (e) => e.dayNum === d && e.monthIndex === m && e.year === y,
+      );
+    }
+
+    function renderMain() {
+      document.getElementById("cal-title").textContent =
+        monthNames[cur.month] + " " + cur.year;
+
+      const first = new Date(cur.year, cur.month, 1).getDay();
+      const days = new Date(cur.year, cur.month + 1, 0).getDate();
+      const prevDays = new Date(cur.year, cur.month, 0).getDate();
+      const grid = document.getElementById("cal-grid");
+      let html = "";
+
+      for (let i = 0; i < first; i++) {
+        const d = prevDays - first + 1 + i;
+        html += `<div class="cal-cell other-month"><div class="cell-date">${d}</div></div>`;
+      }
+
+      for (let d = 1; d <= days; d++) {
+        const isToday =
+          d === today.getDate() &&
+          cur.month === today.getMonth() &&
+          cur.year === today.getFullYear();
+        const evs = getEvents(d, cur.month, cur.year);
+        const chips = evs
+          .map(
+            (e) =>
+              `<span class="event-chip" data-day="${e.dayNum}" data-month="${e.monthIndex}" data-year="${e.year}">${e.title}</span>`,
+          )
+          .join("");
+        html += `<div class="cal-cell${isToday ? " today" : ""}"><div class="cell-date">${d}</div>${chips}</div>`;
+      }
+
+      const rem = (7 - ((first + days) % 7)) % 7;
+      for (let i = 1; i <= rem; i++) {
+        html += `<div class="cal-cell other-month"><div class="cell-date">${i}</div></div>`;
+      }
+
+      grid.innerHTML = html;
+
+      grid.querySelectorAll(".event-chip").forEach((chip) => {
+        chip.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showEvent(
+            parseInt(chip.dataset.day),
+            parseInt(chip.dataset.month),
+            parseInt(chip.dataset.year),
+          );
+        });
+      });
+    }
+
+    function renderMini() {
+      document.getElementById("mini-title").textContent =
+        monthNames[cur.month].slice(0, 3) + " " + cur.year;
+
+      const first = new Date(cur.year, cur.month, 1).getDay();
+      const days = new Date(cur.year, cur.month + 1, 0).getDate();
+      const prevDays = new Date(cur.year, cur.month, 0).getDate();
+      const grid = document.getElementById("mini-grid");
+      let html = "";
+
+      for (let i = 0; i < first; i++) {
+        html += `<div class="mini-day other-month">${prevDays - first + 1 + i}</div>`;
+      }
+
+      for (let d = 1; d <= days; d++) {
+        const isToday =
+          d === today.getDate() &&
+          cur.month === today.getMonth() &&
+          cur.year === today.getFullYear();
+        const hasEv = getEvents(d, cur.month, cur.year).length > 0;
+        const cls = isToday ? "today" : hasEv ? "has-event" : "";
+        html += `<div class="mini-day ${cls}">${d}</div>`;
+      }
+
+      const rem = (7 - ((first + days) % 7)) % 7;
+      for (let i = 1; i <= rem; i++) {
+        html += `<div class="mini-day other-month">${i}</div>`;
+      }
+
+      grid.innerHTML = html;
+    }
+
+    function renderSidebar() {
+      const upcoming = events
+        .filter((e) => new Date(e.year, e.monthIndex, e.dayNum) >= today)
+        .slice(0, 4);
+
+      document.getElementById("sidebar-upcoming").innerHTML = upcoming
+        .map(
+          (e) => `
+        <div class="event-row" data-day="${e.dayNum}" data-month="${e.monthIndex}" data-year="${e.year}">
+          <span class="event-row-dot"></span>
+          <div>
+            <p class="event-row-title">${e.title}</p>
+            <p class="event-row-date">${e.month} ${e.day}</p>
+          </div>
+        </div>
+      `,
+        )
+        .join("");
+
+      document
+        .getElementById("sidebar-upcoming")
+        .querySelectorAll(".event-row")
+        .forEach((el) => {
+          el.addEventListener("click", () =>
+            showEvent(
+              parseInt(el.dataset.day),
+              parseInt(el.dataset.month),
+              parseInt(el.dataset.year),
+            ),
+          );
+        });
+    }
+
+    function showEvent(d, m, y) {
+      const ev = getEvents(d, m, y)[0];
+      if (!ev) return;
+      document.getElementById("event-detail").innerHTML = `
+        <div>
+          <p class="event-detail-title">${ev.title}</p>
+          <p class="event-detail-meta">${monthNames[m]} ${d}, ${y} &nbsp;·&nbsp; ${ev.time}</p>
+          <p class="event-detail-desc">${ev.description}</p>
+        </div>
+      `;
+    }
+
+    // Tombol navigasi — clone untuk remove listener lama
+    const prevBtn = document.getElementById("cal-prev");
+    const nextBtn = document.getElementById("cal-next");
+    const todayBtn = document.getElementById("cal-today");
+
+    prevBtn.replaceWith(prevBtn.cloneNode(true));
+    nextBtn.replaceWith(nextBtn.cloneNode(true));
+    todayBtn.replaceWith(todayBtn.cloneNode(true));
+
+    document.getElementById("cal-prev").addEventListener("click", () => {
+      cur.month--;
+      if (cur.month < 0) {
+        cur.month = 11;
+        cur.year--;
+      }
+      renderMain();
+      renderMini();
+    });
+
+    document.getElementById("cal-next").addEventListener("click", () => {
+      cur.month++;
+      if (cur.month > 11) {
+        cur.month = 0;
+        cur.year++;
+      }
+      renderMain();
+      renderMini();
+    });
+
+    document.getElementById("cal-today").addEventListener("click", () => {
+      cur = { year: today.getFullYear(), month: today.getMonth() };
+      renderMain();
+      renderMini();
+    });
+
+    renderMain();
+    renderMini();
+    renderSidebar();
+  }
+
+  // Init saat load pertama & setelah View Transition
+  initCalendar();
+  document.addEventListener("astro:after-swap", initCalendar);
+</script>

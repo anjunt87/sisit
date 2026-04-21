@@ -1,0 +1,99 @@
+---
+// src/components/landing/Achievements.astro
+
+const achievements = [
+  {
+    icon: "fa-trophy",
+    title: "Juara 1 Olimpiade Matematika",
+    desc: "Tingkat Kabupaten Karawang, 2024",
+  },
+  {
+    icon: "fa-microphone",
+    title: "Lomba Pidato Bahasa Arab",
+    desc: "Tingkat Provinsi Jawa Barat, 2023",
+  },
+  {
+    icon: "fa-book-quran",
+    title: "Wisuda Hafizh 30 Juz",
+    desc: "Santri terbaik tahun 2024",
+  },
+];
+---
+
+<section
+  id="achievements"
+  class="relative overflow-hidden bg-gray-50 py-20 px-6"
+>
+  <!-- Background Pattern -->
+  <svg
+    class="absolute inset-0 h-full w-full opacity-10"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice"
+  >
+    <defs>
+      <pattern
+        id="star"
+        patternUnits="userSpaceOnUse"
+        width="50"
+        height="50"
+      >
+        <path
+          d="M25 0 L30 20 L50 25 L30 30 L25 50 L20 30 L0 25 L20 20 Z"
+          fill="none"
+          stroke="#16610E"
+          stroke-width="1"
+        />
+      </pattern>
+    </defs>
+
+    <rect width="100%" height="100%" fill="url(#star)" />
+  </svg>
+
+  <div class="relative z-10 max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-12 text-center">
+      <span
+        class="mb-4 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-600"
+      >
+        Prestasi
+      </span>
+
+      <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+        Prestasi
+        <span class="text-green-600"> Sekolah</span>
+      </h2>
+
+      <p class="mx-auto max-w-2xl text-lg text-gray-600">
+        Berbagai prestasi membanggakan yang telah diraih oleh siswa dan lembaga kami
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {
+        achievements.map((item) => (
+          <div
+            class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+          >
+            <!-- Icon -->
+            <div
+              class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-green-600 text-2xl text-white transition group-hover:scale-110"
+            >
+              <i class={`fa-solid ${item.icon}`}></i>
+            </div>
+
+            <!-- Title -->
+            <h3 class="mb-2 text-xl font-bold text-gray-800">
+              {item.title}
+            </h3>
+
+            <!-- Desc -->
+            <p class="text-gray-600">
+              {item.desc}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
