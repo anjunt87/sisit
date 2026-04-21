@@ -18,7 +18,7 @@ import { defineConfig } from 'astro/config';
 import githubPages from '@astrojs/github-pages';
 
 export default defineConfig({
-  site: 'https://andri.github.io',
-  base: '/sekolah/',
+  site: 'https://anjunt87.github.io',
+  base: '/sisit/',
   adapter: githubPages(),
 });
