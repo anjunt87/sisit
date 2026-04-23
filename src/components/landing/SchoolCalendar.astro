@@ -6,56 +6,63 @@ const eventsJson = JSON.stringify(schoolCalendar);
 
 <section
   id="calendar"
-  class="py-20 bg-white px-6"
+  class="relative py-20 bg-gradient-to-b from-green-50 via-white to-green-100 px-6 overflow-hidden"
 >
-  <div class="max-w-7xl mx-auto">
+  <div class="relative max-w-7xl mx-auto z-10">
+    <!-- Header -->
     <div
       class="text-center mb-12"
       data-aos="fade-down"
     >
       <span
-        class="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md"
       >
         Calendar
       </span>
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-        School <span class="text-green-600">Events</span>
+
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+        School <span class="text-green-700">Events</span>
       </h2>
-      <p class="text-gray-500 max-w-2xl mx-auto text-sm">
+
+      <p class="text-gray-700 max-w-2xl mx-auto text-sm md:text-base">
         Important schedules, activities, and special student moments throughout
         the academic year.
       </p>
     </div>
 
+    <!-- Calendar Box -->
     <div
-      class="border border-gray-200 rounded-2xl overflow-hidden shadow-sm"
+      class="border border-green-200 rounded-3xl overflow-hidden shadow-xl bg-white"
       data-aos="fade-up"
     >
       <!-- Top Bar -->
       <div
-        class="flex items-center justify-between px-5 py-3 border-b border-gray-200 bg-white"
+        class="flex items-center justify-between px-5 py-4 border-b border-green-100 bg-white"
       >
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 flex-wrap">
           <button
             id="cal-prev"
-            class="cal-nav-btn"
+            class="cal-nav-btn bg-green-100 hover:bg-green-200 text-green-700 w-10 h-10 rounded-xl transition"
           >
             &#8249;
           </button>
+
           <h3
             id="cal-title"
             class="text-base font-semibold text-gray-800 min-w-[140px]"
           >
           </h3>
+
           <button
             id="cal-next"
-            class="cal-nav-btn"
+            class="cal-nav-btn bg-green-100 hover:bg-green-200 text-green-700 w-10 h-10 rounded-xl transition"
           >
             &#8250;
           </button>
+
           <button
             id="cal-today"
-            class="cal-today-btn"
+            class="cal-today-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition"
           >
             Today
           </button>
@@ -65,41 +72,49 @@ const eventsJson = JSON.stringify(schoolCalendar);
       <!-- Body -->
       <div class="flex">
         <!-- Sidebar -->
-        <div class="hidden md:block cal-sidebar">
+        <div
+          class="hidden md:block cal-sidebar bg-green-50 border-r border-green-100"
+        >
           <div class="flex items-center justify-between mb-2">
             <span
               id="mini-title"
-              class="mini-month-title"
+              class="mini-month-title text-gray-800 font-semibold"
             >
             </span>
           </div>
+
           <div class="mini-day-labels">
             {
               ["S", "M", "T", "W", "T", "F", "S"].map((l) => (
-                <div class="mini-day-label">{l}</div>
+                <div class="mini-day-label text-green-700">{l}</div>
               ))
             }
           </div>
+
           <div
             id="mini-grid"
             class="mini-grid"
           >
           </div>
+
           <div class="mt-4">
-            <p class="upcoming-label">Upcoming</p>
+            <p class="upcoming-label text-green-700 font-semibold">Upcoming</p>
             <div id="sidebar-upcoming"></div>
           </div>
         </div>
 
         <!-- Main Grid -->
-        <div class="flex-1 min-w-0">
-          <div class="grid grid-cols-7 border-b border-gray-200">
+        <div class="flex-1 min-w-0 bg-white">
+          <div class="grid grid-cols-7 border-b border-green-100">
             {
               ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
-                <div class="day-header-label">{d}</div>
+                <div class="day-header-label bg-green-50 text-green-700 font-semibold">
+                  {d}
+                </div>
               ))
             }
           </div>
+
           <div
             class="grid grid-cols-7"
             id="cal-grid"
@@ -111,9 +126,11 @@ const eventsJson = JSON.stringify(schoolCalendar);
       <!-- Event Detail -->
       <div
         id="event-detail"
-        class="event-detail-panel"
+        class="event-detail-panel bg-green-50 border-t border-green-100"
       >
-        <p class="event-detail-empty">Click an event to see details.</p>
+        <p class="event-detail-empty text-gray-700">
+          Click an event to see details.
+        </p>
       </div>
     </div>
   </div>

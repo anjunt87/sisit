@@ -7,6 +7,257 @@
   --cream: #f8fff5;
 }
 
+/* ── Container ── */
+.ppdb-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px 64px;
+}
+
+/* ── Top row ── */
+.ppdb-toprow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.tahun-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50px;
+  padding: 6px 16px;
+}
+
+.tahun-label {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ── Main grid ── */
+.ppdb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Left column ── */
+.ppdb-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.ppdb-heading {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.ppdb-desc {
+  color: rgba(255,255,255,0.65);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 440px;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.info-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2px;
+}
+
+.info-value {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.ppdb-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ── Right column ── */
+.ornament-text {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ppdb-countdown {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.kuota-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.kuota-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.kuota-title {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.kuota-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+.kuota-track {
+  background: rgba(255,255,255,0.08);
+  border-radius: 50px;
+  overflow: hidden;
+  height: 6px;
+}
+
+.kuota-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.syarat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.syarat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+}
+
+/* Decorative circles */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.deco-circle--top {
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: rgba(82,183,136,0.08);
+}
+.deco-circle--bottom {
+  bottom: -60px; left: -60px;
+  width: 240px; height: 240px;
+  background: rgba(201,168,76,0.06);
+}
+
+/* ════════════════════════════════
+   MOBILE RESPONSIVE
+════════════════════════════════ */
+@media (max-width: 768px) {
+  .ppdb-container {
+    padding: 56px 16px 48px;
+  }
+
+  /* Grid jadi 1 kolom */
+  .ppdb-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .ppdb-desc {
+    max-width: 100%;
+  }
+
+  /* CTA stack vertikal */
+  .ppdb-cta-row {
+    flex-direction: column;
+  }
+
+  .ppdb-cta-row .cta-btn,
+  .ppdb-cta-row .sec-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Countdown lebih kecil */
+  .ppdb-countdown {
+    gap: 8px;
+  }
+
+  .countdown-box {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 6px;
+  }
+
+  .countdown-num {
+    font-size: clamp(1.4rem, 6vw, 2rem) !important;
+  }
+
+  /* Syarat 1 kolom */
+  .syarat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sembunyikan dekorasi besar di mobile */
+  .deco-circle--top {
+    width: 160px;
+    height: 160px;
+    top: -40px;
+    right: -40px;
+  }
+  .deco-circle--bottom {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 400px) {
+  .ppdb-toprow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ppdb-countdown {
+    gap: 6px;
+  }
+}
+
 #ppdb-banner {
   font-family: "Tajawal", sans-serif;
 }
@@ -215,3 +466,4 @@
     padding: 12px 24px;
   }
 }
+

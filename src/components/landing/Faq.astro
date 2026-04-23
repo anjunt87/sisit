@@ -23,22 +23,53 @@ const faqs = [
 
 <section
   id="pertanyaan"
-  class="py-20 bg-green-50"
+  class="relative py-20 bg-gradient-to-b from-green-50 via-white to-green-100 overflow-hidden"
 >
-  <div class="max-w-4xl mx-auto px-4">
+  <!-- Background Pattern -->
+  <svg
+    class="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice"
+  >
+    <defs>
+      <pattern
+        id="star"
+        patternUnits="userSpaceOnUse"
+        width="50"
+        height="50"
+      >
+        <path
+          d="M25 0 L30 20 L50 25 L30 30 L25 50 L20 30 L0 25 L20 20 Z"
+          fill="none"
+          stroke="#16610E"
+          stroke-width="1"
+        >
+        </path>
+      </pattern>
+    </defs>
+
+    <rect
+      width="100%"
+      height="100%"
+      fill="url(#star)"
+    >
+    </rect>
+  </svg>
+
+  <div class="relative max-w-4xl mx-auto px-4 z-10">
     <!-- Header -->
     <div class="text-center mb-12">
       <span
-        class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md"
       >
         Pertanyaan
       </span>
 
-      <h2 class="text-4xl font-bold text-gray-800 mb-4">
-        Pertanyaan<span class="text-green-600">Umum</span>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">
+        Pertanyaan <span class="text-green-700">Umum</span>
       </h2>
 
-      <p class="text-gray-600 text-lg">
+      <p class="text-gray-700 text-lg max-w-2xl mx-auto">
         Temukan jawaban dari pertanyaan yang sering diajukan oleh orang tua
         calon siswa
       </p>
@@ -48,15 +79,17 @@ const faqs = [
     <div class="space-y-4">
       {
         faqs.map((faq) => (
-          <div class="faq-item border border-green-100 rounded-xl overflow-hidden shadow-sm">
+          <div class="faq-item bg-white border border-green-200 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
             <button
-              class="faq-toggle w-full px-6 py-4 text-left flex justify-between items-center bg-green-50 hover:bg-green-100 transition-colors duration-200"
+              class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center bg-white hover:bg-green-50 transition-colors duration-200"
               aria-expanded="false"
             >
-              <span class="font-medium text-gray-800">{faq.q}</span>
+              <span class="font-semibold text-gray-800 text-base md:text-lg">
+                {faq.q}
+              </span>
 
               <svg
-                class="faq-icon w-5 h-5 text-green-600 transition-transform duration-300 shrink-0"
+                class="faq-icon w-5 h-5 text-green-700 transition-transform duration-300 shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -70,9 +103,9 @@ const faqs = [
               </svg>
             </button>
 
-            <div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 ease-in-out bg-white">
+            <div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 ease-in-out bg-green-50">
               <div class="overflow-hidden">
-                <p class="px-6 py-4 text-gray-600">{faq.a}</p>
+                <p class="px-6 py-4 text-gray-700 leading-relaxed">{faq.a}</p>
               </div>
             </div>
           </div>

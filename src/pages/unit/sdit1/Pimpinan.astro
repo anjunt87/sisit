@@ -1,0 +1,65 @@
+---
+import {
+  identitas,
+  stats,
+  statistik,
+  prosesPembelajaran,
+  milestones,
+  pimpinan,
+  gallery,
+  categories,
+} from "../../../data/sdit1";
+---
+
+
+<!-- ╔══════════════════════════════════════╗ -->
+<!-- ║        3. PIMPINAN SEKOLAH           ║ -->
+<!-- ╚══════════════════════════════════════╝ -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <span class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+        Pimpinan Sekolah
+      </span>
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-800">
+        Tim <span class="text-green-600">Pimpinan</span>
+      </h2>
+      <p class="text-slate-500 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+        Dipimpin oleh tenaga pendidik berpengalaman yang berkomitmen membimbing dan mengembangkan potensi terbaik setiap siswa.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      {
+        pimpinan.map((item) => (
+          <div class="text-center group">
+
+            <!-- Foto -->
+            <div class="relative w-36 h-36 mx-auto mb-4">
+              <img
+                src={item.image}
+                alt={item.name}
+                class="w-full h-full object-cover rounded-full border-4 border-white shadow-md group-hover:scale-105 transition duration-300"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Nama -->
+            <h3 class="text-base font-bold text-slate-800">
+              {item.name}
+            </h3>
+
+            <!-- Jabatan -->
+            <p class="text-sm text-emerald-600 font-semibold mt-1">
+              {item.role}
+            </p>
+
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

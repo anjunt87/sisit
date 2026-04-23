@@ -1,0 +1,378 @@
+/* src\styles\testimonial.css to src/components/landing/Testimonial.astro */
+
+/* ═══════════════════════════
+     Section (sama seperti sebelumnya)
+  ═══════════════════════════ */
+  .testi-section {
+    position: relative;
+    padding: 5rem 1.5rem;
+    background: linear-gradient(to bottom, #f0fdf4, #ffffff, #dcfce7);
+    overflow: hidden;
+  }
+  .testi-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 0 L30 20 L50 25 L30 30 L25 50 L20 30 L0 25 L20 20 Z' fill='none' stroke='%2316610E' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 50px 50px;
+  }
+  .testi-container {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  /* Card */
+  .testi-card {
+    background: #ffffff;
+    border: 1px solid #bbf7d0;
+    border-radius: 22px;
+    padding: 1.75rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+  }
+  .testi-card:hover {
+    transform: translateY(-6px);
+    border-color: #16a34a;
+    box-shadow: 0 18px 30px rgba(22, 163, 74, 0.12);
+  }
+  .testi-quote-icon {
+    color: #16a34a;
+    width: 28px;
+    height: 20px;
+  }
+  .testi-message {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.8;
+    flex: 1;
+  }
+  .testi-stars {
+    display: flex;
+    gap: 3px;
+  }
+  .testi-star {
+    width: 14px;
+    height: 14px;
+    color: #d1d5db;
+  }
+  .testi-star--filled {
+    color: #f59e0b;
+  }
+  .testi-divider {
+    height: 1px;
+    background: #dcfce7;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testi-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .testi-author-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .testi-author-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  .testi-author-role {
+    font-size: 0.8125rem;
+    color: #6b7280;
+  }
+
+  /* Pagination */
+  .testi-pagination .swiper-pagination-bullet {
+    background: #16a34a;
+    opacity: 0.35;
+    width: 8px;
+    height: 8px;
+  }
+  .testi-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 24px;
+    border-radius: 999px;
+  }
+
+  /* ═══════════════════════════
+     MODAL
+  ═══════════════════════════ */
+  .testi-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end; /* panel muncul dari bawah */
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .testi-modal.is-open {
+    pointer-events: all;
+    visibility: visible;
+  }
+
+  /* Backdrop */
+  .testi-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.35s ease;
+    cursor: pointer;
+  }
+  .testi-modal.is-open .testi-modal-backdrop {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  /* Panel — slide dari bawah */
+  .testi-modal-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 94dvh; /* hampir penuh layar — terasa seperti halaman baru */
+    background: #f0fdf4;
+    border-radius: 24px 24px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .testi-modal.is-open .testi-modal-panel {
+    transform: translateY(0);
+  }
+
+  /* Drag handle */
+  .testi-modal-panel::before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #bbf7d0;
+    border-radius: 99px;
+    margin: 12px auto 0;
+    flex-shrink: 0;
+  }
+
+  /* Modal Header */
+  .testi-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.5rem 0.75rem;
+    border-bottom: 1px solid #bbf7d0;
+    background: #f0fdf4;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  .testi-modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .testi-modal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid #bbf7d0;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #15803d;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  .testi-modal-back svg {
+    width: 16px;
+    height: 16px;
+  }
+  .testi-modal-back:hover {
+    background: #dcfce7;
+  }
+  .testi-modal-title-block {
+    display: flex;
+    flex-direction: column;
+  }
+  .testi-modal-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+  }
+  .testi-modal-count {
+    font-size: 0.8125rem;
+    color: #6b7280;
+  }
+
+  /* Search */
+  .testi-modal-search-wrap {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+    min-width: 200px;
+  }
+  .testi-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+  .testi-search-input {
+    width: 100%;
+    padding: 9px 14px 9px 36px;
+    border: 1px solid #bbf7d0;
+    border-radius: 999px;
+    background: white;
+    font-size: 0.875rem;
+    color: #111827;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .testi-search-input:focus {
+    border-color: #16a34a;
+  }
+
+  /* Filter */
+  .testi-modal-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid #dcfce7;
+    background: white;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  .testi-filter-label {
+    font-size: 0.8125rem;
+    color: #6b7280;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .testi-filter-btn {
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1px solid #bbf7d0;
+    background: white;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  .testi-filter-btn:hover {
+    border-color: #16a34a;
+    color: #15803d;
+  }
+  .testi-filter-btn.active {
+    background: #16a34a;
+    color: white;
+    border-color: #16a34a;
+  }
+
+  /* Body / Grid */
+  .testi-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    scroll-behavior: smooth;
+  }
+  .testi-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  /* Card di modal — tidak perlu hover naik tinggi */
+  .testi-modal-card {
+    animation: cardIn 0.3s ease both;
+  }
+  .testi-modal-card[data-hidden="true"] {
+    display: none;
+  }
+
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Empty state */
+  .testi-empty {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 1rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+  .testi-empty svg {
+    width: 48px;
+    height: 48px;
+  }
+  .testi-empty.visible {
+    display: flex;
+  }
+
+  /* Lock scroll saat modal terbuka */
+  body.testi-modal-open {
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .testi-modal {
+      align-items: center;
+      justify-content: center;
+    }
+    .testi-modal-panel {
+      height: 90dvh;
+      width: 90%;
+      max-width: 1100px;
+      border-radius: 24px;
+      transform: translateY(40px) scale(0.97);
+      opacity: 0;
+      transition:
+        transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.35s ease;
+    }
+    .testi-modal.is-open .testi-modal-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .testi-modal-panel::before {
+      display: none;
+    }
+  }

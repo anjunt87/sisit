@@ -1,0 +1,159 @@
+---
+// src/components/landing/news.astro
+import { newsList } from "../../data/news";
+
+import "../../styles/news.css";
+
+const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
+---
+
+<section
+  id="news"
+  class="news-section"
+>
+  <div class="news-container">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span
+        class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md"
+      >
+        Kabar Terbaru
+      </span>
+
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">
+        Berita & <span class="text-green-700">Kegiatan</span>
+      </h2>
+
+      <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+        Informasi seputar kegiatan, prestasi, dan perkembangan di Nurul Imam
+        Islamic School.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div
+      class="news-tabs"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      {
+        categories.map((cat) => (
+          <button
+            class={`news-tab${cat === "Semua" ? " active" : ""}`}
+            data-filter={cat.toLowerCase()}
+          >
+            {cat}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Grid -->
+    <div
+      class="news-grid"
+      id="newsGrid"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      {
+        newsList.map((item, index) => (
+          <article
+            class={`news-card${index === 0 ? " news-card--featured" : ""}`}
+            data-category={item.category?.toLowerCase() ?? "kegiatan"}
+          >
+            <div class="news-card-image">
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+              />
+              <div class="news-card-overlay" />
+              {item.category && (
+                <span class="news-card-cat">{item.category}</span>
+              )}
+            </div>
+            <div class="news-card-body">
+              <div class="news-card-meta">
+                <span>{item.date ?? "Apr 2025"}</span>
+                <span class="news-meta-sep" />
+                <span>{item.readTime ?? "2 menit"} baca</span>
+              </div>
+              <h3 class="news-card-title">{item.title}</h3>
+              <p class="news-card-desc">{item.description}</p>
+              <a
+                href={item.link}
+                class="news-card-link"
+              >
+                Baca selengkapnya
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M2 10L10 2M10 2H4M10 2v6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- CTA -->
+    <div class="news-cta">
+      <a
+        href="/berita"
+        class="news-cta-btn"
+      >
+        Lihat Semua Berita
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function initNewsFilter() {
+      const tabs = document.querySelectorAll<HTMLButtonElement>(".news-tab");
+      const cards = document.querySelectorAll<HTMLElement>(".news-card");
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+
+          const filter = tab.dataset.filter ?? "semua";
+
+          cards.forEach((card) => {
+            const cat = card.dataset.category ?? "";
+            const show = filter === "semua" || cat === filter;
+            card.classList.toggle("hidden", !show);
+
+            // Reset featured layout when filtered
+            if (filter !== "semua") {
+              card.classList.remove("news-card--featured");
+            }
+          });
+
+          // Re-apply featured to first visible card when "Semua"
+          if (filter === "semua") {
+            const first = document.querySelector<HTMLElement>(".news-card");
+            first?.classList.add("news-card--featured");
+          }
+        });
+      });
+    }
+
+    initNewsFilter();
+    document.addEventListener("astro:after-swap", initNewsFilter);
+  </script>
+</section>

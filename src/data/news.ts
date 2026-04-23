@@ -1,6 +1,6 @@
 // src/data/berita.ts
 
-export const beritaList = [
+export const newsList = [
   {
     title: "Wisuda Tahfidz & Akhirussanah",
     description:

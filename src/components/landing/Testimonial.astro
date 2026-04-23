@@ -1,77 +1,272 @@
 ---
 // src/components/landing/Testimonial.astro
 import { testimonials } from "../../data/testimonials";
+
+import "../../styles/testimonial.css";
+
+const preview = testimonials.slice(0, 6);
 ---
 
-<section class="py-20 px-6 relative overflow-hidden bg-gray-50">
-  <!-- Background -->
-  <svg
-    class="absolute inset-0 w-full h-full opacity-10"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="xMidYMid slice"
+<section
+  class="testi-section"
+  id="testimonials"
+>
+  <div
+    class="testi-bg"
+    aria-hidden="true"
   >
-    <defs>
-      <pattern
-        id="star"
-        patternUnits="userSpaceOnUse"
-        width="50"
-        height="50"
-      >
-        <path
-          d="M25 0 L30 20 L50 25 L30 30 L25 50 L20 30 L0 25 L20 20 Z"
-          fill="none"
-          stroke="#16610E"
-          stroke-width="1"
-        >
-        </path>
-      </pattern>
-    </defs>
-    <rect
-      width="100%"
-      height="100%"
-      fill="url(#star)"
-    >
-    </rect>
-  </svg>
+  </div>
 
-  <div class="max-w-7xl mx-auto relative z-10">
-    <!-- Heading -->
-    <div class="text-center mb-16">
+  <div class="testi-container">
+    <!-- Header -->
+    <div class="text-center mb-12">
       <span
-        class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md"
       >
         Testimoni
       </span>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-        Apa Kata <span class="text-green-600">Mereka</span>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4">
+        Apa Kata <span class="text-green-700">Mereka</span>
       </h2>
+      <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+        Cerita nyata dari orang tua dan siswa yang telah mempercayai Nurul Imam
+        Islamic School.
+      </p>
     </div>
 
-    <!-- Swiper -->
-    <div class="swiper testimonial-swiper">
+    <!-- Swiper (preview 6 item) -->
+    <div
+      class="swiper testi-swiper"
+      data-aos="fade-up"
+      data-aos-delay="150"
+    >
       <div class="swiper-wrapper pb-12">
         {
-          testimonials.map((item) => (
+          preview.map((item) => (
             <div class="swiper-slide">
-              <div class="testimonial-card p-8 bg-white rounded-2xl shadow-lg h-full flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-lime-600 text-white rounded-full flex items-center justify-center font-bold mr-4 shrink-0">
-                      {item.initial}
-                    </div>
-                    <div>
-                      <h4 class="font-bold text-gray-800">{item.name}</h4>
-                      <p class="text-sm text-gray-500">{item.role}</p>
-                    </div>
-                  </div>
-                  <p class="text-gray-700 mb-5 leading-relaxed line-clamp-4">
-                    "{item.message}"
-                  </p>
+              <div class="testi-card">
+                <div
+                  class="testi-quote-icon"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 32 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0L16 2.88C11.84 3.84 9.28 6.24 8.32 10.08H14.4V24H0ZM17.6 24V14.4C17.6 6.4 22.4 1.6 32 0L33.6 2.88C29.44 3.84 26.88 6.24 25.92 10.08H32V24H17.6Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </div>
-                <div class="flex text-yellow-400 gap-1">
-                  {Array.from({ length: item.rating }).map((_, i) => (
-                    <i class="fas fa-star" />
+                <p class="testi-message">{item.message}</p>
+                <div
+                  class="testi-stars"
+                  aria-label={`Rating: ${item.rating} dari 5`}
+                >
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg
+                      class={`testi-star${i < item.rating ? " testi-star--filled" : ""}`}
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M8 1L9.85 5.72L15 6.18L11.25 9.47L12.42 14.5L8 11.77L3.58 14.5L4.75 9.47L1 6.18L6.15 5.72L8 1Z" />
+                    </svg>
                   ))}
+                </div>
+                <div class="testi-divider" />
+                <div class="testi-author">
+                  <div class="testi-avatar">{item.initial}</div>
+                  <div class="testi-author-info">
+                    <span class="testi-author-name">{item.name}</span>
+                    <span class="testi-author-role">{item.role}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="swiper-pagination testi-pagination"></div>
+    </div>
+
+    <!-- Tombol buka modal -->
+    <div
+      class="testi-cta"
+      data-aos="fade-up"
+    >
+      <button
+        class="testi-cta-btn"
+        id="testiOpenBtn"
+        aria-haspopup="dialog"
+      >
+        <span>Lihat Semua Testimoni</span>
+        <span class="testi-cta-count">({testimonials.length})</span>
+        <svg
+          class="testi-cta-arrow"
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MODAL — "Halaman" Semua Testimoni
+══════════════════════════════════════ -->
+<div
+  class="testi-modal"
+  id="testiModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Semua Testimoni"
+  aria-hidden="true"
+>
+  <!-- Backdrop -->
+  <div
+    class="testi-modal-backdrop"
+    id="testiBackdrop"
+  >
+  </div>
+
+  <!-- Panel -->
+  <div
+    class="testi-modal-panel"
+    id="testiPanel"
+  >
+    <!-- Modal Header -->
+    <div class="testi-modal-header">
+      <div class="testi-modal-header-left">
+        <button
+          class="testi-modal-back"
+          id="testiCloseBtn"
+          aria-label="Kembali"
+        >
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M12 4l-6 6 6 6"></path>
+          </svg>
+          <span>Kembali</span>
+        </button>
+        <div class="testi-modal-title-block">
+          <h2 class="testi-modal-title">Semua Testimoni</h2>
+          <span
+            class="testi-modal-count"
+            id="testiCountLabel"
+          >
+            {testimonials.length} ulasan
+          </span>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="testi-modal-search-wrap">
+        <svg
+          class="testi-search-icon"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <circle
+            cx="9"
+            cy="9"
+            r="5.5"
+          >
+          </circle>
+          <path d="M14 14l3.5 3.5"></path>
+        </svg>
+        <input
+          class="testi-search-input"
+          id="testiSearch"
+          type="search"
+          placeholder="Cari nama atau pesan…"
+          aria-label="Cari testimoni"
+        />
+      </div>
+    </div>
+
+    <!-- Filter Rating -->
+    <div class="testi-modal-filters">
+      <span class="testi-filter-label">Filter:</span>
+      {
+        [0, 5, 4, 3].map((r) => (
+          <button
+            class={`testi-filter-btn${r === 0 ? " active" : ""}`}
+            data-rating={r}
+            aria-pressed={r === 0 ? "true" : "false"}
+          >
+            {r === 0 ? "Semua" : `${r} ★`}
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Grid -->
+    <div class="testi-modal-body">
+      <div
+        class="testi-modal-grid"
+        id="testiModalGrid"
+      >
+        {
+          testimonials.map((item) => (
+            <div
+              class="testi-card testi-modal-card"
+              data-name={item.name.toLowerCase()}
+              data-message={item.message.toLowerCase()}
+              data-rating={item.rating}
+            >
+              <div
+                class="testi-quote-icon"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 32 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0L16 2.88C11.84 3.84 9.28 6.24 8.32 10.08H14.4V24H0ZM17.6 24V14.4C17.6 6.4 22.4 1.6 32 0L33.6 2.88C29.44 3.84 26.88 6.24 25.92 10.08H32V24H17.6Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <p class="testi-message">{item.message}</p>
+              <div
+                class="testi-stars"
+                aria-label={`Rating: ${item.rating} dari 5`}
+              >
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg
+                    class={`testi-star${i < item.rating ? " testi-star--filled" : ""}`}
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 1L9.85 5.72L15 6.18L11.25 9.47L12.42 14.5L8 11.77L3.58 14.5L4.75 9.47L1 6.18L6.15 5.72L8 1Z" />
+                  </svg>
+                ))}
+              </div>
+              <div class="testi-divider" />
+              <div class="testi-author">
+                <div class="testi-avatar">{item.initial}</div>
+                <div class="testi-author-info">
+                  <span class="testi-author-name">{item.name}</span>
+                  <span class="testi-author-role">{item.role}</span>
                 </div>
               </div>
             </div>
@@ -79,93 +274,172 @@ import { testimonials } from "../../data/testimonials";
         }
       </div>
 
-      <div class="swiper-pagination"></div>
+      <!-- Empty state -->
+      <div
+        class="testi-empty"
+        id="testiEmpty"
+        aria-live="polite"
+      >
+        <svg
+          viewBox="0 0 48 48"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle
+            cx="24"
+            cy="24"
+            r="20"
+            stroke="#bbf7d0"
+            stroke-width="2"
+          >
+          </circle>
+          <path
+            d="M16 24h16M24 16v16"
+            stroke="#16a34a"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+          </path>
+        </svg>
+        <p>Tidak ada testimoni yang cocok.</p>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<style>
-  .swiper-slide {
-    height: auto;
-  }
-
-  .testimonial-card {
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-
-  .testimonial-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .testimonial-swiper {
-    padding-bottom: 3rem !important;
-  }
-
-  .testimonial-swiper .swiper-pagination {
-    bottom: 0;
-  }
-
-  .testimonial-swiper .swiper-pagination-bullet {
-    background: #10b981;
-    opacity: 0.4;
-    width: 8px;
-    height: 8px;
-  }
-
-  .testimonial-swiper .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #059669;
-    width: 24px;
-    border-radius: 4px;
-  }
-
-  /* Fallback line-clamp jika plugin Tailwind tidak aktif */
-  .line-clamp-4 {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
 <script>
   import Swiper from "swiper";
   import { Autoplay, Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
 
-  let swiper = null;
+  /* ── Swiper ── */
+  let swiper: InstanceType<typeof Swiper> | null = null;
 
-  function init() {
+  function initSwiper() {
     if (swiper) {
       swiper.destroy(true, true);
       swiper = null;
     }
-    const el = document.querySelector(".testimonial-swiper");
+    const el = document.querySelector<HTMLElement>(".testi-swiper");
     if (!el) return;
-    swiper = new Swiper(".testimonial-swiper", {
+    swiper = new Swiper(".testi-swiper", {
       modules: [Autoplay, Pagination],
       slidesPerView: 1,
-      spaceBetween: 24,
+      spaceBetween: 20,
       loop: true,
-      autoplay: { delay: 4000, disableOnInteraction: false },
-      pagination: {
-        el: ".testimonial-swiper .swiper-pagination",
-        clickable: true,
-      },
+      autoplay: { delay: 4500, disableOnInteraction: false },
+      pagination: { el: ".testi-pagination", clickable: true },
       breakpoints: {
+        640: { slidesPerView: 1 },
         768: { slidesPerView: 2 },
         1024: { slidesPerView: 3 },
       },
     });
   }
 
-  init();
-  document.addEventListener("astro:after-swap", init);
+  /* ── Modal ── */
+  function initModal() {
+    const modal = document.getElementById("testiModal");
+    const openBtn = document.getElementById("testiOpenBtn");
+    const closeBtn = document.getElementById("testiCloseBtn");
+    const backdrop = document.getElementById("testiBackdrop");
+    const searchEl = document.getElementById(
+      "testiSearch",
+    ) as HTMLInputElement | null;
+    const grid = document.getElementById("testiModalGrid");
+    const emptyEl = document.getElementById("testiEmpty");
+    const countEl = document.getElementById("testiCountLabel");
+    const filterBtns =
+      document.querySelectorAll<HTMLButtonElement>(".testi-filter-btn");
+
+    if (!modal || !openBtn) return;
+
+    let activeRating = 0;
+    let searchQuery = "";
+
+    const cards = () =>
+      grid
+        ? Array.from(grid.querySelectorAll<HTMLElement>(".testi-modal-card"))
+        : [];
+
+    function applyFilter() {
+      let visible = 0;
+      cards().forEach((card) => {
+        const rating = parseInt(card.dataset.rating ?? "5");
+        const name = card.dataset.name ?? "";
+        const message = card.dataset.message ?? "";
+        const matchR = activeRating === 0 || rating === activeRating;
+        const matchS =
+          !searchQuery ||
+          name.includes(searchQuery) ||
+          message.includes(searchQuery);
+        const show = matchR && matchS;
+        card.dataset.hidden = String(!show);
+        if (show) visible++;
+      });
+      if (emptyEl) emptyEl.classList.toggle("visible", visible === 0);
+      if (countEl) countEl.textContent = `${visible} ulasan`;
+    }
+
+    function openModal() {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("testi-modal-open");
+      // fokus ke search setelah animasi selesai
+      setTimeout(() => searchEl?.focus(), 420);
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("testi-modal-open");
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn?.addEventListener("click", closeModal);
+    backdrop?.addEventListener("click", closeModal);
+
+    // Tutup dengan Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open"))
+        closeModal();
+    });
+
+    // Search
+    searchEl?.addEventListener("input", () => {
+      searchQuery = searchEl.value.toLowerCase().trim();
+      applyFilter();
+    });
+
+    // Filter rating
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-pressed", "false");
+        });
+        btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
+        activeRating = parseInt(btn.dataset.rating ?? "0");
+        applyFilter();
+      });
+    });
+  }
+
+  initSwiper();
+  initModal();
+
+  document.addEventListener("astro:after-swap", () => {
+    initSwiper();
+    initModal();
+  });
   document.addEventListener("astro:before-swap", () => {
     if (swiper) {
       swiper.destroy(true, true);
       swiper = null;
     }
+    document.body.classList.remove("testi-modal-open");
   });
 </script>

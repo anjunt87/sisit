@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/ppdb.css";
 import Contact from "../components/landing/Contact.astro";
 
-// Tanggal buka & tutup pendaftaran — sesuaikan di sini
 const PPDB_OPEN = "2026-01-01T00:00:00";
 const PPDB_CLOSE = "2026-10-31T23:59:59";
 const TAHUN = "2025/2026";
@@ -26,23 +25,12 @@ const TAHUN = "2025/2026";
       <div class="absolute inset-0 islamic-bg"></div>
 
       <!-- Decorative circles -->
-      <div
-        style="position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(82,183,136,0.08);pointer-events:none;"
-      >
-      </div>
-      <div
-        style="position:absolute;bottom:-60px;left:-60px;width:240px;height:240px;border-radius:50%;background:rgba(201,168,76,0.06);pointer-events:none;"
-      >
-      </div>
+      <div class="deco-circle deco-circle--top"></div>
+      <div class="deco-circle deco-circle--bottom"></div>
 
-      <div
-        class="relative"
-        style="max-width:1200px;margin:0 auto;padding:64px 24px;"
-      >
+      <div class="ppdb-container">
         <!-- Top row: badge + tahun ajaran -->
-        <div
-          style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:40px;"
-        >
+        <div class="ppdb-toprow">
           <div
             id="ppdb-status-badge"
             class="status-badge badge-soon"
@@ -56,9 +44,7 @@ const TAHUN = "2025/2026";
             <span id="ppdb-status-text">Memuat status...</span>
           </div>
 
-          <div
-            style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:50px;padding:6px 16px;"
-          >
+          <div class="tahun-pill">
             <svg
               width="14"
               height="14"
@@ -74,19 +60,22 @@ const TAHUN = "2025/2026";
                 height="18"
                 rx="2"
               >
-              </rect><line
+              </rect>
+              <line
                 x1="16"
                 y1="2"
                 x2="16"
                 y2="6"
               >
-              </line><line
+              </line>
+              <line
                 x1="8"
                 y1="2"
                 x2="8"
                 y2="6"
               >
-              </line><line
+              </line>
+              <line
                 x1="3"
                 y1="10"
                 x2="21"
@@ -94,41 +83,28 @@ const TAHUN = "2025/2026";
               >
               </line>
             </svg>
-            <span style="font-size:0.8rem;color:rgba(255,255,255,0.7);">
+            <span class="tahun-label">
               Tahun Ajaran <strong style="color:#fff;">{TAHUN}</strong>
             </span>
           </div>
         </div>
 
         <!-- Main content grid -->
-        <div
-          style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;"
-        >
+        <div class="ppdb-grid">
           <!-- Kiri: teks utama -->
-          <div>
-            <p
-              style="font-size:0.8rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;"
-            >
-              Penerimaan Peserta Didik Baru
-            </p>
-            <h2
-              class="font-display"
-              style="font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:16px;"
-            >
+          <div class="ppdb-left">
+            <p class="ppdb-eyebrow">Penerimaan Peserta Didik Baru</p>
+            <h2 class="ppdb-heading font-display">
               Daftarkan Putra–Putri Anda di NIIS
             </h2>
-            <p
-              style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.7;margin-bottom:28px;max-width:440px;"
-            >
+            <p class="ppdb-desc">
               Bergabunglah bersama ribuan keluarga yang telah mempercayakan
               pendidikan Islami terbaik kepada kami. Kuota terbatas — pastikan
               putra-putri Anda mendapatkan tempat.
             </p>
 
             <!-- Info items -->
-            <div
-              style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;"
-            >
+            <div class="info-list">
               <div class="info-item">
                 <svg
                   width="18"
@@ -137,7 +113,7 @@ const TAHUN = "2025/2026";
                   fill="none"
                   stroke="#52b788"
                   stroke-width="1.8"
-                  style="margin-top:1px;shrink:0;"
+                  style="margin-top:1px;flex-shrink:0;"
                 >
                   <path
                     d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
@@ -145,12 +121,8 @@ const TAHUN = "2025/2026";
                   </path>
                 </svg>
                 <div>
-                  <div
-                    style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:2px;"
-                  >
-                    Pendaftaran Online & Offline
-                  </div>
-                  <div style="font-size:0.9rem;color:#fff;">
+                  <div class="info-label">Pendaftaran Online & Offline</div>
+                  <div class="info-value">
                     Jl. Nurul Imam No. 12, atau via website
                   </div>
                 </div>
@@ -163,28 +135,21 @@ const TAHUN = "2025/2026";
                   fill="none"
                   stroke="#52b788"
                   stroke-width="1.8"
-                  style="margin-top:1px;"
+                  style="margin-top:1px;flex-shrink:0;"
                 >
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
-                  </path><circle
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle
                     cx="9"
                     cy="7"
                     r="4"
                   >
-                  </circle><path
-                    d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
-                  >
+                  </circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75">
                   </path>
                 </svg>
                 <div>
-                  <div
-                    style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:2px;"
-                  >
-                    Jenjang yang Tersedia
-                  </div>
-                  <div style="font-size:0.9rem;color:#fff;">
-                    SD Islam · SMP Islam · SMA Islam
-                  </div>
+                  <div class="info-label">Jenjang yang Tersedia</div>
+                  <div class="info-value">SD Islam · SMP Islam · SMA Islam</div>
                 </div>
               </div>
               <div class="info-item">
@@ -195,7 +160,7 @@ const TAHUN = "2025/2026";
                   fill="none"
                   stroke="#52b788"
                   stroke-width="1.8"
-                  style="margin-top:1px;"
+                  style="margin-top:1px;flex-shrink:0;"
                 >
                   <rect
                     x="3"
@@ -204,19 +169,22 @@ const TAHUN = "2025/2026";
                     height="18"
                     rx="2"
                   >
-                  </rect><line
+                  </rect>
+                  <line
                     x1="16"
                     y1="2"
                     x2="16"
                     y2="6"
                   >
-                  </line><line
+                  </line>
+                  <line
                     x1="8"
                     y1="2"
                     x2="8"
                     y2="6"
                   >
-                  </line><line
+                  </line>
+                  <line
                     x1="3"
                     y1="10"
                     x2="21"
@@ -225,13 +193,9 @@ const TAHUN = "2025/2026";
                   </line>
                 </svg>
                 <div>
+                  <div class="info-label">Periode Pendaftaran</div>
                   <div
-                    style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:2px;"
-                  >
-                    Periode Pendaftaran
-                  </div>
-                  <div
-                    style="font-size:0.9rem;color:#fff;"
+                    class="info-value"
                     id="ppdb-periode"
                   >
                     1 Juni – 31 Juli 2025
@@ -241,9 +205,9 @@ const TAHUN = "2025/2026";
             </div>
 
             <!-- CTA buttons -->
-            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <div class="ppdb-cta-row">
               <a
-                href="/ppdb/daftar"
+                href="/ppdb-daftar"
                 class="cta-btn"
               >
                 Daftar Sekarang
@@ -268,11 +232,11 @@ const TAHUN = "2025/2026";
           </div>
 
           <!-- Kanan: countdown + progress -->
-          <div>
+          <div class="ppdb-right">
             <!-- Countdown header -->
             <div class="ornament-line">
               <span
-                style="font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;"
+                class="ornament-text"
                 id="ppdb-countdown-label"
               >
                 Pendaftaran dibuka dalam
@@ -281,7 +245,7 @@ const TAHUN = "2025/2026";
 
             <!-- Countdown grid -->
             <div
-              style="display:flex;gap:12px;justify-content:center;margin-bottom:28px;"
+              class="ppdb-countdown"
               id="ppdb-countdown"
             >
               <div class="countdown-box">
@@ -323,40 +287,26 @@ const TAHUN = "2025/2026";
             </div>
 
             <!-- Progress bar kuota -->
-            <div
-              style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px 24px;"
-            >
-              <div
-                style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"
-              >
-                <span style="font-size:0.8rem;color:rgba(255,255,255,0.6);">
-                  Kuota terisi
-                </span>
+            <div class="kuota-card">
+              <div class="kuota-header">
+                <span class="kuota-title">Kuota terisi</span>
                 <span
-                  style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);"
+                  class="kuota-pct"
                   id="ppdb-kuota-pct"
                 >
                   68%
                 </span>
               </div>
-              <div
-                style="background:rgba(255,255,255,0.08);border-radius:50px;overflow:hidden;height:6px;"
-              >
+              <div class="kuota-track">
                 <div
                   id="ppdb-progress-fill"
                   style="width:0%"
                 >
                 </div>
               </div>
-              <div
-                style="display:flex;justify-content:space-between;margin-top:8px;"
-              >
-                <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);">
-                  204 pendaftar
-                </span>
-                <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);">
-                  Kuota 300 siswa
-                </span>
+              <div class="kuota-footer">
+                <span>204 pendaftar</span>
+                <span>Kuota 300 siswa</span>
               </div>
             </div>
 
@@ -365,13 +315,9 @@ const TAHUN = "2025/2026";
               class="ornament-line"
               style="margin-top:24px;"
             >
-              <span
-                style="font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;"
-              >
-                Syarat dokumen
-              </span>
+              <span class="ornament-text">Syarat dokumen</span>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div class="syarat-grid">
               {
                 [
                   "Akta Kelahiran",
@@ -381,7 +327,7 @@ const TAHUN = "2025/2026";
                   "Surat Keterangan Sehat",
                   "Raport Semester",
                 ].map((item) => (
-                  <div style="display:flex;align-items:center;gap:8px;font-size:0.82rem;color:rgba(255,255,255,0.65);">
+                  <div class="syarat-item">
                     <svg
                       width="14"
                       height="14"
@@ -389,7 +335,7 @@ const TAHUN = "2025/2026";
                       fill="none"
                       stroke="#52b788"
                       stroke-width="2.5"
-                      style="shrink:0;"
+                      style="flex-shrink:0;"
                     >
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
@@ -413,7 +359,6 @@ const TAHUN = "2025/2026";
       const cdLabel = document.getElementById("ppdb-countdown-label");
       const progressFill = document.getElementById("ppdb-progress-fill");
 
-      // Animate progress bar on load
       setTimeout(() => {
         if (progressFill) progressFill.style.width = "68%";
       }, 300);
@@ -424,24 +369,21 @@ const TAHUN = "2025/2026";
 
       function tick() {
         const now = new Date();
-        let target, diff;
+        let target;
 
         if (now < openDate) {
-          // Belum buka
           badge.className = "status-badge badge-soon";
           pulse.style.background = "var(--gold)";
           statusTxt.textContent = "Segera Dibuka";
           cdLabel.textContent = "Pendaftaran dibuka dalam";
           target = openDate;
         } else if (now >= openDate && now <= closeDate) {
-          // Sedang berlangsung
           badge.className = "status-badge badge-open";
           pulse.style.background = "#52b788";
           statusTxt.textContent = "Pendaftaran Dibuka";
           cdLabel.textContent = "Pendaftaran ditutup dalam";
           target = closeDate;
         } else {
-          // Sudah tutup
           badge.className = "status-badge badge-closed";
           pulse.style.animation = "none";
           pulse.style.background = "#e05050";
@@ -453,16 +395,19 @@ const TAHUN = "2025/2026";
           return;
         }
 
-        diff = Math.max(0, target - now);
-        const hari = Math.floor(diff / 86400000);
-        const jam = Math.floor((diff % 86400000) / 3600000);
-        const menit = Math.floor((diff % 3600000) / 60000);
-        const detik = Math.floor((diff % 60000) / 1000);
-
-        document.getElementById("cd-hari").textContent = pad(hari);
-        document.getElementById("cd-jam").textContent = pad(jam);
-        document.getElementById("cd-menit").textContent = pad(menit);
-        document.getElementById("cd-detik").textContent = pad(detik);
+        const diff = Math.max(0, target - now);
+        document.getElementById("cd-hari").textContent = pad(
+          Math.floor(diff / 86400000),
+        );
+        document.getElementById("cd-jam").textContent = pad(
+          Math.floor((diff % 86400000) / 3600000),
+        );
+        document.getElementById("cd-menit").textContent = pad(
+          Math.floor((diff % 3600000) / 60000),
+        );
+        document.getElementById("cd-detik").textContent = pad(
+          Math.floor((diff % 60000) / 1000),
+        );
       }
 
       tick();

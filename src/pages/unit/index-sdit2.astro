@@ -1,0 +1,577 @@
+---
+// src/pages/profil-02/index.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const gallery = [
+  {
+    title: "Upacara Bendera",
+    image:
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
+    category: "Kedisiplinan",
+  },
+  {
+    title: "Kegiatan Belajar Kelas",
+    image:
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+    category: "Akademik",
+  },
+  {
+    title: "Tahfidz Al-Qur'an",
+    image:
+      "https://images.unsplash.com/photo-1519817914152-22f90e4f5c77?auto=format&fit=crop&w=1200&q=80",
+    category: "Keislaman",
+  },
+  {
+    title: "Pramuka",
+    image:
+      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1200&q=80",
+    category: "Ekstrakurikuler",
+  },
+  {
+    title: "Olahraga Bersama",
+    image:
+      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80",
+    category: "Kesehatan",
+  },
+  {
+    title: "Wisuda & Pentas Seni",
+    image:
+      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80",
+    category: "Event Sekolah",
+  },
+];
+
+const categories = ["Semua", ...new Set(gallery.map((g) => g.category))];
+
+const identitas = [
+  { icon: "fa-school", label: "Nama Sekolah", value: "SDIT Nurul Imam 02" },
+  { icon: "fa-id-card", label: "NPSN", value: "70049181" },
+  { icon: "fa-star", label: "Akreditasi", value: "—" },
+  { icon: "fa-check-circle", label: "Status", value: "Swasta" },
+  { icon: "fa-book-open", label: "Bentuk Pendidikan", value: "SD" },
+  {
+    icon: "fa-user-tie",
+    label: "Kepala Sekolah",
+    value: "Indah Sunanun Mutsarodah",
+  },
+  { icon: "fa-user-cog", label: "Operator", value: "Wandi Mulyana" },
+  { icon: "fa-layer-group", label: "Kurikulum", value: "Kurikulum SD Merdeka" },
+  {
+    icon: "fa-clock",
+    label: "Penyelenggaraan",
+    value: "Sehari Penuh / 5 Hari",
+  },
+  {
+    icon: "fa-map-marker-alt",
+    label: "Alamat",
+    value:
+      "Dusun 2 Ciranggon Raya RT. 008/004, Kec. Majalaya, Kab. Karawang, Prov. Jawa Barat",
+  },
+  { icon: "fa-phone", label: "Telepon", value: "081282159719" },
+  { icon: "fa-envelope", label: "Email", value: "sditnurulimam02@gmail.com" },
+  {
+    icon: "fa-building",
+    label: "Yayasan",
+    value: "Yayasan Pendidikan Alam Jaya",
+  },
+];
+
+const stats = [
+  { value: "433", label: "Siswa Aktif" },
+  { value: "19", label: "Tenaga Pendidik" },
+  { value: "12", label: "Rombel" },
+  { value: "100%", label: "Kelas Layak" },
+];
+
+const statistik = [
+  { icon: "fa-chalkboard-teacher", label: "Guru", value: "19" },
+  { icon: "fa-male", label: "Siswa Laki-laki", value: "214" },
+  { icon: "fa-female", label: "Siswa Perempuan", value: "219" },
+  { icon: "fa-users", label: "Rombongan Belajar", value: "12" },
+  { icon: "fa-door-open", label: "Ruang Kelas", value: "12" },
+  { icon: "fa-flask", label: "Laboratorium", value: "1" },
+  { icon: "fa-book", label: "Perpustakaan", value: "1" },
+];
+
+const prosesPembelajaran = [
+  { label: "Rasio Siswa / Rombel", value: "25" },
+  { label: "Rasio Rombel / Ruang Kelas", value: "1" },
+  { label: "Rasio Siswa / Guru", value: "23" },
+  { label: "Guru Kualifikasi S1/D4", value: "94,74%" },
+  { label: "Guru Bersertifikasi", value: "36,84%" },
+  { label: "Ruang Kelas Layak", value: "100%" },
+];
+---
+
+<BaseLayout
+  title="Profil SDIT Nurul Imam 02 Karawang"
+  description="Profil lengkap SDIT Nurul Imam 02 Karawang, sekolah dasar Islam terpadu dengan kurikulum merdeka dan pembelajaran full day school."
+>
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║            HERO SECTION              ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section
+    class="relative bg-gradient-to-br from-emerald-900 via-emerald-700 to-emerald-600 pt-24 pb-0 overflow-hidden"
+  >
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style="background-image:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16,185,129,0.15) 0%, transparent 40%)"
+    >
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 relative">
+      <div class="flex items-center gap-12 flex-wrap">
+        <!-- Emblem -->
+        <div
+          class="relative w-36 h-36 flex-shrink-0 flex items-center justify-center"
+        >
+          <div
+            class="absolute w-36 h-36 rounded-full border-2 border-dashed border-white/20 animate-spin"
+            style="animation-duration:20s"
+          >
+          </div>
+          <div
+            class="absolute w-28 h-28 rounded-full border-2 border-white/20 animate-spin"
+            style="animation-duration:15s; animation-direction:reverse"
+          >
+          </div>
+          <div
+            class="w-20 h-20 bg-white/10 backdrop-blur border-2 border-white/25 rounded-full flex items-center justify-center text-3xl text-amber-300"
+          >
+            <i class="fas fa-school"></i>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="flex-1 min-w-[280px]">
+          <span
+            class="inline-block bg-white/10 border border-white/20 text-emerald-300 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-4"
+          >
+            Profil Sekolah
+          </span>
+          <h1
+            class="font-serif text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4"
+          >
+            SDIT Nurul Imam 02 <br />
+            <span class="text-amber-300">Karawang</span>
+          </h1>
+          <p class="text-white/75 text-base leading-relaxed max-w-lg mb-6">
+            Mendidik generasi Qurani yang berakhlak mulia, cerdas, berprestasi,
+            dan siap menghadapi masa depan.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span
+              class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/90 text-sm font-medium px-3 py-1.5 rounded-full"
+            >
+              <i class="fas fa-award"></i> Sekolah Swasta
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/90 text-sm font-medium px-3 py-1.5 rounded-full"
+            >
+              <i class="fas fa-book"></i> Kurikulum Merdeka
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/90 text-sm font-medium px-3 py-1.5 rounded-full"
+            >
+              <i class="fas fa-map-marker-alt"></i> Karawang
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave divider -->
+    <div class="mt-8 leading-none">
+      <svg
+        viewBox="0 0 1440 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full block"
+      >
+        <path
+          d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
+          fill="#f8fafc"
+        >
+        </path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║             STATS BAR               ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section class="bg-slate-50 border-b border-slate-200 py-8">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex flex-wrap items-center justify-center">
+        {
+          stats.map((stat, i) => (
+            <>
+              <div class="flex flex-col items-center px-10 py-2">
+                <span
+                  class="font-serif text-4xl font-bold text-emerald-700 leading-none"
+                  data-counter={stat.value}
+                >
+                  {stat.value}
+                </span>
+                <span class="text-sm text-slate-600 font-medium mt-1">
+                  {stat.label}
+                </span>
+              </div>
+              {i < stats.length - 1 && (
+                <div class="w-px h-10 bg-slate-200 hidden sm:block" />
+              )}
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║          IDENTITAS SEKOLAH          ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span
+          class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        >
+          Identitas
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800">
+          Identitas <span class="text-green-600">SDIT Nurul Imam 02</span>
+        </h2>
+      </div>
+
+      <div
+        class="relative bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm"
+      >
+        <div
+          class="absolute top-0 right-0 w-48 h-48 pointer-events-none overflow-hidden"
+        >
+          <div
+            class="absolute w-36 h-36 -top-14 -right-14 bg-emerald-50 rounded-full"
+          >
+          </div>
+          <div
+            class="absolute w-20 h-20 top-5 right-5 bg-emerald-100 rounded-full"
+          >
+          </div>
+        </div>
+
+        <div class="relative divide-y divide-slate-100">
+          {
+            identitas.map((row) => (
+              <div class="grid grid-cols-[180px_1fr] sm:grid-cols-[220px_1fr] px-6 sm:px-8 py-4 hover:bg-emerald-50 transition">
+                <div class="flex items-center gap-2.5 text-sm font-semibold text-slate-500">
+                  <i class={`fas ${row.icon} text-emerald-600 w-4`} />
+                  {row.label}
+                </div>
+                <div class="text-sm text-slate-700 font-medium leading-relaxed">
+                  {row.value}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║         STATISTIK SEKOLAH           ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span
+          class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        >
+          Statistik
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800">
+          Statistik <span class="text-green-600">Sekolah</span>
+        </h2>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+        {
+          statistik.map((item) => (
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center hover:border-emerald-300 hover:bg-emerald-50 transition">
+              <div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center mx-auto mb-3 text-lg">
+                <i class={`fas ${item.icon}`} />
+              </div>
+              <div class="font-serif text-3xl font-bold text-emerald-700 leading-none mb-1">
+                {item.value}
+              </div>
+              <div class="text-xs text-slate-500 font-medium">{item.label}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Proses Pembelajaran -->
+      <div
+        class="bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden"
+      >
+        <div class="bg-emerald-700 px-8 py-4">
+          <h3 class="text-white font-bold text-lg flex items-center gap-2">
+            <i class="fas fa-chart-bar"></i> Proses Pembelajaran
+          </h3>
+        </div>
+        <div class="divide-y divide-slate-100">
+          {
+            prosesPembelajaran.map((row) => (
+              <div class="grid grid-cols-2 px-8 py-3.5 hover:bg-emerald-50 transition">
+                <span class="text-sm text-slate-500 font-medium">
+                  {row.label}
+                </span>
+                <span class="text-sm text-slate-800 font-bold">
+                  {row.value}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║         VISI & MISI                 ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span
+          class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        >
+          Visi & Misi
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800">
+          Landasan <span class="text-green-600">Kami</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Visi -->
+        <div class="bg-emerald-50 border border-emerald-100 rounded-3xl p-8">
+          <div
+            class="w-12 h-12 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl mb-5"
+          >
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 class="text-xl font-bold text-emerald-900 mb-3">Visi</h3>
+          <p class="text-slate-700 leading-relaxed">
+            Terwujudnya generasi muslim yang beriman, bertaqwa, berakhlak mulia,
+            cerdas, berprestasi, dan mandiri.
+          </p>
+        </div>
+
+        <!-- Misi -->
+        <div class="bg-amber-50 border border-amber-100 rounded-3xl p-8">
+          <div
+            class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center text-xl mb-5"
+          >
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3 class="text-xl font-bold text-amber-900 mb-3">Misi</h3>
+          <ul class="space-y-2 text-slate-700">
+            <li class="flex items-start gap-2">
+              <i
+                class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"
+              >
+              </i>
+              Menyelenggarakan pembelajaran Al-Qur'an secara intensif
+            </li>
+            <li class="flex items-start gap-2">
+              <i
+                class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"
+              >
+              </i>
+              Mengintegrasikan nilai-nilai Islam dalam setiap mata pelajaran
+            </li>
+            <li class="flex items-start gap-2">
+              <i
+                class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"
+              >
+              </i>
+              Membangun karakter unggul melalui pembiasaan akhlak mulia
+            </li>
+            <li class="flex items-start gap-2">
+              <i
+                class="fas fa-check-circle text-amber-500 mt-0.5 flex-shrink-0"
+              >
+              </i>
+              Mengembangkan potensi akademik dan non-akademik siswa
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║         GALLERY + FILTER            ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <span
+          class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        >
+          Gallery
+        </span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-800">
+          Dokumentasi <span class="text-green-600">Kegiatan Sekolah</span>
+        </h2>
+      </div>
+
+      <div
+        class="flex flex-wrap justify-center gap-2 mb-10"
+        id="gallery-filters"
+      >
+        {
+          categories.map((cat) => (
+            <button
+              data-filter={cat === "Semua" ? "all" : cat}
+              class={`px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200
+              ${
+                cat === "Semua"
+                  ? "bg-emerald-600 text-white border-emerald-600"
+                  : "bg-white text-slate-600 border-slate-200 hover:border-emerald-400 hover:text-emerald-600"
+              }`}
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <div
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="gallery-grid"
+      >
+        {
+          gallery.map((item) => (
+            <div
+              class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300"
+              data-category={item.category}
+            >
+              <div class="overflow-hidden bg-slate-100">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  class="w-full h-64 object-cover group-hover:scale-110 transition duration-500"
+                />
+              </div>
+              <div class="p-6">
+                <span class="inline-block text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full mb-3">
+                  {item.category}
+                </span>
+                <h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════╗ -->
+  <!-- ║              CTA SECTION            ║ -->
+  <!-- ╚══════════════════════════════════════╝ -->
+  <section class="py-20 pb-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div
+        class="relative bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-3xl p-12 text-center overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 pointer-events-none"
+          style="background-image:
+            radial-gradient(circle at 10% 90%, rgba(255,255,255,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 90% 10%, rgba(16,185,129,0.1) 0%, transparent 40%)"
+        >
+        </div>
+        <div class="relative">
+          <i
+            class="fas fa-envelope-open-text text-4xl text-amber-300 block mb-5"
+          >
+          </i>
+          <h3 class="font-serif text-3xl font-bold text-white mb-3">
+            Tertarik Bergabung?
+          </h3>
+          <p
+            class="text-white/75 text-base leading-relaxed max-w-md mx-auto mb-8"
+          >
+            Daftarkan putra-putri Anda di SDIT Nurul Imam 02 Karawang dan
+            wujudkan impian bersama kami.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a
+              href="/pendaftaran"
+              class="inline-flex items-center gap-2
+            bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm px-8
+            py-3.5 rounded-full transition-all duration-300
+            hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-600/30"
+            >
+              <i class="fas fa-pen-to-square"></i> Daftar Sekarang
+            </a>
+            <a
+              href="/kontak"
+              class="inline-flex items-center gap-2 bg-transparent
+          border-2 border-white/30 hover:bg-white/10 hover:border-white/60
+          text-white/90 font-semibold text-sm px-8 py-3.5 rounded-full
+          transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <i class="fas fa-phone-volume"></i> Hubungi Kami
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const filters = document.querySelectorAll<HTMLButtonElement>(
+        "#gallery-filters button",
+      );
+      const cards = document.querySelectorAll<HTMLElement>(
+        "#gallery-grid [data-category]",
+      );
+
+      filters.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.dataset.filter!;
+
+          filters.forEach((b) => {
+            b.classList.remove(
+              "bg-emerald-600",
+              "text-white",
+              "border-emerald-600",
+            );
+            b.classList.add("bg-white", "text-slate-600", "border-slate-200");
+          });
+          btn.classList.add(
+            "bg-emerald-600",
+            "text-white",
+            "border-emerald-600",
+          );
+          btn.classList.remove(
+            "bg-white",
+            "text-slate-600",
+            "border-slate-200",
+          );
+
+          cards.forEach((card) => {
+            const match = filter === "all" || card.dataset.category === filter;
+            card.style.display = match ? "" : "none";
+          });
+        });
+      });
+    </script>
+  </section>
+</BaseLayout>

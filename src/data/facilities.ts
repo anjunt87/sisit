@@ -4,16 +4,21 @@ export interface Facility {
   icon: string
   bg: string
   color: string
+  image?: string        // ← tambah ini
+  detail?: string       // ← deskripsi panjang untuk halaman detail
+  features?: string[]   // ← poin-poin fitur spesifik
 }
-
 export const facilities: Facility[] = [
  {
-    title: "Ruang Kelas AC",
-    desc: "Ruang kelas yang nyaman dengan AC dan smart board",
-    icon: "fas fa-chalkboard-teacher",
-    bg: "bg-green-100",
-    color: "text-green-600",
-  },
+  title: "Ruang Kelas AC",
+  desc: "Ruang kelas yang nyaman dengan AC dan smart board",
+  icon: "fas fa-chalkboard-teacher",
+  bg: "bg-green-100",
+  color: "text-green-600",
+  image: "/images/facilities/ruang-kelas.webp",   // ← opsional
+  detail: "Setiap ruang kelas dilengkapi dengan AC split, smart board interaktif, dan pencahayaan LED yang ramah mata. Kapasitas 25–30 siswa dengan tata letak yang mendukung diskusi kelompok maupun pembelajaran individual.",
+  features: ["Smart board interaktif", "AC split 1,5 PK", "30 kursi ergonomis", "Proyektor HD"],
+},
   {
     title: "Lab Sains",
     desc: "Laboratorium sains dengan peralatan modern",
