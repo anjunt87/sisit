@@ -1,28 +1,39 @@
 ---
-// src/components/landing/Facilities.astro
-// Struktur data diasumsikan dari ../../data/facilities
-// Pisahkan menjadi featured (6) dan supporting (sisanya)
-
 import { facilities } from "../../data/facilities";
 
 import "../../styles/facilities.css";
 
-// 6 pertama = fasilitas unggulan, sisanya = pendukung
 const featured = facilities.slice(0, 6);
 const supporting = facilities.slice(6);
 const hasSupporting = supporting.length > 0;
 ---
 
-<section id="facilities" class="fac-section">
-  <!-- Dekorasi background -->
-  <div class="fac-bg" aria-hidden="true"></div>
-  <div class="fac-orb fac-orb--1" aria-hidden="true"></div>
-  <div class="fac-orb fac-orb--2" aria-hidden="true"></div>
+<section
+  id="facilities"
+  class="fac-section"
+>
+  <div
+    class="fac-bg"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="fac-orb fac-orb--1"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="fac-orb fac-orb--2"
+    aria-hidden="true"
+  >
+  </div>
 
   <div class="fac-container">
-
-    <!-- ── Header ── -->
-    <div class="fac-header" data-aos="fade-up">
+    <!-- Header -->
+    <div
+      class="fac-header"
+      data-aos="fade-up"
+    >
       <span class="fac-badge">
         <span class="fac-badge-dot"></span>
         Fasilitas
@@ -31,61 +42,245 @@ const hasSupporting = supporting.length > 0;
         Fasilitas <em>Unggulan</em>
       </h2>
       <p class="fac-subtitle">
-        Sarana dan prasarana modern untuk mendukung proses belajar mengajar
-        yang optimal dan menyenangkan.
+        Sarana dan prasarana modern untuk mendukung proses belajar mengajar yang
+        optimal dan menyenangkan.
       </p>
     </div>
 
-    <!-- ── Grid Utama (6 fasilitas featured) ── -->
-    <div class="fac-grid" data-aos="fade-up" data-aos-delay="100">
-      {featured.map((item, i) => (
-        <article
-          class="fac-card"
-          style={`--delay: ${i * 60}ms`}
-          data-aos="fade-up"
-          data-aos-delay={100 + i * 60}
-        >
-          <!-- Icon block -->
-          <div class={`fac-icon-wrap ${item.bg}`}>
-            <i class={`${item.icon} fac-icon ${item.color}`} aria-hidden="true"></i>
-          </div>
-
-          <!-- Content -->
-          <div class="fac-card-body">
-            <h3 class="fac-card-title">{item.title}</h3>
-            <p class="fac-card-desc">{item.desc}</p>
-          </div>
-
-          <!-- Accent corner -->
-          <div class="fac-card-corner" aria-hidden="true"></div>
-        </article>
-      ))}
+    <!-- Grid Utama -->
+    <div
+      class="fac-grid"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      {
+        featured.map((item, i) => (
+          <article
+            class="fac-card"
+            data-aos="fade-up"
+            data-aos-delay={100 + i * 60}
+            data-facility={i}
+            role="button"
+            tabindex="0"
+            aria-label={`Lihat detail ${item.title}`}
+          >
+            <div class={`fac-icon-wrap ${item.bg}`}>
+              <i
+                class={`${item.icon} fac-icon ${item.color}`}
+                aria-hidden="true"
+              />
+            </div>
+            <div class="fac-card-body">
+              <h3 class="fac-card-title">{item.title}</h3>
+              <p class="fac-card-desc">{item.desc}</p>
+              <p class="fac-card-hint">Lihat detail →</p>
+            </div>
+            <div
+              class="fac-card-corner"
+              aria-hidden="true"
+            />
+          </article>
+        ))
+      }
     </div>
 
-    <!-- ── Fasilitas Pendukung ── -->
-    {hasSupporting && (
-      <div class="fac-supporting" data-aos="fade-up" data-aos-delay="300">
-        <p class="fac-supporting-label">Fasilitas Pendukung</p>
-        <div class="fac-pill-grid">
-          {supporting.map((item) => (
-            <div class="fac-pill">
-              <i class={`${item.icon} fac-pill-icon ${item.color}`} aria-hidden="true"></i>
-              <span>{item.title}</span>
-            </div>
-          ))}
+    <!-- Fasilitas Pendukung -->
+    {
+      hasSupporting && (
+        <div
+          class="fac-supporting"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <p class="fac-supporting-label">Fasilitas Pendukung</p>
+          <div class="fac-pill-grid">
+            {supporting.map((item) => (
+              <div class="fac-pill">
+                <i
+                  class={`${item.icon} fac-pill-icon ${item.color}`}
+                  aria-hidden="true"
+                />
+                <span>{item.title}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    )}
+      )
+    }
 
-    <!-- ── CTA ── -->
-    <div class="fac-cta" data-aos="fade-up" data-aos-delay="350">
-      <a href="/tentang#fasilitas" class="fac-cta-btn">
+    <!-- CTA -->
+    <div
+      class="fac-cta"
+      data-aos="fade-up"
+      data-aos-delay="350"
+    >
+      <a
+        href="/facilities"
+        class="fac-cta-btn"
+      >
         Lihat Detail Lengkap
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4"/>
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <path d="M3 8h10M9 4l4 4-4 4"></path>
         </svg>
       </a>
     </div>
-
   </div>
 </section>
+
+<!-- ══ Modal Detail Fasilitas ══ -->
+<div
+  class="fac-overlay"
+  id="facOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="facModalTitle"
+>
+  <div
+    class="fac-modal"
+    id="facModal"
+  >
+    <div class="fac-modal-top">
+      <div
+        class="fac-modal-icon"
+        id="facModalIcon"
+      >
+      </div>
+      <div class="fac-modal-header">
+        <h3
+          class="fac-modal-title"
+          id="facModalTitle"
+        >
+        </h3>
+        <p
+          class="fac-modal-desc"
+          id="facModalDesc"
+        >
+        </p>
+      </div>
+      <button
+        class="fac-modal-close"
+        id="facModalClose"
+        aria-label="Tutup detail"
+      >
+        ✕
+      </button>
+    </div>
+    <div class="fac-modal-body">
+      <div id="facModalImg"></div>
+      <div id="facModalDetail"></div>
+      <div id="facModalFeatures"></div>
+    </div>
+  </div>
+</div>
+<script define:vars={{ featuredJSON: JSON.stringify(featured) }}>
+  const featuredData = JSON.parse(featuredJSON);
+
+  const bgMap = {
+    "bg-green-100": "background:#dcfce7",
+    "bg-purple-100": "background:#ede9fe",
+    "bg-yellow-100": "background:#fef9c3",
+    "bg-red-100": "background:#fee2e2",
+    "bg-pink-100": "background:#fce7f3",
+  };
+  const colorMap = {
+    "text-green-600": "color:#16a34a",
+    "text-purple-600": "color:#7c3aed",
+    "text-yellow-600": "color:#ca8a04",
+    "text-red-600": "color:#dc2626",
+    "text-pink-600": "color:#db2777",
+  };
+
+  const overlay = document.getElementById("facOverlay");
+  const modal = document.getElementById("facModal");
+
+  function openModal(idx) {
+    const f = featuredData[idx];
+    if (!f) return;
+
+    // Icon
+    const iconEl = document.getElementById("facModalIcon");
+    iconEl.setAttribute(
+      "style",
+      `${bgMap[f.bg] ?? ""};width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0`,
+    );
+    iconEl.innerHTML = `<i class="${f.icon}" style="${colorMap[f.color] ?? ""}"></i>`;
+
+    document.getElementById("facModalTitle").textContent = f.title;
+    document.getElementById("facModalDesc").textContent = f.desc;
+
+    // Image — support images[] dan fallback ke image
+    const imgEl = document.getElementById("facModalImg");
+    const allImages = f.images?.length ? f.images : f.image ? [f.image] : [];
+
+    if (allImages.length > 0) {
+      imgEl.innerHTML = allImages
+        .map(
+          (src) =>
+            `<img src="${src}" alt="${f.title}" class="fac-modal-img" loading="lazy"
+          onerror="this.style.display='none'">`,
+        )
+        .join("");
+    } else {
+      imgEl.innerHTML = `<div class="fac-modal-img-placeholder">
+        <i class="${f.icon}" style="${colorMap[f.color] ?? ""}"></i>
+        <span>Foto segera hadir</span>
+      </div>`;
+    }
+
+    // Detail
+    document.getElementById("facModalDetail").innerHTML = f.detail
+      ? `<p class="fac-modal-section-label">Deskripsi lengkap</p>
+         <p class="fac-modal-detail-text">${f.detail}</p>`
+      : "";
+
+    // Features
+    document.getElementById("facModalFeatures").innerHTML = f.features?.length
+      ? `<p class="fac-modal-section-label">Fitur utama</p>
+         <div class="fac-modal-features">
+           ${f.features
+             .map(
+               (ft) => `
+             <div class="fac-modal-feature">
+               <span class="fac-modal-feature-check">✓</span>${ft}
+             </div>`,
+             )
+             .join("")}
+         </div>`
+      : "";
+
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".fac-card[data-facility]").forEach((card) => {
+    const idx = Number(card.dataset.facility);
+    card.addEventListener("click", () => openModal(idx));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(idx);
+      }
+    });
+  });
+
+  document
+    .getElementById("facModalClose")
+    .addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>

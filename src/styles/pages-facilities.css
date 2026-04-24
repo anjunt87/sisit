@@ -1,0 +1,471 @@
+    /* --- Swiper Custom Color --- */
+ :root {
+  --swiper-theme-color: #16a34a !important; /* Paksa hijau */
+  --swiper-navigation-size: 24px;
+}
+  /* Memastikan Panah Navigasi Hijau */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #16a34a !important;
+}
+
+/* Mengubah warna titik-titik (pagination) yang aktif */
+.swiper-pagination-bullet-active {
+  background: #16a34a !important;
+}
+
+/* Opsional: Jika ingin menghilangkan background lingkaran putih pada panah */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.2rem; /* Sesuaikan ukuran panah */
+  font-weight: bold;
+}
+  /* ── Page layout ── */
+ .facpage-section {
+    position: relative;
+    padding: 5rem 1.5rem 6rem;
+    background: #fcfdfc;
+    min-height: 100vh;
+  }
+  .facpage-container {
+    max-width: 52rem;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  
+  /* --- Badges & Text --- */
+  .fac-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: #f0fdf4;
+    border: 1px solid #dcfce7;
+    border-radius: 99px;
+    color: #16a34a;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .fac-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #16a34a;
+    border-radius: 50%;
+  }
+
+  .facpage-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #111827;
+    margin: 1rem 0;
+  }
+  .facpage-title em {
+    font-style: normal;
+    color: #16a34a;
+    text-decoration: underline decoration-4 underline-offset-4;
+  }
+
+
+
+  /* ── Header ── */
+  .facpage-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+  }
+
+  .facpage-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .facpage-back svg { width: 14px; height: 14px; }
+  .facpage-back:hover { color: #16a34a; }
+
+  .facpage-title {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .facpage-title em {
+    font-style: normal;
+    color: #16a34a;
+    position: relative;
+  }
+  .facpage-title em::after {
+    content: "";
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #16a34a, #4ade80);
+    border-radius: 999px;
+  }
+
+  .facpage-subtitle {
+    font-size: 0.9375rem;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+
+  /* ── Filter Tabs ── */
+  /* --- Tabs --- */
+  .facpage-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+  .facpage-tab {
+    white-space: nowrap;
+    padding: 10px 20px;
+    border-radius: 99px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .facpage-tab.active {
+    background: #16a34a;
+    color: white;
+    border-color: #16a34a;
+  }
+
+  .facpage-tab:hover {
+    border-color: #16a34a;
+    color: #15803d;
+  }
+  .facpage-tab.active {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+  }
+  .facpage-tab.active .facpage-tab-count {
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+
+  .facpage-tab-count {
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    line-height: 1.4;
+    transition: all 0.2s;
+  }
+
+  /* ── Grid ── */
+  .facpage-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ── Card ── */
+ .facpage-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .facpage-card[aria-expanded="true"] {
+    border-color: #16a34a;
+    box-shadow: 0 10px 30px -10px rgba(22, 163, 74, 0.2);
+  }
+
+  /* Pastikan info mengambil sisa ruang yang ada */
+/* .facpage-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
+.facpage-card-info {
+  flex: 1; /* Mengambil ruang tengah agar elemen setelahnya terdorong ke kanan */
+  min-width: 0; /* Mencegah teks meluap */
+}
+  .facpage-card-header {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center; /* Sejajar vertikal */
+  gap: 1.25rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Badge Unggulan */
+.tag-unggulan, .facpage-badge-unggulan {
+  margin-left: auto; /* Trik sakti: mendorong elemen ke kanan */
+  margin-right: 1rem; /* Jarak dari tombol panah */
+  order: 2; /* Memastikan dia muncul setelah judul pada flex */
+}
+
+.facpage-indicator, .facpage-toggle {
+  order: 3; /* Tombol panah selalu paling kanan */
+}
+  .fac-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  /* Badge unggulan */
+  .facpage-badge-unggulan {
+  display: inline-flex; /* Aktifkan default */
+  margin-left: auto;   /* Dorong ke kanan */
+  margin-right: 1rem;  /* Jarak dari tombol chevron */
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+  /* Toggle button */
+  .facpage-toggle {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid #d1fae5;
+    background: #f0fdf4;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .facpage-toggle:hover {
+    background: #dcfce7;
+    border-color: #16a34a;
+  }
+  .facpage-card[aria-expanded="true"] .facpage-toggle {
+    background: #16a34a;
+    border-color: #16a34a;
+  }
+  .facpage-card[aria-expanded="true"] .facpage-toggle svg {
+    stroke: #ffffff;
+  }
+
+  .facpage-chevron {
+    width: 16px; height: 16px;
+    transition: transform 0.3s ease;
+  }
+  .facpage-card[aria-expanded="true"] .facpage-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ── Detail Panel ── */
+  .facpage-detail {
+    border-top: 1px solid #f3f4f6;
+    overflow: hidden;
+  }
+  .fac-swiper,
+  .facpage-detail-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    cursor: zoom-in;
+  }
+  .facpage-detail-body {
+    padding: 1.5rem;
+  }
+  .facpage-detail-section {
+    margin-bottom: 1.5rem;
+  }
+  .facpage-detail-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9ca3af;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .facpage-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+  }
+  .facpage-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: #374151;
+    font-weight: 500;
+  }
+  .facpage-feature-check {
+    color: #16a34a;
+    font-weight: 800;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .facpage-detail-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .facpage-detail-img-placeholder {
+    width: 100%;
+    height: 180px;
+    background: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #9ca3af;
+    font-size: 0.8125rem;
+  }
+  .facpage-detail-img-placeholder i {
+    font-size: 36px;
+    opacity: 0.35;
+  }
+
+  .facpage-detail-body {
+    padding: 1.25rem 1.375rem;
+  }
+  .facpage-detail-body + .facpage-detail-body {
+    padding-top: 0;
+  }
+
+  .facpage-detail-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 0.5rem;
+  }
+  .facpage-detail-text {
+    font-size: 0.875rem;
+    color: #374151;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* Features list */
+  .facpage-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+  .facpage-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #15803d;
+  }
+  .facpage-feature-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* --- Fullscreen Gallery Overlay --- */
+  .fac-gallery-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .fac-gallery-overlay.open {
+    display: flex;
+    opacity: 1;
+  }
+  .fac-gallery-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10001;
+  }
+  .fac-gallery-modal {
+    width: 90%;
+    height: 80%;
+    position: relative;
+  }
+  .fac-gallery-swiper {
+    width: 100%;
+    height: 100%;
+  }
+  .fac-gallery-swiper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+  /* Empty state */
+  .facpage-empty {
+    text-align: center;
+    padding: 3rem 0;
+    color: #9ca3af;
+    font-size: 0.9375rem;
+  }
+
+  /* ── Responsive ── */
+  @media (min-width: 640px) {
+    .facpage-badge-unggulan { display: inline-flex; }
+  }
+  @media (max-width: 480px) {
+    .facpage-card-desc { display: none; }
+  }
+  @media (max-width: 400px) {
+  .facpage-badge-unggulan {
+    display: none;
+  }
+}
+  
+  

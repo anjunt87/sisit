@@ -1,0 +1,119 @@
+---
+// src/pages/berita/index.astro
+import Layout from "../../layouts/BaseLayout.astro";
+
+import { newsList } from "../../data/news";
+
+const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
+---
+
+<Layout title="Berita & Kegiatan — Nurul Imam Islamic School">
+  <section class="min-h-screen bg-gray-50 py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <a href="/" class="inline-flex items-center gap-2 text-green-700 text-sm font-medium mb-6 hover:underline">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" class="w-4 h-4" aria-hidden="true">
+            <path d="M13 8H3M7 4l-4 4 4 4"/>
+          </svg>
+          Kembali ke Beranda
+        </a>
+        <span class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md">
+          Kabar Terbaru
+        </span>
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Semua Berita & <span class="text-green-700">Kegiatan</span>
+        </h1>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+          Informasi seputar kegiatan, prestasi, dan perkembangan di Nurul Imam Islamic School.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10">
+        {categories.map((cat) => (
+          <button
+            class={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 news-tab${cat === "Semua" ? " bg-green-600 text-white border-green-600" : " bg-white text-gray-600 border-gray-200 hover:border-green-500 hover:text-green-700"}`}
+            data-filter={cat.toLowerCase()}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="newsGrid">
+        {newsList.map((item) => (
+          <article
+            class="news-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col"
+            data-category={item.category.toLowerCase()}
+          >
+            <a href={`/berita/${item.id}`} class="block overflow-hidden">
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </a>
+            <div class="p-5 flex flex-col flex-1">
+              <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                <span class="bg-green-50 text-green-700 font-semibold px-2 py-0.5 rounded-full">
+                  {item.category}
+                </span>
+                <span>·</span>
+                <span>{item.date}</span>
+                <span>·</span>
+                <span>{item.readTime} menit baca</span>
+              </div>
+              <h2 class="text-gray-900 font-bold text-lg mb-2 leading-snug">
+                <a href={`/berita/${item.id}`} class="hover:text-green-700 transition-colors">
+                  {item.title}
+                </a>
+              </h2>
+              <p class="text-gray-500 text-sm leading-relaxed flex-1">{item.description}</p>
+              
+                href={`/berita/${item.id}`}
+                class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 hover:text-green-800 transition-colors"
+              >
+                Baca selengkapnya
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" class="w-3.5 h-3.5" aria-hidden="true">
+                  <path d="M2 10L10 2M10 2H4M10 2v6"/>
+                </svg>
+              </a>
+            </div>
+          <article/>
+        ))}
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function initFilter() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>(".news-tab");
+    const cards = document.querySelectorAll<HTMLElement>(".news-card");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => {
+          t.classList.remove("bg-green-600", "text-white", "border-green-600");
+          t.classList.add("bg-white", "text-gray-600", "border-gray-200");
+        });
+        tab.classList.add("bg-green-600", "text-white", "border-green-600");
+        tab.classList.remove("bg-white", "text-gray-600", "border-gray-200");
+
+        const filter = tab.dataset.filter ?? "semua";
+        cards.forEach((card) => {
+          const cat = card.dataset.category ?? "";
+          card.classList.toggle("hidden", filter !== "semua" && cat !== filter);
+        });
+      });
+    });
+  }
+
+  initFilter();
+  document.addEventListener("astro:after-swap", initFilter);
+</script>
