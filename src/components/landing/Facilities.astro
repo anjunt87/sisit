@@ -6,6 +6,12 @@ import "../../styles/facilities.css";
 const featured = facilities.slice(0, 6);
 const supporting = facilities.slice(6);
 const hasSupporting = supporting.length > 0;
+
+import { facilities } from "../../data/facilities";
+import "../../styles/facilities.css";
+// const featured = facilities.slice(0, 6);
+// const supporting = facilities.slice(6);
+// const hasSupporting = supporting.length > 0;
 ---
 
 <section
@@ -30,35 +36,40 @@ const hasSupporting = supporting.length > 0;
 
   <div class="fac-container">
     <!-- Header -->
-    <div
-      class="fac-header"
-      data-aos="fade-up"
-    >
-      <span class="fac-badge">
+    <div class="fac-header">
+      <span
+        data-animate="fade-up"
+        data-delay="100"
+        class="fac-badge"
+      >
         <span class="fac-badge-dot"></span>
         Fasilitas
       </span>
-      <h2 class="fac-title">
+      <h2
+        data-animate="fade-up"
+        data-delay="200"
+        class="fac-title"
+      >
         Fasilitas <em>Unggulan</em>
       </h2>
-      <p class="fac-subtitle">
+      <p
+        data-animate="fade-up"
+        data-delay="300"
+        class="fac-subtitle"
+      >
         Sarana dan prasarana modern untuk mendukung proses belajar mengajar yang
         optimal dan menyenangkan.
       </p>
     </div>
 
     <!-- Grid Utama -->
-    <div
-      class="fac-grid"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
+    <div class="fac-grid">
       {
         featured.map((item, i) => (
           <article
             class="fac-card"
-            data-aos="fade-up"
-            data-aos-delay={100 + i * 60}
+            data-animate="fade-up"
+            data-delay={String(((i % 3) + 1) * 100)}
             data-facility={i}
             role="button"
             tabindex="0"
@@ -89,13 +100,17 @@ const hasSupporting = supporting.length > 0;
       hasSupporting && (
         <div
           class="fac-supporting"
-          data-aos="fade-up"
-          data-aos-delay="300"
+          data-animate="fade-up"
+          data-delay="200"
         >
           <p class="fac-supporting-label">Fasilitas Pendukung</p>
           <div class="fac-pill-grid">
-            {supporting.map((item) => (
-              <div class="fac-pill">
+            {supporting.map((item, i) => (
+              <div
+                class="fac-pill"
+                data-animate="fade-up"
+                data-delay={String(((i % 4) + 1) * 80)}
+              >
                 <i
                   class={`${item.icon} fac-pill-icon ${item.color}`}
                   aria-hidden="true"
@@ -111,8 +126,8 @@ const hasSupporting = supporting.length > 0;
     <!-- CTA -->
     <div
       class="fac-cta"
-      data-aos="fade-up"
-      data-aos-delay="350"
+      data-animate="fade-up"
+      data-delay="200"
     >
       <a
         href="/facilities"

@@ -11,17 +11,27 @@ import type { ColorKey } from "../../data/programs";
     <!-- Header -->
     <div class="mb-16 text-center">
       <span
+        data-animate="fade-up"
+        data-delay="100"
         class="mb-4 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-600"
       >
         Program Unggulan
       </span>
 
-      <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+      <h2
+        data-animate="fade-up"
+        data-delay="200"
+        class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl"
+      >
         Keunggulan
         <span class="text-green-600">Nurul Imam Islamic School</span>
       </h2>
 
-      <p class="mx-auto max-w-3xl text-lg text-gray-600">
+      <p
+        data-animate="fade-up"
+        data-delay="300"
+        class="mx-auto max-w-3xl text-lg text-gray-600"
+      >
         Program-program inovatif yang dirancang untuk mengembangkan potensi
         siswa secara maksimal
       </p>
@@ -30,10 +40,12 @@ import type { ColorKey } from "../../data/programs";
     <!-- Grid -->
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {
-        programs.map((program) => {
+        programs.map((program, i) => {
           const style = colorMap[program.color as ColorKey];
           return (
             <a
+              data-animate="fade-up"
+              data-delay={String((i + 1) * 100)}
               href={`/programs/${program.slug}`}
               class={`group rounded-2xl border bg-gradient-to-br p-8 shadow-lg transition duration-300 hover:-translate-y-2 hover:shadow-2xl ${style.bg} ${style.border}`}
             >

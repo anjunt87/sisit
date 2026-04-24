@@ -20,76 +20,94 @@ const partners = [
 ];
 ---
 
+<!-- Ganti bagian Swiper dengan ini -->
 <section class="py-14 bg-gradient-to-br from-blue-50 to-green-50 px-6">
   <div class="max-w-5xl mx-auto">
     <!-- Header -->
-    <div class="text-center mb-10 fade-up delay-0">
+    <div class="text-center mb-12">
       <span
+        data-animate="fade-up"
+        data-delay="100"
         class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md"
       >
         Kerja Sama
       </span>
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+      <h2
+        data-animate="fade-up"
+        data-delay="200"
+        class="text-4xl md:text-5xl font-bold mb-6 text-gray-800"
+      >
         Partnership <span class="text-green-600">Strategis</span>
       </h2>
-
-      <p class="text-gray-600 max-w-xl mx-auto">
+      <p
+        data-animate="fade-up"
+        data-delay="300"
+        class="text-gray-600 max-w-xl mx-auto"
+      >
         Kami menjalin kemitraan dengan lembaga keislaman dan universitas
         terkemuka untuk mendukung pengembangan pendidikan Islami berkualitas.
       </p>
     </div>
 
-    <!-- Swiper -->
-    <div class="swiper kerja-sama-swiper fade-up delay-0">
-      <div class="swiper-wrapper pb-10">
+    <!-- Marquee Track -->
+    <div class="marquee-wrapper overflow-hidden relative">
+      <!-- Fade edges -->
+      <div
+        class="pointer-events-none absolute left-0 top-0 h-full w-24 z-10 bg-gradient-to-r from-blue-50/80 to-transparent"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute right-0 top-0 h-full w-24 z-10 bg-gradient-to-l from-green-50/80 to-transparent"
+      >
+      </div>
+
+      <div
+        class="marquee-track flex gap-5"
+        style="width: max-content;"
+      >
+        <!-- Render 2x untuk loop seamless -->
         {
-          partners.map((item) => (
-            <div class="swiper-slide flex items-center justify-center">
-              <div class="bg-white shadow-md rounded-xl p-6 w-full h-36 flex items-center justify-center">
-                <img
-                  src={item.logo.src}
-                  alt={item.name}
-                  class="h-12 object-contain grayscale hover:grayscale-0 transition duration-300"
-                />
-              </div>
+          [...partners, ...partners].map((item, i) => (
+            <div
+              class="partner-card bg-white border border-green-100 rounded-2xl px-7 py-5 flex flex-col items-center justify-center gap-3 shadow-sm hover:shadow-md hover:border-green-300 transition-all duration-300 group"
+              style="min-width: 160px; height: 120px;"
+            >
+              <img
+                src={item.logo.src}
+                alt={item.name}
+                class="h-10 object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+              />
+              <span class="text-[11px] font-medium text-gray-400 group-hover:text-green-600 transition-colors duration-300 text-center leading-tight">
+                {item.name}
+              </span>
             </div>
           ))
         }
       </div>
-
-      <!-- Pagination -->
-      <div class="swiper-pagination mt-10 flex justify-center"></div>
     </div>
   </div>
 </section>
 
 <style>
-  .kerja-sama-swiper .swiper-pagination-bullet {
-    background: #10b981;
-    opacity: 0.5;
+  .marquee-track {
+    animation: marquee-scroll 28s linear infinite;
   }
 
-  .kerja-sama-swiper .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #059669;
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
   }
 
-  .kerja-sama-swiper .swiper-button-next,
-  .kerja-sama-swiper .swiper-button-prev {
-    color: #059669;
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
-  .kerja-sama-swiper .swiper-button-next:hover,
-  .kerja-sama-swiper .swiper-button-prev:hover {
-    color: #10b981;
-  }
-
-  .swiper-slide {
-    transition: transform 0.3s ease;
-  }
-
-  .swiper-slide:hover {
-    transform: translateY(-5px);
+  .partner-card {
+    flex-shrink: 0;
   }
 </style>
 
@@ -101,7 +119,8 @@ const partners = [
 <script
   src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
   is:inline
-></script>
+>
+</script>
 <script>
   import Swiper from "swiper";
   import { Autoplay, Pagination } from "swiper/modules";

@@ -1,7 +1,6 @@
 ---
 // src/components/landing/news.astro
 import { newsList } from "../../data/news";
-
 import "../../styles/news.css";
 
 const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
@@ -15,16 +14,26 @@ const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
     <!-- Header -->
     <div class="text-center mb-12">
       <span
+        data-animate="fade-up"
+        data-delay="100"
         class="inline-block bg-green-600 text-white px-5 py-2 rounded-full text-sm font-semibold mb-4 shadow-md"
       >
         Kabar Terbaru
       </span>
 
-      <h2 class="text-4xl font-bold text-gray-900 mb-4">
+      <h2
+        data-animate="fade-up"
+        data-delay="200"
+        class="text-4xl font-bold text-gray-900 mb-4"
+      >
         Berita & <span class="text-green-700">Kegiatan</span>
       </h2>
 
-      <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+      <p
+        data-animate="fade-up"
+        data-delay="300"
+        class="text-gray-700 text-lg max-w-2xl mx-auto"
+      >
         Informasi seputar kegiatan, prestasi, dan perkembangan di Nurul Imam
         Islamic School.
       </p>
@@ -32,9 +41,9 @@ const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
 
     <!-- Filter Tabs -->
     <div
+      data-animate="fade-up"
+      data-delay="150"
       class="news-tabs"
-      data-aos="fade-up"
-      data-aos-delay="100"
     >
       {
         categories.map((cat) => (
@@ -52,14 +61,14 @@ const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
     <div
       class="news-grid"
       id="newsGrid"
-      data-aos="fade-up"
-      data-aos-delay="200"
     >
       {
-        newsList.map((item, index) => (
+        newsList.map((item, i) => (
           <article
-            class={`news-card${index === 0 ? " news-card--featured" : ""}`}
+            class={`news-card${i === 0 ? " news-card--featured" : ""}`}
             data-category={item.category?.toLowerCase() ?? "kegiatan"}
+            data-animate="fade-up"
+            data-delay={String(((i % 3) + 1) * 100)}
           >
             <div class="news-card-image">
               <img
@@ -102,7 +111,11 @@ const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
     </div>
 
     <!-- CTA -->
-    <div class="news-cta">
+    <div
+      data-animate="fade-up"
+      data-delay="200"
+      class="news-cta"
+    >
       <a
         href="/berita"
         class="news-cta-btn"
@@ -138,13 +151,11 @@ const categories = ["Semua", "Kegiatan", "Prestasi", "Pengumuman"];
             const show = filter === "semua" || cat === filter;
             card.classList.toggle("hidden", !show);
 
-            // Reset featured layout when filtered
             if (filter !== "semua") {
               card.classList.remove("news-card--featured");
             }
           });
 
-          // Re-apply featured to first visible card when "Semua"
           if (filter === "semua") {
             const first = document.querySelector<HTMLElement>(".news-card");
             first?.classList.add("news-card--featured");
