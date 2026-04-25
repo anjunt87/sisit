@@ -1,32 +1,4 @@
-
-export const identitas = [
-  { icon: "fa-school", label: "Nama Sekolah", value: "SDIT Nurul Imam" },
-  { icon: "fa-id-card", label: "NPSN", value: "70006486" },
-  { icon: "fa-star", label: "Akreditasi", value: "A" },
-  { icon: "fa-check-circle", label: "Status", value: "Swasta" },
-  { icon: "fa-book-open", label: "Bentuk Pendidikan", value: "SD" },
-  { icon: "fa-user-tie", label: "Kepala Sekolah", value: "Agung Widiana" },
-  { icon: "fa-user-cog", label: "Operator", value: "Ivan Setiawan" },
-  { icon: "fa-layer-group", label: "Kurikulum", value: "Kurikulum SD Merdeka" },
-  {
-    icon: "fa-clock",
-    label: "Penyelenggaraan",
-    value: "Sehari Penuh / 5 Hari",
-  },
-  {
-    icon: "fa-map-marker-alt",
-    label: "Alamat",
-    value:
-      "Dusun 2 Ciranggon Raya RT.008/004, Kec. Majalaya, Kab. Karawang, Jawa Barat",
-  },
-  { icon: "fa-phone", label: "Telepon", value: "085777483654" },
-  { icon: "fa-envelope", label: "Email", value: "opssditnurulimam@gmail.com" },
-  {
-    icon: "fa-building",
-    label: "Yayasan",
-    value: "Yayasan Pendidikan Alam Jaya",
-  },
-];
+// src/data/sdit1.ts
 
 export const stats = [
   { target: 869, suffix: "+", label: "Siswa Aktif" },
@@ -35,24 +7,7 @@ export const stats = [
   { target: 100, suffix: "%", label: "Kelas Layak" },
 ];
 
-export const statistik = [
-  { icon: "fa-chalkboard-teacher", label: "Guru", value: "41" },
-  { icon: "fa-male", label: "Siswa Laki-laki", value: "463" },
-  { icon: "fa-female", label: "Siswa Perempuan", value: "406" },
-  { icon: "fa-users", label: "Rombongan Belajar", value: "29" },
-  { icon: "fa-door-open", label: "Ruang Kelas", value: "24" },
-  { icon: "fa-flask", label: "Laboratorium", value: "1" },
-  { icon: "fa-book", label: "Perpustakaan", value: "1" },
-];
-
-export const prosesPembelajaran = [
-  { label: "Rasio Siswa / Rombel", value: "30" },
-  { label: "Rasio Rombel / Ruang Kelas", value: "0,97" },
-  { label: "Rasio Siswa / Guru", value: "22" },
-  { label: "Guru Kualifikasi S1/D4", value: "97,56%" },
-  { label: "Guru Bersertifikasi", value: "41,46%" },
-  { label: "Ruang Kelas Layak", value: "100%" },
-];
+// (Tentang kalau nanti mau dijadikan data, sekarang masih component)
 
 export const pimpinan = [
   {
@@ -77,43 +32,104 @@ export const pimpinan = [
   },
 ];
 
-export const gallery = [
+export const keunggulan = [
   {
-    title: "Upacara Bendera",
-    image:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
-    category: "Kedisiplinan",
+    icon: "fa-mosque",
+    title: "Kurikulum Islami Terintegrasi",
+    desc: "Kurikulum Nasional terintegrasi dengan nilai-nilai Islam.",
   },
   {
-    title: "Kegiatan Belajar Kelas",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
-    category: "Akademik",
+    icon: "fa-project-diagram",
+    title: "Project Based Learning",
+    desc: "Pembelajaran berbasis proyek dengan pendekatan deep learning.",
   },
   {
-    title: "Tahfidz Al-Qur'an",
-    image:
-      "https://images.unsplash.com/photo-1519817914152-22f90e4f5c77?auto=format&fit=crop&w=1200&q=80",
-    category: "Keislaman",
+    icon: "fa-quran",
+    title: "Tahsin & Tahfidz UMMI",
+    desc: "Program hafalan Al-Qur’an hingga 2 juz.",
   },
   {
-    title: "Pramuka",
-    image:
-      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1200&q=80",
-    category: "Ekstrakurikuler",
-  },
-  {
-    title: "Olahraga Bersama",
-    image:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80",
-    category: "Kesehatan",
-  },
-  {
-    title: "Wisuda & Pentas Seni",
-    image:
-      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80",
-    category: "Event Sekolah",
+    icon: "fa-language",
+    title: "Bahasa Arab & Inggris",
+    desc: "Mempersiapkan siswa berwawasan global.",
   },
 ];
 
-export const categories = ["Semua", ...new Set(gallery.map((g) => g.category))];
+export const visi = `Terwujudnya lembaga pendidikan rujukan yang mampu mengembangkan potensi peserta didik dan menghasilkan Generasi Rabbani.`;
+
+export const misi = [
+  "Menanamkan keyakinan kepada Allah melalui penguatan tauhid dan akhlak.",
+  "Meningkatkan kemampuan melalui pembelajaran berbasis project.",
+  "Menumbuhkan kemandirian dan jiwa kepemimpinan.",
+  "Meningkatkan kompetensi SDM secara komprehensif.",
+  "Menyelenggarakan pendidikan berkualitas dan terjangkau.",
+  "Mengintegrasikan Kurikulum Nasional dengan nilai keislaman.",
+];
+
+export const ekstrakurikuler = [
+  {
+    icon: "fa-drum",
+    name: "Hadroh",
+    desc: "Kesenian musik Islami.",
+  },
+  {
+    icon: "fa-futbol",
+    name: "Futsal",
+    desc: "Melatih kerja sama tim dan kebugaran.",
+  },
+  {
+    icon: "fa-code",
+    name: "Coding",
+    desc: "Melatih logika dan problem solving.",
+  },
+  {
+    icon: "fa-campground",
+    name: "Pramuka",
+    desc: "Membentuk karakter dan kemandirian.",
+  },
+];
+
+export const gallery = [
+  {
+    title: "Upacara Bendera",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
+    category: "Kedisiplinan",
+  },
+  {
+    title: "Kegiatan Belajar",
+    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+    category: "Akademik",
+  },
+  {
+    title: "Tahfidz",
+    image: "https://images.unsplash.com/photo-1519817914152-22f90e4f5c77?auto=format&fit=crop&w=1200&q=80",
+    category: "Keislaman",
+  },
+];
+
+export const categories = [
+  "Semua",
+  ...new Set(gallery.map((g) => g.category)),
+];
+
+export const statistik = [
+  { icon: "fa-chalkboard-teacher", label: "Guru", value: "41" },
+  { icon: "fa-male", label: "Siswa Laki-laki", value: "463" },
+  { icon: "fa-female", label: "Siswa Perempuan", value: "406" },
+  { icon: "fa-users", label: "Rombel", value: "29" },
+];
+
+export const prosesPembelajaran = [
+  { label: "Rasio Siswa / Rombel", value: "30" },
+  { label: "Rasio Siswa / Guru", value: "22" },
+];
+
+export const identitas = [
+  { icon: "fa-school", label: "Nama Sekolah", value: "SDIT Nurul Imam" },
+  { icon: "fa-id-card", label: "NPSN", value: "70006486" },
+  { icon: "fa-star", label: "Akreditasi", value: "A" },
+  { icon: "fa-check-circle", label: "Status", value: "Swasta" },
+  { icon: "fa-book-open", label: "Bentuk Pendidikan", value: "SD" },
+  { icon: "fa-user-tie", label: "Kepala Sekolah", value: "Agung Widiana" },
+  { icon: "fa-map-marker-alt", label: "Alamat", value: "Karawang, Jawa Barat" },
+];

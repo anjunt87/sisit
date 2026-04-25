@@ -1,5 +1,5 @@
 ---
-import {} from "../../../data/sdit1";
+import { keunggulan } from "../../../data/sdit1";
 ---
 
 <!-- ╔══════════════════════════════════════╗ --><!-- ║        4. KEUNGGULAN SEKOLAH         ║ --><!-- ╚══════════════════════════════════════╝ -->
@@ -28,39 +28,20 @@ import {} from "../../../data/sdit1";
       class="grid sm:grid-cols-2 gap-6"
     >
       {
-        [
-          {
-            icon: "fa-mosque",
-            title: "Kurikulum Islami Terintegrasi",
-            desc: "Kurikulum Nasional yang terintegrasi dengan nilai-nilai Islam dalam setiap aspek pembelajaran.",
-          },
-          {
-            icon: "fa-project-diagram",
-            title: "Project Based Learning & Deep Learning",
-            desc: "Pembelajaran dengan metode Project Based Learning (PjBL) berbasis karakter menggunakan pendekatan Deep Learning.",
-          },
-          {
-            icon: "fa-quran",
-            title: "Tahsin & Tahfidz Metode UMMI",
-            desc: "Pembelajaran Tahsin dan Tahfidz menggunakan metode UMMI dengan target hafalan 2 Juz (Juz 30 & 29).",
-          },
-          {
-            icon: "fa-language",
-            title: "Muatan Lokal Bahasa Arab & Inggris",
-            desc: "Program muatan lokal Bahasa Arab dan Bahasa Inggris untuk mempersiapkan siswa yang berwawasan global.",
-          },
-        ].map((item, i) => (
+        keunggulan.map((item, i) => (
           <div class="bg-white border border-slate-200 rounded-3xl p-7 flex gap-5 hover:border-emerald-300 hover:shadow-md transition">
             <div class="w-12 h-12 flex-shrink-0 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-xl">
               <i class={`fas ${item.icon}`} />
             </div>
+
             <div>
               <div class="flex items-center gap-2 mb-2">
-                <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center flex-shrink-0">
+                <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center justify-center">
                   {i + 1}
                 </span>
                 <h3 class="text-base font-bold text-slate-800">{item.title}</h3>
               </div>
+
               <p class="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
             </div>
           </div>
