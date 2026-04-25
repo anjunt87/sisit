@@ -1,3 +1,12 @@
+---
+const stats = [
+  { target: 1200, suffix: "+", label: "Siswa Aktif" },
+  { target: 80, suffix: "+", label: "Tenaga Pendidik" },
+  { target: 7, suffix: "", label: "Tahun Berdiri" },
+  { target: 500, suffix: "+", label: "Alumni Berprestasi" },
+];
+---
+
 <!-- Hero Section -->
 <section
   class="relative bg-gradient-to-br from-emerald-900 via-emerald-700 to-emerald-600 pt-24 pb-0 overflow-hidden"
@@ -57,7 +66,7 @@
           <span
             class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/90 text-sm font-medium px-3 py-1.5 rounded-full"
           >
-            <i class="fas fa-calendar"></i> Est. 2005
+            <i class="fas fa-calendar"></i> Est. 2019
           </span>
           <span
             class="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white/90 text-sm font-medium px-3 py-1.5 rounded-full"
@@ -90,47 +99,50 @@
 <section class="bg-slate-50 border-b border-slate-200 py-8">
   <div class="max-w-5xl mx-auto px-6">
     <div class="flex flex-wrap items-center justify-center">
-      <div class="flex flex-col items-center px-10 py-2">
-        <span
-          class="font-serif text-4xl font-bold text-emerald-700 leading-none"
-        >
-          1200+
-        </span>
-        <span class="text-sm text-slate-600 font-medium mt-1">Siswa Aktif</span>
-      </div>
-      <div class="w-px h-10 bg-slate-200 hidden sm:block"></div>
-      <div class="flex flex-col items-center px-10 py-2">
-        <span
-          class="font-serif text-4xl font-bold text-emerald-700 leading-none"
-        >
-          80+
-        </span>
-        <span class="text-sm text-slate-600 font-medium mt-1">
-          Tenaga Pendidik
-        </span>
-      </div>
-      <div class="w-px h-10 bg-slate-200 hidden sm:block"></div>
-      <div class="flex flex-col items-center px-10 py-2">
-        <span
-          class="font-serif text-4xl font-bold text-emerald-700 leading-none"
-        >
-          19
-        </span>
-        <span class="text-sm text-slate-600 font-medium mt-1">
-          Tahun Berdiri
-        </span>
-      </div>
-      <div class="w-px h-10 bg-slate-200 hidden sm:block"></div>
-      <div class="flex flex-col items-center px-10 py-2">
-        <span
-          class="font-serif text-4xl font-bold text-emerald-700 leading-none"
-        >
-          500+
-        </span>
-        <span class="text-sm text-slate-600 font-medium mt-1">
-          Alumni Berprestasi
-        </span>
-      </div>
+      {
+        stats.map((stat, i) => (
+          <>
+            <div class="flex flex-col items-center px-10 py-2">
+              <span
+                class="stat-counter font-serif text-4xl font-bold text-emerald-700 leading-none"
+                data-target={stat.target}
+                data-suffix={stat.suffix}
+              >
+                0
+              </span>
+              <span class="text-sm text-slate-600 font-medium mt-1">
+                {stat.label}
+              </span>
+            </div>
+            {i < stats.length - 1 && (
+              <div class="w-px h-10 bg-slate-200 hidden sm:block" />
+            )}
+          </>
+        ))
+      }
     </div>
   </div>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".stat-counter");
+
+    counters.forEach((counter) => {
+      const updateCount = () => {
+        const target = +counter.getAttribute("data-target");
+        const suffix = counter.getAttribute("data-suffix") || "";
+        const count = +counter.innerText.replace(/\D/g, "");
+        const increment = Math.ceil(target / 100);
+
+        if (count < target) {
+          counter.innerText = count + increment + suffix;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target + suffix;
+        }
+      };
+
+      updateCount();
+    });
+  });
+</script>
