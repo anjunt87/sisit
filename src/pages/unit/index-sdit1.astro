@@ -8,7 +8,6 @@ import {
   stats,
   statistik,
   prosesPembelajaran,
-  milestones,
   pimpinan,
   gallery,
   categories,
@@ -28,10 +27,12 @@ import CTA from "./sdit1/CTA.astro";
 ---
 
 <BaseLayout
-  title="Profil SDIT Nurul Imam Karawang"
+  title="Profil SDIT Nurul Imam Karawang 1"
   description="Profil lengkap SDIT Nurul Imam Karawang, sekolah dasar Islam terpadu dengan akreditasi A, kurikulum merdeka dan pembelajaran full day school."
 >
   <Hero />
+
+  <Stats stats={stats} />
 
   <Tentang />
 
@@ -50,8 +51,6 @@ import CTA from "./sdit1/CTA.astro";
     statistik={statistik}
     proses={prosesPembelajaran}
   />
-
-  <Stats stats={stats} />
 
   <Identitas identitas={identitas} />
 

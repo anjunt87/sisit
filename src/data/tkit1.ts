@@ -1,13 +1,22 @@
+// src\data\tkit1.ts
 
 export const identitas = [
-  { icon: "fa-school", label: "Nama Sekolah", value: "SDIT Nurul Imam" },
-  { icon: "fa-id-card", label: "NPSN", value: "70006486" },
+  {
+    icon: "fa-school",
+    label: "Nama Sekolah",
+    value: "TK Nurul Imam Islamic School",
+  },
+  { icon: "fa-id-card", label: "NPSN", value: "70027490" },
   { icon: "fa-star", label: "Akreditasi", value: "A" },
   { icon: "fa-check-circle", label: "Status", value: "Swasta" },
-  { icon: "fa-book-open", label: "Bentuk Pendidikan", value: "SD" },
-  { icon: "fa-user-tie", label: "Kepala Sekolah", value: "Agung Widiana" },
-  { icon: "fa-user-cog", label: "Operator", value: "Ivan Setiawan" },
-  { icon: "fa-layer-group", label: "Kurikulum", value: "Kurikulum SD Merdeka" },
+  { icon: "fa-book-open", label: "Bentuk Pendidikan", value: "TK" },
+  { icon: "fa-user-tie", label: "Kepala Sekolah", value: "Irma Oktavia Sari" },
+  { icon: "fa-user-cog", label: "Operator", value: "Dea Luckita Solihawa" },
+  {
+    icon: "fa-layer-group",
+    label: "Kurikulum",
+    value: "Kurikulum PAUD Merdeka",
+  },
   {
     icon: "fa-clock",
     label: "Penyelenggaraan",
@@ -17,15 +26,16 @@ export const identitas = [
     icon: "fa-map-marker-alt",
     label: "Alamat",
     value:
-      "Dusun 2 Ciranggon Raya RT.008/004, Kec. Majalaya, Kab. Karawang, Jawa Barat",
+      "Dusun 2 Ciranggon Raya RT.007/RW.004, Kec. Majalaya, Kab. Karawang, Prov. Jawa Barat",
   },
-  { icon: "fa-phone", label: "Telepon", value: "085777483654" },
-  { icon: "fa-envelope", label: "Email", value: "opssditnurulimam@gmail.com" },
+  { icon: "fa-phone", label: "Telepon", value: "085693151402" },
+  { icon: "fa-envelope", label: "Email", value: "irmaaqibit2330@gmail.com" },
   {
     icon: "fa-building",
     label: "Yayasan",
     value: "Yayasan Pendidikan Alam Jaya",
   },
+  { icon: "fa-expand-arrows-alt", label: "Luas Tanah", value: "4.831 m²" },
 ];
 
 export const stats = [
@@ -36,23 +46,24 @@ export const stats = [
 ];
 
 export const statistik = [
-  { icon: "fa-chalkboard-teacher", label: "Guru", value: "41" },
-  { icon: "fa-male", label: "Siswa Laki-laki", value: "463" },
-  { icon: "fa-female", label: "Siswa Perempuan", value: "406" },
-  { icon: "fa-users", label: "Rombongan Belajar", value: "29" },
-  { icon: "fa-door-open", label: "Ruang Kelas", value: "24" },
-  { icon: "fa-flask", label: "Laboratorium", value: "1" },
-  { icon: "fa-book", label: "Perpustakaan", value: "1" },
+  { icon: "fa-chalkboard-teacher", label: "Guru", value: "19" },
+  { icon: "fa-male", label: "Siswa Laki-laki", value: "142" },
+  { icon: "fa-female", label: "Siswa Perempuan", value: "145" },
+  { icon: "fa-users", label: "Rombongan Belajar", value: "15" },
+  { icon: "fa-door-open", label: "Ruang Kelas", value: "15" },
+  { icon: "fa-flask", label: "Laboratorium", value: "0" },
+  { icon: "fa-book", label: "Perpustakaan", value: "0" },
 ];
 
 export const prosesPembelajaran = [
-  { label: "Rasio Siswa / Rombel", value: "30" },
-  { label: "Rasio Rombel / Ruang Kelas", value: "0,97" },
-  { label: "Rasio Siswa / Guru", value: "22" },
-  { label: "Guru Kualifikasi S1/D4", value: "97,56%" },
-  { label: "Guru Bersertifikasi", value: "41,46%" },
+  { label: "Rasio Siswa / Rombel", value: "20" },
+  { label: "Rasio Rombel / Ruang Kelas", value: "1" },
+  { label: "Rasio Siswa / Guru", value: "16" },
+  { label: "Guru Kualifikasi S1/D4", value: "63,16%" },
+  { label: "Guru Bersertifikasi", value: "42,11%" },
   { label: "Ruang Kelas Layak", value: "100%" },
 ];
+
 
 export const pimpinan = [
   {
@@ -116,4 +127,7 @@ export const gallery = [
   },
 ];
 
-export const categories = ["Semua", ...new Set(gallery.map((g) => g.category))];
+export const categories = [
+  "Semua",
+  ...new Set(gallery.map((g) => g.category)),
+];
