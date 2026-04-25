@@ -1,25 +1,39 @@
 ---
-
+// src/components/Chatbot.astro
 ---
 
-<!-- Floating Button -->
+<!-- ── Floating Button ── -->
 <div class="fixed bottom-20 right-4 z-40">
   <button
     id="chatbotToggle"
     type="button"
+    title="Buka Chatbot"
     class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shadow-xl backdrop-blur-md hover:bg-white/30 transition-all hover:scale-110 cursor-pointer"
     style="color: var(--color-primary)"
-    title="Buka Chatbot"
   >
-    <i class="fas fa-comment-alt text-xl"></i>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z">
+      </path>
+    </svg>
   </button>
 </div>
 
-<!-- Chatbox -->
+<!-- ── Chatbox ── -->
 <div
   id="chatbotBox"
-  class="fixed bottom-24 right-6 z-50 w-96 max-w-[calc(100vw-2rem)] bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-2xl flex-col overflow-hidden"
   style="display: none;"
+  class="fixed bottom-24 right-6 z-50 w-96 max-w-[calc(100vw-2rem)]
+         bg-white/20 backdrop-blur-lg border border-white/30
+         rounded-2xl shadow-2xl flex flex-col overflow-hidden h-[600px] max-h-[80vh]"
 >
   <!-- Header -->
   <div
@@ -30,10 +44,42 @@
       <div
         class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
       >
-        <i class="fas fa-robot text-sm"></i>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect
+            x="2"
+            y="3"
+            width="20"
+            height="14"
+            rx="2"
+          >
+          </rect>
+          <line
+            x1="8"
+            y1="21"
+            x2="16"
+            y2="21"
+          >
+          </line>
+          <line
+            x1="12"
+            y1="17"
+            x2="12"
+            y2="21"
+          >
+          </line>
+        </svg>
       </div>
       <div>
-        <h3 class="font-semibold">Asisten Sekolah</h3>
+        <h3 class="font-semibold text-sm">Asisten Sekolah</h3>
         <p
           class="text-xs opacity-90"
           id="chatbotStatus"
@@ -44,16 +90,40 @@
     </div>
     <button
       id="closeChatbot"
-      class="text-white/80 hover:text-white text-xl transition-colors"
+      class="text-white/80 hover:text-white transition-colors p-1"
     >
-      <i class="fas fa-times"></i>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line
+          x1="18"
+          y1="6"
+          x2="6"
+          y2="18"
+        >
+        </line>
+        <line
+          x1="6"
+          y1="6"
+          x2="18"
+          y2="18"
+        >
+        </line>
+      </svg>
     </button>
   </div>
 
   <!-- Messages Area -->
   <div
     id="chatMessages"
-    class="relative flex-1 overflow-y-auto h-80 p-4 space-y-3 bg-white/10 backdrop-blur-sm border-t border-white/20"
+    class="relative flex-1 min-h-0 overflow-y-auto p-4 space-y-3 bg-white/10 backdrop-blur-sm border-t border-white/20"
   >
     <svg
       class="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
@@ -103,28 +173,10 @@
     class="px-4 py-2 bg-white/30 backdrop-blur-sm border-t border-white/20"
   >
     <p class="text-xs text-gray-500 mb-2">Pertanyaan populer:</p>
-    <div class="flex flex-wrap gap-1">
-      {
-        [
-          { text: "📝 Pendaftaran", msg: "Bagaimana cara daftar?" },
-          { text: "📚 Program", msg: "Program apa saja yang ada?" },
-          { text: "🕐 Jadwal", msg: "Jam belajar berapa?" },
-          { text: "📍 Lokasi", msg: "Dimana lokasi sekolah?" },
-        ].map((item) => (
-          <button
-            class="quick-btn px-3 py-1 rounded-full text-xs transition-colors"
-            style="
-          background: color-mix(in srgb, var(--color-primary) 15%, white);
-          color: var(--color-primary);
-        "
-            onmouseover="this.style.background='color-mix(in srgb, var(--color-primary) 25%, white)'"
-            onmouseout="this.style.background='color-mix(in srgb, var(--color-primary) 15%, white)'"
-            data-message={item.msg}
-          >
-            {item.text}
-          </button>
-        ))
-      }
+    <div
+      class="flex flex-wrap gap-1"
+      id="quickActionsContainer"
+    >
     </div>
   </div>
 
@@ -138,18 +190,35 @@
         type="text"
         id="chatInput"
         placeholder="Ketik pertanyaan..."
-        class="flex-1 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:border-transparent text-sm bg-white/70 backdrop-blur-md"
+        autocomplete="off"
+        class="flex-1 p-3 rounded-full border focus:outline-none focus:ring-2 focus:border-transparent text-sm bg-white/70 backdrop-blur-md"
         style="border-color: var(--color-primary)"
       />
       <button
         type="submit"
         id="sendBtn"
-        class="px-4 py-3 text-white rounded-ful transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        class="px-4 py-3 text-white rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         style="background: var(--color-primary);"
-        onmouseover="this.style.background='color-mix(in srgb, var(--color-primary) 80%, black)'"
-        onmouseout="this.style.background='var(--color-primary)'"
       >
-        <i class="fas fa-paper-plane text-sm"></i>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line
+            x1="22"
+            y1="2"
+            x2="11"
+            y2="13"
+          >
+          </line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
       </button>
     </form>
   </div>
@@ -194,9 +263,201 @@
       transform: translateY(0);
     }
   }
+  .quick-btn:hover {
+    background: color-mix(in srgb, var(--color-primary) 25%, white) !important;
+  }
+  #sendBtn:hover {
+    background: color-mix(in srgb, var(--color-primary) 80%, black) !important;
+  }
 </style>
 
 <script>
+  // ── Tipe ────────────────────────────────────────────────────
+  type Action = [string, string];
+  type KBEntry = { keys: string[]; reply: string; actions?: Action[] };
+
+  // ── Knowledge Base ──────────────────────────────────────────
+  const KB: KBEntry[] = [
+    {
+      keys: ["assalamualaikum", "salam", "waalaikumsalam"],
+      reply:
+        "Waalaikumsalam warahmatullah wabarakatuh. Semoga Anda selalu dalam lindungan Allah SWT. Ada yang bisa kami bantu hari ini? 😊",
+    },
+    {
+      keys: ["islami", "nilai islam", "agama", "syariah", "akhlak", "karakter"],
+      reply:
+        "Sekolah kami menanamkan nilai-nilai Islam: shalat berjamaah, tahfidz, adab kepada guru & orang tua, serta pembiasaan sunnah seperti dzikir dan puasa Senin-Kamis.",
+    },
+    {
+      keys: ["tahfidz", "hafalan", "al-quran", "tilawah", "murojaah"],
+      reply:
+        "Program Tahfidz Al-Quran kami dibimbing ustadz/ustadzah bersanad, dengan target hafalan bertahap dan murojaah rutin setiap hari.",
+    },
+    {
+      keys: ["doa", "doa harian", "doa belajar", "doa sebelum belajar"],
+      reply:
+        'Doa sebelum belajar:<br><br><em>Rabbi zidnii \'ilmaa warzuqnii fahmaa</em><br>Artinya: "Ya Allah, tambahkanlah ilmuku dan berikanlah aku pemahaman."',
+    },
+    {
+      keys: ["sunnah", "amalan sunnah", "puasa senin kamis", "dzikir"],
+      reply:
+        "Kami membiasakan amalan sunnah: shalat dhuha, dzikir pagi-petang, puasa sunnah (Senin-Kamis), dan membaca Al-Quran setiap hari.",
+    },
+    // Subtopik pendaftaran — letakkan SEBELUM topik utama agar lebih spesifik
+    {
+      keys: ["syarat masuk", "persyaratan", "syarat pendaftaran"],
+      reply:
+        "Syarat masuk: mengisi formulir, fotokopi KK, akta kelahiran, ijazah TK (untuk SD), dan mengikuti seleksi.",
+    },
+    {
+      keys: ["jadwal seleksi", "kapan seleksi", "tes masuk", "waktu seleksi"],
+      reply:
+        "Seleksi masuk diadakan setiap <strong>Desember–Maret</strong>. Info lengkap tersedia di halaman pendaftaran.",
+    },
+    {
+      keys: ["daftar", "pendaftaran", "masuk", "bergabung", "formulir"],
+      reply:
+        "Pendaftaran dibuka setiap tahun. Silakan isi formulir di halaman Pendaftaran kami.",
+      actions: [
+        ["📝 Syarat Masuk", "Apa syarat masuk sekolah?"],
+        ["📅 Jadwal Seleksi", "Kapan jadwal seleksi masuk?"],
+      ],
+    },
+    // Subtopik transportasi — letakkan SEBELUM topik utama
+    {
+      keys: [
+        "biaya transport",
+        "ongkos jemput",
+        "tarif antar jemput",
+        "harga jemput",
+      ],
+      reply:
+        "Biaya antar jemput: <strong>Rp 250.000 – Rp 400.000</strong>/bulan tergantung jarak dan rute.",
+    },
+    {
+      keys: [
+        "area layanan",
+        "area mana",
+        "wilayah antar jemput",
+        "daerah dijangkau",
+      ],
+      reply:
+        "Layanan antar jemput mencakup: Karawang Kota, Galuh Mas, Klari, dan Telukjambe.",
+    },
+    {
+      keys: [
+        "transportasi",
+        "antar jemput",
+        "jemputan",
+        "bus sekolah",
+        "mobil sekolah",
+        "ojek",
+      ],
+      reply:
+        "Kami menyediakan layanan antar jemput dengan berbagai rute. Ingin tahu lebih lanjut?",
+      actions: [
+        ["📍 Area Layanan", "Area mana saja yang dijangkau antar jemput?"],
+        ["💰 Biaya Transport", "Berapa biaya antar jemput?"],
+      ],
+    },
+    {
+      keys: ["program", "kurikulum", "pelajaran", "mata pelajaran", "jurusan"],
+      reply:
+        "Program unggulan kami:<br>🟢 <strong>Tahfidz Al-Quran</strong><br>🟢 <strong>Sains & Teknologi</strong><br>🟢 <strong>Akhlak & Karakter</strong><br><br>Dirancang holistik untuk potensi optimal siswa.",
+    },
+    {
+      keys: ["jadwal", "jam belajar", "waktu", "jam sekolah", "schedule"],
+      reply:
+        "Jadwal belajar:<br>🕐 Senin–Jumat: <strong>07.00–14.00 WIB</strong><br>🕐 Sabtu (ekskul): <strong>08.00–11.00 WIB</strong>",
+    },
+    {
+      keys: ["alamat", "lokasi", "tempat", "dimana", "maps", "peta"],
+      reply:
+        "Lokasi sekolah kami:<br><br>🏫 <strong>NIIS 1 & 2</strong> — Karawang Kota<br><a href='https://maps.app.goo.gl/KBSpqMNciY7LM3Qt5' target='_blank' style='color:var(--color-primary);text-decoration:underline;'>📍 Google Maps</a><br><br>🏫 <strong>NIIS 3</strong> — Karawang Timur<br><a href='https://maps.app.goo.gl/zmbQurhrPghk6pQ19' target='_blank' style='color:var(--color-primary);text-decoration:underline;'>📍 Google Maps</a>",
+    },
+    {
+      keys: ["biaya", "spp", "uang sekolah", "bayar", "harga", "tarif"],
+      reply:
+        "Untuk detail biaya pendaftaran dan SPP, silakan hubungi admin kami via WhatsApp atau datang langsung ke sekolah untuk konsultasi gratis.",
+    },
+    {
+      keys: [
+        "fasilitas",
+        "sarana",
+        "prasarana",
+        "lab",
+        "perpustakaan",
+        "kantin",
+      ],
+      reply:
+        "Fasilitas lengkap kami:<br>💻 Lab Komputer · 📚 Perpustakaan · 🕌 Masjid<br>⚽ Lapangan Olahraga · 🍽️ Kantin Sehat · ❄️ Kelas ber-AC",
+    },
+    {
+      keys: ["kontak", "hubungi", "telepon", "whatsapp", "wa", "phone"],
+      reply:
+        "📞 Telepon: (0267) 123-4567<br>📱 WhatsApp: 0812-3456-7890<br>📧 Email: info@sekolah.com",
+    },
+    {
+      keys: ["guru", "pengajar", "tenaga pengajar", "staff", "kualifikasi"],
+      reply:
+        "Guru kami berkualifikasi S1/S2 dengan pengalaman minimal 3 tahun, telah tersertifikasi, dan mengikuti pelatihan berkala.",
+    },
+    {
+      keys: ["visi", "misi", "tujuan", "cita-cita"],
+      reply:
+        "<strong>Visi:</strong> Mencetak generasi Qurani unggul dalam akhlak, ilmu, dan kontribusi.<br><br><strong>Misi:</strong> Menanamkan nilai Islam, mengembangkan potensi akademik & non-akademik, serta membangun karakter kepemimpinan.",
+    },
+    {
+      keys: ["akreditasi", "sertifikasi"],
+      reply:
+        "Alhamdulillah, sekolah kami terakreditasi <strong>A</strong> oleh BAN-S/M.",
+    },
+    {
+      keys: ["seragam", "pakaian", "baju sekolah"],
+      reply:
+        "Seragam terdiri dari: seragam harian Islami, batik sekolah, olahraga, dan pramuka — semua disediakan saat awal masuk.",
+    },
+    {
+      keys: ["ekstrakurikuler", "ekskul", "club", "organisasi"],
+      reply:
+        "Ekstrakurikuler tersedia:<br>⚽ Olahraga (Futsal, Basket, Badminton)<br>🎨 Seni (Tari, Musik) · 🤖 Robotika · 🗣️ English Club · ⚜️ Pramuka",
+    },
+    {
+      keys: ["prestasi", "penghargaan", "juara", "kompetisi"],
+      reply:
+        "Siswa kami meraih prestasi di lomba Tahfidz, Olimpiade Sains, MTQ, dan kompetisi tingkat kota hingga nasional. 🏆",
+    },
+    {
+      keys: ["alumni", "lulusan", "lanjut sekolah", "melanjutkan"],
+      reply:
+        "Alumni kami melanjutkan ke sekolah favorit dan pesantren ternama. Kami juga memiliki komunitas alumni yang aktif.",
+    },
+    {
+      keys: ["bk", "bimbingan", "konseling", "psikolog"],
+      reply:
+        "Kami memiliki tim BK yang siap membantu siswa secara akademik, emosional, dan sosial.",
+    },
+    {
+      keys: ["kelas", "rombel", "jumlah siswa", "per kelas"],
+      reply:
+        "Maksimal <strong>25 siswa</strong> per kelas dengan 1 guru utama + 1 guru pendamping agar pembelajaran lebih efektif.",
+    },
+    {
+      keys: ["kesehatan", "uks", "dokter", "p3k"],
+      reply:
+        "Kami memiliki UKS, pengecekan kesehatan rutin, dan kerja sama dengan puskesmas terdekat.",
+    },
+  ];
+
+  const DEFAULT_ACTIONS: Action[] = [
+    ["📝 Pendaftaran", "Bagaimana cara daftar?"],
+    ["📚 Program", "Program apa saja yang ada?"],
+    ["🕐 Jadwal", "Jam belajar berapa?"],
+    ["📍 Lokasi", "Dimana lokasi sekolah?"],
+    ["🚌 Transport", "Apakah ada antar jemput?"],
+  ];
+
+  // ── DOM refs ────────────────────────────────────────────────
   const chatbotToggle = document.getElementById("chatbotToggle")!;
   const chatbotBox = document.getElementById("chatbotBox")! as HTMLElement;
   const closeChatbot = document.getElementById("closeChatbot")!;
@@ -207,12 +468,15 @@
   const chatMessages = document.getElementById("chatMessages")!;
   const sendBtn = document.getElementById("sendBtn")! as HTMLButtonElement;
   const quickActions = document.getElementById("quickActions")! as HTMLElement;
+  const quickContainer = document.getElementById("quickActionsContainer")!;
   const statusEl = document.getElementById("chatbotStatus")!;
 
   let isLoading = false;
-  let conversationHistory: { role: string; content: string }[] = [];
 
-  // ── Toggle buka/tutup ───────────────────────────────────────
+  // Init: tampilkan default quick actions
+  renderQuickActions(DEFAULT_ACTIONS);
+
+  // ── Toggle buka / tutup ─────────────────────────────────────
   chatbotToggle.addEventListener("click", () => {
     const isOpen = chatbotBox.style.display === "flex";
     chatbotBox.style.display = isOpen ? "none" : "flex";
@@ -223,22 +487,13 @@
     chatbotBox.style.display = "none";
   });
 
-  // ── Quick action buttons ────────────────────────────────────
-  document.querySelectorAll(".quick-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const message = (btn as HTMLElement).dataset.message ?? "";
-      chatInput.value = message;
-      sendMessage();
-    });
-  });
-
   // ── Form submit ─────────────────────────────────────────────
   chatbotForm.addEventListener("submit", (e) => {
     e.preventDefault();
     sendMessage();
   });
 
-  // ── Kirim pesan ─────────────────────────────────────────────
+  // ── Kirim pesan (tanpa fetch — langsung dari KB) ────────────
   function sendMessage() {
     const userMessage = chatInput.value.trim();
     if (!userMessage || isLoading) return;
@@ -248,33 +503,80 @@
     chatInput.value = "";
     showTypingIndicator();
 
-    conversationHistory.push({ role: "user", content: userMessage });
-
-    fetch("/api/chatbot/ask", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: userMessage,
-        history: conversationHistory,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
+    // Delay alami 300–900ms
+    setTimeout(
+      () => {
         removeTypingIndicator();
-        const reply = data.reply ?? "Maaf, tidak ada respons.";
+        const { reply, actions } = getReply(userMessage);
         addMessage(reply, "bot");
-        conversationHistory.push({ role: "assistant", content: reply });
+        renderQuickActions(actions ?? DEFAULT_ACTIONS);
+      },
+      300 + Math.random() * 600,
+    );
+  }
 
-        if (Array.isArray(data.actions)) renderQuickActions(data.actions);
-      })
-      .catch((err) => {
-        console.error("[Chatbot]", err);
-        removeTypingIndicator();
-        addMessage("Maaf, terjadi kesalahan. Silakan coba lagi.", "bot");
-      });
+  // ── Cari jawaban dari Knowledge Base ───────────────────────
+  function getReply(raw: string): { reply: string; actions?: Action[] } {
+    const msg = raw.toLowerCase();
+
+    for (const entry of KB) {
+      if (entry.keys.some((k) => msg.includes(k))) {
+        return { reply: entry.reply, actions: entry.actions };
+      }
+    }
+
+    if (
+      [
+        "halo",
+        "hai",
+        "hello",
+        "hi",
+        "selamat pagi",
+        "selamat siang",
+        "selamat sore",
+        "selamat malam",
+      ].some((g) => msg.includes(g))
+    ) {
+      return {
+        reply:
+          "Halo! Selamat datang. Ada yang bisa saya bantu tentang sekolah kami? 😊",
+      };
+    }
+
+    if (
+      ["terima kasih", "makasih", "thanks", "thank you"].some((g) =>
+        msg.includes(g),
+      )
+    ) {
+      return { reply: "Sama-sama! Senang bisa membantu. Ada pertanyaan lain?" };
+    }
+
+    if (
+      ["apa kabar", "gimana kabar", "bagaimana kabar"].some((g) =>
+        msg.includes(g),
+      )
+    ) {
+      return {
+        reply:
+          "Alhamdulillah baik! Bagaimana kabar Anda? Ada yang bisa saya bantu hari ini?",
+      };
+    }
+
+    if (
+      ["siapa kamu", "kamu siapa", "bot", "robot", "ai"].some((g) =>
+        msg.includes(g),
+      )
+    ) {
+      return {
+        reply:
+          "Saya asisten virtual sekolah yang siap membantu informasi seputar sekolah kami. 😊",
+      };
+    }
+
+    return {
+      reply:
+        "Maaf, saya belum bisa menjawab itu. Silakan tanya tentang:<br><strong>pendaftaran, program, jadwal, lokasi, biaya, fasilitas, transportasi,</strong> atau <strong>kontak</strong>.",
+    };
   }
 
   // ── Tambah bubble pesan ─────────────────────────────────────
@@ -283,22 +585,21 @@
       hour: "2-digit",
       minute: "2-digit",
     });
+
     const div = document.createElement("div");
     div.className = `${sender === "user" ? "text-right" : "text-left"} chat-animation relative z-10`;
 
     div.innerHTML =
       sender === "user"
-        ? `<div 
-         class="inline-block text-white px-4 py-2 rounded-2xl rounded-tr-sm shadow-sm max-w-xs"
-         style="background: var(--color-primary);"
-       >
-         <p class="text-sm">${message}</p>
-       </div>
-       <p class="text-xs text-gray-500 mt-1 mr-2">${time}</p>`
+        ? `<div class="inline-block text-white px-4 py-2 rounded-2xl rounded-tr-sm shadow-sm max-w-xs"
+              style="background: var(--color-primary);">
+           <p class="text-sm">${escapeHtml(message)}</p>
+         </div>
+         <p class="text-xs text-gray-500 mt-1 mr-2">${time}</p>`
         : `<div class="inline-block bg-white text-gray-700 px-4 py-2 rounded-2xl rounded-tl-sm shadow-sm max-w-xs">
-         <p class="text-sm">${message}</p>
-       </div>
-       <p class="text-xs text-gray-500 mt-1 ml-2">${time}</p>`;
+           <p class="text-sm">${message}</p>
+         </div>
+         <p class="text-xs text-gray-500 mt-1 ml-2">${time}</p>`;
 
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -333,22 +634,34 @@
     statusEl.textContent = "Online";
   }
 
-  // ── Render quick actions dinamis ────────────────────────────
-  function renderQuickActions(actions: { label: string; message: string }[]) {
-    quickActions.style.display = "block";
-    const container = quickActions.querySelector(".flex.flex-wrap")!;
-    container.innerHTML = "";
-
-    actions.forEach((action) => {
+  // ── Render quick action buttons ─────────────────────────────
+  function renderQuickActions(actions: Action[]) {
+    quickContainer.innerHTML = "";
+    actions.forEach(([label, message]) => {
       const btn = document.createElement("button");
-      btn.className = "quick-btn quick-theme px-3 py-1 rounded-full text-xs";
-      btn.textContent = action.label;
-      btn.dataset.message = action.message;
+      btn.type = "button";
+      btn.className =
+        "quick-btn px-3 py-1 rounded-full text-xs transition-colors";
+      btn.style.cssText = `
+        background: color-mix(in srgb, var(--color-primary) 15%, white);
+        color: var(--color-primary);
+      `;
+      btn.textContent = label;
       btn.addEventListener("click", () => {
-        chatInput.value = action.message;
+        chatInput.value = message;
         sendMessage();
       });
-      container.appendChild(btn);
+      quickContainer.appendChild(btn);
     });
+    quickActions.style.display = "block";
+  }
+
+  // ── XSS prevention untuk input user ────────────────────────
+  function escapeHtml(text: string): string {
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 </script>
