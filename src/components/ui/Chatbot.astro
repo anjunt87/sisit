@@ -7,7 +7,8 @@
   <button
     id="chatbotToggle"
     type="button"
-    class="w-12 h-12 bg-white/20 text-green-600 rounded-full flex items-center justify-center shadow-xl backdrop-blur-md hover:bg-white/30 transition-all hover:scale-110 cursor-pointer"
+    class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shadow-xl backdrop-blur-md hover:bg-white/30 transition-all hover:scale-110 cursor-pointer"
+    style="color: var(--color-primary)"
     title="Buka Chatbot"
   >
     <i class="fas fa-comment-alt text-xl"></i>
@@ -22,7 +23,8 @@
 >
   <!-- Header -->
   <div
-    class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex justify-between items-center"
+    class="text-white p-4 flex justify-between items-center"
+    style="background: linear-gradient(to right, var(--color-primary), color-mix(in srgb, var(--color-primary) 80%, black));"
   >
     <div class="flex items-center space-x-2">
       <div
@@ -68,7 +70,7 @@
           <path
             d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z"
             fill="none"
-            stroke="#16610E"
+            stroke="var(--color-primary)"
             stroke-width="0.8"
           >
           </path>
@@ -102,30 +104,27 @@
   >
     <p class="text-xs text-gray-500 mb-2">Pertanyaan populer:</p>
     <div class="flex flex-wrap gap-1">
-      <button
-        class="quick-btn px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs hover:bg-green-200 transition-colors"
-        data-message="Bagaimana cara daftar?"
-      >
-        📝 Pendaftaran
-      </button>
-      <button
-        class="quick-btn px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs hover:bg-blue-200 transition-colors"
-        data-message="Program apa saja yang ada?"
-      >
-        📚 Program
-      </button>
-      <button
-        class="quick-btn px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs hover:bg-purple-200 transition-colors"
-        data-message="Jam belajar berapa?"
-      >
-        🕐 Jadwal
-      </button>
-      <button
-        class="quick-btn px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs hover:bg-orange-200 transition-colors"
-        data-message="Dimana lokasi sekolah?"
-      >
-        📍 Lokasi
-      </button>
+      {
+        [
+          { text: "📝 Pendaftaran", msg: "Bagaimana cara daftar?" },
+          { text: "📚 Program", msg: "Program apa saja yang ada?" },
+          { text: "🕐 Jadwal", msg: "Jam belajar berapa?" },
+          { text: "📍 Lokasi", msg: "Dimana lokasi sekolah?" },
+        ].map((item) => (
+          <button
+            class="quick-btn px-3 py-1 rounded-full text-xs transition-colors"
+            style="
+          background: color-mix(in srgb, var(--color-primary) 15%, white);
+          color: var(--color-primary);
+        "
+            onmouseover="this.style.background='color-mix(in srgb, var(--color-primary) 25%, white)'"
+            onmouseout="this.style.background='color-mix(in srgb, var(--color-primary) 15%, white)'"
+            data-message={item.msg}
+          >
+            {item.text}
+          </button>
+        ))
+      }
     </div>
   </div>
 
@@ -139,12 +138,16 @@
         type="text"
         id="chatInput"
         placeholder="Ketik pertanyaan..."
-        class="flex-1 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm bg-white/70 backdrop-blur-md"
+        class="flex-1 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:border-transparent text-sm bg-white/70 backdrop-blur-md"
+        style="border-color: var(--color-primary)"
       />
       <button
         type="submit"
         id="sendBtn"
-        class="px-4 py-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        class="px-4 py-3 text-white rounded-ful transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        style="background: var(--color-primary);"
+        onmouseover="this.style.background='color-mix(in srgb, var(--color-primary) 80%, black)'"
+        onmouseout="this.style.background='var(--color-primary)'"
       >
         <i class="fas fa-paper-plane text-sm"></i>
       </button>
@@ -285,14 +288,17 @@
 
     div.innerHTML =
       sender === "user"
-        ? `<div class="inline-block bg-green-500 text-white px-4 py-2 rounded-2xl rounded-tr-sm shadow-sm max-w-xs">
-           <p class="text-sm">${message}</p>
-         </div>
-         <p class="text-xs text-gray-500 mt-1 mr-2">${time}</p>`
+        ? `<div 
+         class="inline-block text-white px-4 py-2 rounded-2xl rounded-tr-sm shadow-sm max-w-xs"
+         style="background: var(--color-primary);"
+       >
+         <p class="text-sm">${message}</p>
+       </div>
+       <p class="text-xs text-gray-500 mt-1 mr-2">${time}</p>`
         : `<div class="inline-block bg-white text-gray-700 px-4 py-2 rounded-2xl rounded-tl-sm shadow-sm max-w-xs">
-           <p class="text-sm">${message}</p>
-         </div>
-         <p class="text-xs text-gray-500 mt-1 ml-2">${time}</p>`;
+         <p class="text-sm">${message}</p>
+       </div>
+       <p class="text-xs text-gray-500 mt-1 ml-2">${time}</p>`;
 
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -335,8 +341,7 @@
 
     actions.forEach((action) => {
       const btn = document.createElement("button");
-      btn.className =
-        "quick-btn px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs hover:bg-green-200 transition-colors";
+      btn.className = "quick-btn quick-theme px-3 py-1 rounded-full text-xs";
       btn.textContent = action.label;
       btn.dataset.message = action.message;
       btn.addEventListener("click", () => {

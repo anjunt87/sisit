@@ -20,11 +20,13 @@ import { ClientRouter } from "astro:transitions";
 interface Props {
   title?: string;
   description?: string;
+  theme?: string;
 }
 
 const {
   title = "Nurul Imam Islamic School",
   description = "Sekolah Islam terbaik di Karawang",
+  theme = "green",
 } = Astro.props;
 ---
 
@@ -53,7 +55,9 @@ const {
     />
   </head>
 
-  <body class="bg-white text-gray-900 antialiased overflow-x-hidden">
+  <body
+    class={`theme-${theme} bg-white text-gray-900 antialiased overflow-x-hidden`}
+  >
     <!-- <Navbar transparent={true} /> -->
     <Navbar transparent={false} />
     <main>

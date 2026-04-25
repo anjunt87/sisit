@@ -1,20 +1,42 @@
-/* src/styles/global.css */
+/* ================================
+   IMPORT
+================================ */
 @import "tailwindcss";
 @import "swiper/css";
 @import "swiper/css/pagination";
 
-/* Tailwind Utility */
+/* ================================
+   THEME SYSTEM
+================================ */
+:root {
+  --color-primary: #16a34a; /* default (green) */
+}
+
+/* Theme Variants */
+.theme-green  { --color-primary: #16a34a; }
+.theme-orange { --color-primary: #ea580c; }
+.theme-sky    { --color-primary: #0ea5e9; }
+.theme-indigo { --color-primary: #6366f1; }
+.theme-violet { --color-primary: #8b5cf6; }
+
+/* ================================
+   GLOBAL UTILITIES
+================================ */
 .glassmorph {
   @apply bg-white/70 backdrop-blur-md shadow-lg;
 }
 
-/* === BASE STATE (sebelum animasi) === */
+/* ================================
+   ANIMATION SYSTEM
+================================ */
+
+/* Base */
 [data-animate] {
   opacity: 0;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Variasi arah animasi */
+/* Variants */
 [data-animate="fade-up"]    { transform: translateY(40px); }
 [data-animate="fade-down"]  { transform: translateY(-40px); }
 [data-animate="fade-left"]  { transform: translateX(40px); }
@@ -22,55 +44,48 @@
 [data-animate="zoom-in"]    { transform: scale(0.9); }
 [data-animate="fade"]       { transform: none; }
 
-/* === ANIMATE-IN STATE === */
+/* Active */
 [data-animate].animate-in {
   opacity: 1;
   transform: translateY(0) translateX(0) scale(1);
 }
 
-/* Stagger delay untuk child elements */
+/* Delay */
 [data-animate-delay="100"] { transition-delay: 100ms; }
 [data-animate-delay="200"] { transition-delay: 200ms; }
 [data-animate-delay="300"] { transition-delay: 300ms; }
 [data-animate-delay="400"] { transition-delay: 400ms; }
 [data-animate-delay="500"] { transition-delay: 500ms; }
 
+/* Reveal fallback */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.7s ease;
 }
-
 .reveal.show {
   opacity: 1;
   transform: translateY(0);
 }
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: all 0.7s ease;
-}
-
+.reveal-left,
 .reveal-right {
   opacity: 0;
-  transform: translateX(40px);
   transition: all 0.7s ease;
 }
-
+.reveal-left  { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
 .reveal-left.show,
 .reveal-right.show {
   opacity: 1;
   transform: translateX(0);
 }
-
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
-/* ===============================
-   UNIVERSAL CTA BUTTON STYLE
-================================= */
 
+/* ================================
+   BUTTON (UNIVERSAL CTA)
+================================ */
 .fac-cta,
 .testi-cta,
 .news-cta {
@@ -86,11 +101,8 @@
   justify-content: center;
   gap: 10px;
 
-  background: #16a34a;
-  color: #ffffff !important;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
+  background: var(--color-primary);
+  color: #fff !important;
 
   padding: 13px 28px;
   min-height: 52px;
@@ -98,23 +110,16 @@
   border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.01em;
 
-  box-shadow: 0 12px 22px rgba(22, 163, 74, 0.18);
+  box-shadow: 0 12px 22px color-mix(in srgb, var(--color-primary) 40%, transparent);
   transition: all 0.28s ease;
-
-  appearance: none;
-  -webkit-appearance: none;
 }
 
 .fac-cta-btn:hover,
 .testi-cta-btn:hover,
 .news-cta-btn:hover {
-  background: #15803d;
-  color: #ffffff !important;
+  background: color-mix(in srgb, var(--color-primary) 80%, black);
   transform: translateY(-3px);
-  box-shadow: 0 18px 28px rgba(22, 163, 74, 0.24);
 }
 
 .fac-cta-btn:active,
@@ -128,7 +133,6 @@
 .news-cta-btn svg {
   width: 16px;
   height: 16px;
-  flex-shrink: 0;
   transition: transform 0.25s ease;
 }
 
@@ -138,11 +142,6 @@
   transform: translateX(4px);
 }
 
-.testi-cta-count {
-  opacity: 0.85;
-  font-weight: 500;
-}
-
 /* Mobile */
 @media (max-width: 640px) {
   .fac-cta-btn,
@@ -150,6 +149,55 @@
   .news-cta-btn {
     width: 100%;
     max-width: 340px;
-    padding: 14px 22px;
   }
+}
+
+/* ================================
+   THEME UTILITIES
+================================ */
+.button-theme {
+  color: var(--color-primary);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+.button-theme:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* ================================
+   CHATBOT THEME
+================================ */
+.chatbot-primary { color: var(--color-primary); }
+
+.chatbot-bg { background: var(--color-primary); }
+
+.chatbot-bg-hover:hover {
+  background: color-mix(in srgb, var(--color-primary) 80%, black);
+}
+
+.chatbot-soft {
+  background: color-mix(in srgb, var(--color-primary) 15%, white);
+  color: var(--color-primary);
+}
+
+.chatbot-gradient {
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    color-mix(in srgb, var(--color-primary) 80%, black)
+  );
+}
+
+/* ================================
+   QUICK BUTTON (CHATBOT)
+================================ */
+.quick-theme {
+  background: color-mix(in srgb, var(--color-primary) 15%, white);
+  color: var(--color-primary);
+  transition: all 0.2s ease;
+}
+.quick-theme:hover {
+  background: var(--color-primary);
+  color: #fff;
+  transform: scale(1.05);
 }
