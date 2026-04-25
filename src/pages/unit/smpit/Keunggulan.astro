@@ -1,0 +1,91 @@
+---
+import { } from "../../../data/sdit1";
+---
+
+<!-- ╔══════════════════════════════════════╗ --><!-- ║        4. KEUNGGULAN SEKOLAH         ║ --><!-- ╚══════════════════════════════════════╝ -->
+<section class="py-20 bg-slate-50">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <span
+        data-animate="fade-up"
+        data-delay="100"
+        class="inline-block bg-sky-100 text-sky-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+      >
+        Keunggulan
+      </span>
+      <h2
+        data-animate="fade-up"
+        data-delay="200"
+        class="text-4xl md:text-5xl font-bold text-gray-800"
+      >
+        Keunggulan <span class="text-sky-600">Kami</span>
+      </h2>
+    </div>
+
+    <div
+      data-animate="fade-up"
+      data-delay="300"
+      class="grid sm:grid-cols-2 gap-6"
+    >
+      {
+  [
+    {
+      icon: "fa-mosque",
+      title: "Kurikulum Islami",
+      desc: "Menggabungkan Kurikulum Nasional dengan nilai-nilai Islam, sehingga anak tidak hanya cerdas secara akademik, tetapi juga tumbuh dengan akhlak mulia sejak dini.",
+    },
+    {
+      icon: "fa-cubes",
+      title: "Metode Sentra",
+      desc: "Belajar jadi lebih seru melalui metode sentra dan sistem moving class, membuat anak aktif, eksploratif, dan tidak mudah bosan saat belajar.",
+    },
+    {
+      icon: "fa-quran",
+      title: "Program Al-Qur'an",
+      desc: "Anak dibimbing membaca dan menghafal Al-Qur’an dengan metode UMMI yang terstruktur, menyenangkan, dan mudah dipahami sesuai usia mereka.",
+    },
+    {
+      icon: "fa-star-and-crescent",
+      title: "Pembentukan Karakter",
+      desc: "Setiap kegiatan dirancang untuk menanamkan nilai-nilai kebaikan, membentuk pribadi yang mandiri, disiplin, dan berakhlak islami.",
+    },
+    {
+      icon: "fa-book-open",
+      title: "Hafalan Surat",
+      desc: "Program hafalan surat pendek yang disusun bertahap, membantu anak mencintai Al-Qur’an sejak dini dengan cara yang ringan dan menyenangkan.",
+    },
+    {
+      icon: "fa-hands-praying",
+      title: "Doa & Hadits",
+      desc: "Membiasakan anak menghafal doa harian dan hadits pendek sebagai bekal ibadah serta pembentukan akhlak dalam kehidupan sehari-hari.",
+    },
+  ].map((item, i) => (
+    <div class="bg-white border border-slate-200 rounded-3xl p-7 flex gap-5 hover:border-sky-300 hover:shadow-md transition">
+      
+      <!-- Icon -->
+      <div class="w-12 h-12 flex-shrink-0 bg-sky-600 text-white rounded-2xl flex items-center justify-center text-xl">
+        <i class={`fas ${item.icon}`} />
+      </div>
+
+      <!-- Content -->
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-700 text-xs font-bold flex items-center justify-center">
+            {i + 1}
+          </span>
+          <h3 class="text-base font-bold text-slate-800">
+            {item.title}
+          </h3>
+        </div>
+
+        <p class="text-sm text-slate-600 leading-relaxed">
+          {item.desc}
+        </p>
+      </div>
+
+    </div>
+  ))
+}
+    </div>
+  </div>
+</section>
