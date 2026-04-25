@@ -103,47 +103,108 @@ export const kompetensi = [
 // 5. EKSTRAKURIKULER
 // ================================
 export const ekstrakurikuler = [
+  // =========================
+  // Keislaman
+  // =========================
+  {
+    icon: "fa-quran",
+    category: "Keislaman",
+    name: "TAHTA",
+    desc: "Program tahsin dan tahfidz intensif untuk memperkuat hafalan, memperbaiki bacaan Al-Qur’an, serta membentuk kedekatan siswa dengan Al-Qur’an sejak dini.",
+  },
+
+  // =========================
+  // Bilingual Program
+  // =========================
+  {
+    icon: "fa-comments",
+    category: "Bilingual Program",
+    name: "English Club & Conversation",
+    desc: "Pembiasaan komunikasi aktif dalam bahasa Inggris melalui percakapan sehari-hari, diskusi kelompok, presentasi, dan public speaking untuk meningkatkan kepercayaan diri siswa.",
+  },
+
+  // =========================
+  // Seni & Budaya
+  // =========================
   {
     icon: "fa-drum",
     category: "Seni & Budaya",
     name: "Hadroh",
-    desc: "Musik Islami.",
+    desc: "Kesenian musik Islami yang menumbuhkan kecintaan terhadap shalawat, nilai-nilai religius, dan kebersamaan dalam budaya Islam.",
   },
   {
     icon: "fa-music",
     category: "Seni & Budaya",
     name: "Angklung",
-    desc: "Musik tradisional.",
+    desc: "Kegiatan musik tradisional yang melatih kekompakan, ritme, kerja sama tim, serta kecintaan terhadap budaya lokal Indonesia.",
   },
+
+  // =========================
+  // Teknologi
+  // =========================
   {
-    icon: "fa-comments",
-    category: "Bilingual",
-    name: "English Club",
-    desc: "Latihan komunikasi Inggris.",
-  },
-  {
-    icon: "fa-quran",
-    category: "Keislaman",
-    name: "TAHTA",
-    desc: "Tahsin & tahfidz Al-Qur’an.",
-  },
-  {
-    icon: "fa-futbol",
-    category: "Olahraga",
-    name: "Futsal",
-    desc: "Olahraga tim.",
+    icon: "fa-code",
+    category: "Teknologi",
+    name: "Coding",
+    desc: "Pengenalan dasar pemrograman untuk melatih logika berpikir, kreativitas, serta kemampuan problem solving sejak dini.",
   },
   {
     icon: "fa-robot",
     category: "Teknologi",
     name: "Robotic",
-    desc: "STEM learning.",
+    desc: "Pembelajaran STEM melalui perakitan dan pemrograman robot untuk mengembangkan kreativitas, teknologi, dan inovasi siswa.",
   },
   {
+    icon: "fa-paint-brush",
+    category: "Teknologi & Kreatif",
+    name: "Desain Grafis & Videografi",
+    desc: "Pengembangan keterampilan kreatif dalam desain grafis, fotografi, dan videografi, termasuk pembuatan konten visual dan editing video untuk media digital pembelajaran.",
+  },
+
+  // =========================
+  // Bela Diri
+  // =========================
+  {
+    icon: "fa-fist-raised",
+    category: "Bela Diri",
+    name: "Silat Merpati Putih",
+    desc: "Seni bela diri tradisional yang melatih disiplin, ketahanan fisik, mental, serta pembentukan karakter yang kuat dan percaya diri.",
+  },
+  {
+    icon: "fa-person-falling",
+    category: "Bela Diri",
+    name: "Taekwondo",
+    desc: "Olahraga bela diri yang mengembangkan kekuatan fisik, kedisiplinan, fokus, serta sportivitas dalam kompetisi dan kehidupan sehari-hari.",
+  },
+
+  // =========================
+  // Olahraga
+  // =========================
+  {
+    icon: "fa-futbol",
+    category: "Olahraga",
+    name: "Futsal",
+    desc: "Olahraga tim yang melatih kerja sama, komunikasi, strategi, serta meningkatkan kebugaran jasmani dan jiwa sportivitas siswa.",
+  },
+
+  // =========================
+  // Kepramukaan
+  // =========================
+  {
     icon: "fa-campground",
-    category: "Pramuka",
+    category: "Kepramukaan",
     name: "Pramuka",
-    desc: "Kemandirian siswa.",
+    desc: "Kegiatan pembentukan karakter yang menumbuhkan kemandirian, kepemimpinan, kerja sama, serta kepedulian terhadap lingkungan dan sosial.",
+  },
+
+  // =========================
+  // Olahraga Sunnah
+  // =========================
+  {
+    icon: "fa-bullseye",
+    category: "Olahraga Sunnah",
+    name: "Panahan",
+    desc: "Olahraga sunnah yang melatih fokus, ketenangan, konsentrasi, serta mengajarkan nilai-nilai ketepatan dan kesabaran.",
   },
 ];
 
@@ -152,15 +213,86 @@ export const ekstrakurikuler = [
 // ================================
 export const gallery = [
   {
-    title: "Upacara Bendera",
+    title: "Upacara Bendera & Pembentukan Karakter",
     image:
       "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
     category: "Kedisiplinan",
   },
   {
-    title: "Kegiatan Belajar Kelas",
+    title: "Active Learning di Kelas",
     image:
       "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
+    category: "Akademik",
+  },
+  {
+    title: "Tahfidz Al-Qur'an Harian",
+    image:
+      "https://images.unsplash.com/photo-1519817914152-22f90e4f5c77?auto=format&fit=crop&w=1200&q=80",
+    category: "Keislaman",
+  },
+
+  // ======================
+  // TAMBAHAN (lebih lengkap)
+  // ======================
+
+  {
+    title: "Kegiatan Shalat Dhuha Bersama",
+    image:
+      "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1200&q=80",
+    category: "Keislaman",
+  },
+  {
+    title: "Pembelajaran Interaktif Berbasis Proyek",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+    category: "Akademik",
+  },
+  {
+    title: "English Fun Day - Speaking Activity",
+    image:
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+    category: "Bilingual",
+  },
+  {
+    title: "Outdoor Learning & Observasi Alam",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    category: "Akademik",
+  },
+  {
+    title: "Praktik Coding Dasar di Lab Komputer",
+    image:
+      "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1200&q=80",
+    category: "Teknologi",
+  },
+  {
+    title: "Ekstrakurikuler Pramuka Siaga",
+    image:
+      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1200&q=80",
+    category: "Kepramukaan",
+  },
+  {
+    title: "Kegiatan Seni & Kreativitas Siswa",
+    image:
+      "https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&w=1200&q=80",
+    category: "Seni & Budaya",
+  },
+  {
+    title: "Olahraga Futsal Antar Kelas",
+    image:
+      "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1200&q=80",
+    category: "Olahraga",
+  },
+  {
+    title: "Panahan - Melatih Fokus & Ketepatan",
+    image:
+      "https://images.unsplash.com/photo-1602526212907-6c10a0b2b8c5?auto=format&fit=crop&w=1200&q=80",
+    category: "Olahraga Sunnah",
+  },
+  {
+    title: "Kegiatan Literasi & Membaca Pagi",
+    image:
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80",
     category: "Akademik",
   },
 ];

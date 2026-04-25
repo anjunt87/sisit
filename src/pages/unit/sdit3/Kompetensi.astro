@@ -1,5 +1,5 @@
 ---
-import { kompetensi } from "../../../data/smait";
+import { kompetensi } from "../../../data/sdit1";
 ---
 
 <!-- ╔══════════════════════════════════════╗ --><!-- ║         KOMPETENSI LULUSAN          ║ --><!-- ╚══════════════════════════════════════╝ -->
@@ -9,7 +9,7 @@ import { kompetensi } from "../../../data/smait";
       <span
         data-animate="fade-up"
         data-delay="100"
-        class="inline-block bg-violet-100 text-violet-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
+        class="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4"
       >
         Kompetensi
       </span>
@@ -18,7 +18,7 @@ import { kompetensi } from "../../../data/smait";
         data-delay="200"
         class="text-4xl md:text-5xl font-bold text-gray-800"
       >
-        Kompetensi <span class="text-violet-500">Lulusan</span>
+        Kompetensi <span class="text-green-500">Lulusan</span>
       </h2>
       <p
         data-animate="fade-up"
@@ -37,12 +37,12 @@ import { kompetensi } from "../../../data/smait";
     >
       {
         kompetensi.map((item, i) => (
-          <div class="flex items-start gap-4 bg-violet-50 border border-violet-100 rounded-2xl px-6 py-5 hover:border-violet-300 hover:shadow-sm transition">
-            <div class="w-10 h-10 flex-shrink-0 bg-violet-500 text-white rounded-xl flex items-center justify-center text-base">
+          <div class="flex items-start gap-4 bg-green-50 border border-green-100 rounded-2xl px-6 py-5 hover:border-green-300 hover:shadow-sm transition">
+            <div class="w-10 h-10 flex-shrink-0 bg-green-500 text-white rounded-xl flex items-center justify-center text-base">
               <i class={`fas ${item.icon}`} />
             </div>
             <div class="flex items-start gap-3">
-              <span class="w-5 h-5 rounded-full bg-violet-200 text-violet-800 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="w-5 h-5 rounded-full bg-green-200 text-green-800 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                 {i + 1}
               </span>
               <p class="text-sm text-slate-700 leading-relaxed font-medium">
