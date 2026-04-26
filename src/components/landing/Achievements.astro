@@ -1,30 +1,19 @@
 ---
 // src/components/landing/Achievements.astro
-
-const achievements = [
-  {
-    icon: "fa-trophy",
-    title: "Juara 1 Olimpiade Matematika",
-    desc: "Tingkat Kabupaten Karawang, 2024",
-  },
-  {
-    icon: "fa-microphone",
-    title: "Lomba Pidato Bahasa Arab",
-    desc: "Tingkat Provinsi Jawa Barat, 2023",
-  },
-  {
-    icon: "fa-book-quran",
-    title: "Wisuda Hafizh 30 Juz",
-    desc: "Santri terbaik tahun 2024",
-  },
-];
+import {
+  achievements,
+  categories,
+  levelIcon,
+  catColor,
+  levelStyle,
+  statsCounts,
+} from "../../data/achievements";
 ---
 
 <section
   id="achievements"
   class="relative overflow-hidden bg-gray-50 py-20 px-6"
 >
-  <!-- Background Pattern -->
   <svg
     class="absolute inset-0 h-full w-full opacity-10"
     xmlns="http://www.w3.org/2000/svg"
@@ -42,58 +31,150 @@ const achievements = [
           fill="none"
           stroke="#16610E"
           stroke-width="1"
-        />
+        >
+        </path>
       </pattern>
     </defs>
-
-    <rect width="100%" height="100%" fill="url(#star)" />
+    <rect
+      width="100%"
+      height="100%"
+      fill="url(#star)"
+    >
+    </rect>
   </svg>
 
-  <div class="relative z-10 max-w-7xl mx-auto">
+  <div class="relative z-10 max-w-5xl mx-auto">
     <!-- Header -->
-    <div class="mb-12 text-center">
+    <div class="mb-10 text-center">
       <span
-        class="mb-4 inline-block rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-600"
+        class="mb-4 inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700"
       >
-        Prestasi
+        <i class="fa-solid fa-trophy text-xs"></i> Prestasi Unggulan
       </span>
-
-      <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
-        Prestasi
-        <span class="text-green-600"> Sekolah</span>
+      <h2 class="mb-3 text-4xl font-bold text-gray-800 md:text-5xl">
+        Prestasi <span class="text-green-600">Sekolah</span>
       </h2>
-
-      <p class="mx-auto max-w-2xl text-lg text-gray-600">
-        Berbagai prestasi membanggakan yang telah diraih oleh siswa dan lembaga kami
+      <p class="mx-auto max-w-xl text-base text-gray-600">
+        Berbagai prestasi membanggakan yang diraih santri dan lembaga kami
       </p>
     </div>
 
-    <!-- Grid -->
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-7">
       {
-        achievements.map((item) => (
-          <div
-            class="group rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+        categories.map((c) => (
+          <button
+            data-panel={c.key}
+            class:list={[
+              "tab flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors duration-150",
+              c.key === "all"
+                ? "bg-green-600 text-white border-green-600"
+                : "bg-white text-gray-500 border-gray-200 hover:border-green-400 hover:text-green-800",
+            ]}
           >
-            <!-- Icon -->
-            <div
-              class="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-green-600 text-2xl text-white transition group-hover:scale-110"
-            >
-              <i class={`fa-solid ${item.icon}`}></i>
-            </div>
-
-            <!-- Title -->
-            <h3 class="mb-2 text-xl font-bold text-gray-800">
-              {item.title}
-            </h3>
-
-            <!-- Desc -->
-            <p class="text-gray-600">
-              {item.desc}
-            </p>
-          </div>
+            <i class={`fa-solid ${c.icon} text-xs`} />
+            {c.label}
+          </button>
         ))
       }
     </div>
+
+    <!-- Panels -->
+    {
+      categories.map((c) => (
+        <div
+          id={`panel-${c.key}`}
+          class:list={[
+            "panel grid gap-2.5 md:grid-cols-2",
+            c.key !== "all" && "hidden",
+          ]}
+        >
+          {(c.key === "all"
+            ? achievements
+            : achievements.filter((a) => a.cat === c.key)
+          ).map((item) => (
+            <div class="achievement-row flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all duration-200 hover:border-gray-300 hover:translate-x-1">
+              <div
+                class:list={[
+                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white",
+                  catColor[item.cat],
+                ]}
+              >
+                <i class={`fa-solid ${item.icon} text-sm`} />
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="text-sm font-semibold text-gray-800 leading-snug">
+                  {item.title}
+                </div>
+                <div class="text-xs text-gray-500 mt-0.5">{item.desc}</div>
+              </div>
+              <span
+                class:list={[
+                  "flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[10px] font-semibold",
+                  levelStyle[item.level],
+                ]}
+              >
+                <i
+                  class={`fa-solid ${levelIcon[item.level]}`}
+                  style="font-size:9px"
+                />
+                {item.level.charAt(0).toUpperCase() + item.level.slice(1)}
+              </span>
+            </div>
+          ))}
+        </div>
+      ))
+    }
+
+    <!-- Stats -->
+    <div
+      class="mt-10 grid grid-cols-4 divide-x divide-gray-200 rounded-2xl border border-gray-200 bg-white overflow-hidden max-w-lg mx-auto"
+    >
+      <div class="py-4 text-center">
+        <div class="text-2xl font-bold text-green-600">
+          {achievements.length}+
+        </div>
+        <div class="text-xs text-gray-500 mt-0.5">Total</div>
+      </div>
+      <div class="py-4 text-center">
+        <div class="text-2xl font-bold text-amber-600">
+          {statsCounts.internasional}
+        </div>
+        <div class="text-xs text-gray-500 mt-0.5">Internasional</div>
+      </div>
+      <div class="py-4 text-center">
+        <div class="text-2xl font-bold text-blue-600">
+          {statsCounts.nasional}
+        </div>
+        <div class="text-xs text-gray-500 mt-0.5">Nasional</div>
+      </div>
+      <div class="py-4 text-center">
+        <div class="text-2xl font-bold text-purple-600">
+          {statsCounts.provinsi}
+        </div>
+        <div class="text-xs text-gray-500 mt-0.5">Provinsi</div>
+      </div>
+    </div>
   </div>
 </section>
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".tab");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.panel!;
+
+      tabs.forEach((t) => {
+        t.classList.remove("bg-green-600", "text-white", "border-green-600");
+        t.classList.add("bg-white", "text-gray-500", "border-gray-200");
+      });
+      tab.classList.add("bg-green-600", "text-white", "border-green-600");
+      tab.classList.remove("bg-white", "text-gray-500", "border-gray-200");
+
+      document
+        .querySelectorAll(".panel")
+        .forEach((p) => p.classList.add("hidden"));
+      document.getElementById(`panel-${target}`)?.classList.remove("hidden");
+    });
+  });
+</script>

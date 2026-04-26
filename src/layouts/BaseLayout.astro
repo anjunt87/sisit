@@ -58,13 +58,18 @@ const {
   <body
     class={`theme-${theme} bg-white text-gray-900 antialiased overflow-x-hidden`}
   >
+    <!-- Navbar -->
     <!-- <Navbar transparent={true} /> -->
     <Navbar transparent={false} />
+
     <main>
       <slot />
     </main>
+
+    <!-- UI floating -->
     <FloatingButtons />
     <Chatbot />
+
     <Footer />
   </body>
   <script>
