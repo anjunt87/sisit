@@ -1,0 +1,43 @@
+---
+// src/pages/ppdb/formulir.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormPPDB from "../../components/forms/FormPPDB.jsx";
+---
+
+<BaseLayout title="Formulir PPDB – NIIS">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Tajawal:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!--
+    Tidak kirim prop jenjang dari Astro.
+    FormPPDB baca sendiri dari window.location (client-side).
+    Ini fix untuk Astro static mode yang tidak bisa baca query param server-side.
+  -->
+  <FormPPDB client:load />
+
+  <style is:global>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #1a3a2a !important;
+      box-shadow: 0 0 0 3px rgba(26, 58, 42, 0.12);
+    }
+    button[type="submit"]:not(:disabled):hover,
+    button[type="button"]:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+    @media (max-width: 600px) {
+      div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</BaseLayout>

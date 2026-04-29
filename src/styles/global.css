@@ -8,16 +8,52 @@
 /* ================================
    THEME SYSTEM
 ================================ */
-:root {
-  --color-primary: #16a34a; /* default (green) */
-}
+/* :root {
+  --color-primary: #16a34a; 
+} */
 
 /* Theme Variants */
-.theme-green  { --color-primary: #16a34a; }
+/* .theme-green  { --color-primary: #16a34a; }
 .theme-orange { --color-primary: #ea580c; }
 .theme-sky    { --color-primary: #0ea5e9; }
 .theme-indigo { --color-primary: #6366f1; }
-.theme-violet { --color-primary: #8b5cf6; }
+.theme-violet { --color-primary: #8b5cf6; } */
+
+:root{
+  --color-primary:#16a34a;
+  --color-accent:#15803d;
+  --color-soft:#dcfce7;
+}
+
+.theme-green{
+  --color-primary:#16a34a;
+  --color-accent:#15803d;
+  --color-soft:#dcfce7;
+}
+
+.theme-orange{
+  --color-primary:#ea580c;
+  --color-accent:#c2410c;
+  --color-soft:#ffedd5;
+}
+
+.theme-sky{
+  --color-primary:#0ea5e9;
+  --color-accent:#0284c7;
+  --color-soft:#e0f2fe;
+}
+
+.theme-indigo{
+  --color-primary:#6366f1;
+  --color-accent:#4f46e5;
+  --color-soft:#e0e7ff;
+}
+
+.theme-violet{
+  --color-primary:#8b5cf6;
+  --color-accent:#7c3aed;
+  --color-soft:#ede9fe;
+}
 
 /* ================================
    GLOBAL UTILITIES

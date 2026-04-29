@@ -1,6 +1,7 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import "../styles/ppdb.css";
+// src\pages\ppdb-daftar.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/ppdb.css";
 
 const TAHUN = "2025/2026";
 
@@ -15,7 +16,7 @@ const jenjang = [
     biaya_pendaftaran: "Rp 150.000",
     biaya_spp: "Rp 400.000/bln",
     icon: "🌱",
-    color: "#f59e0b",
+    color: "#f8bb54",
     syarat: [
       "Akta Kelahiran",
       "KK / KTP Orang Tua",
@@ -39,7 +40,7 @@ const jenjang = [
     biaya_pendaftaran: "Rp 200.000",
     biaya_spp: "Rp 500.000/bln",
     icon: "🌿",
-    color: "#10b981",
+    color: "#f59e0b",
     syarat: [
       "Akta Kelahiran",
       "KK / KTP Orang Tua",
@@ -64,7 +65,7 @@ const jenjang = [
     biaya_pendaftaran: "Rp 350.000",
     biaya_spp: "Rp 750.000/bln",
     icon: "📖",
-    color: "#3b82f6",
+    color: "#10b981",
     syarat: [
       "Akta Kelahiran",
       "KK / KTP Orang Tua",
@@ -91,7 +92,7 @@ const jenjang = [
     biaya_pendaftaran: "Rp 400.000",
     biaya_spp: "Rp 850.000/bln",
     icon: "🔬",
-    color: "#8b5cf6",
+    color: "#3b82f6",
     syarat: [
       "Akta Kelahiran",
       "KK / KTP Orang Tua",
@@ -119,7 +120,7 @@ const jenjang = [
     biaya_pendaftaran: "Rp 500.000",
     biaya_spp: "Rp 950.000/bln",
     icon: "🎓",
-    color: "#ef4444",
+    color: "#8b5cf6",
     syarat: [
       "Akta Kelahiran",
       "KK / KTP Orang Tua",
@@ -249,11 +250,10 @@ const jenjang = [
           const pct = Math.round((j.terisi / j.kuota) * 100);
           const sisa = j.kuota - j.terisi;
           // Gunakan tanda kurung pada logika perbandingan agar tidak dianggap tag HTML
-          const urgent = "sisa <= 100";
+          const urgent = "sisa <= 10";
 
           return (
             <div
-              key={j.id}
               class={`jenjang-card ${i === 0 ? "jenjang-card--visible" : ""}`}
               id={`card-${j.id}`}
               data-jenjang={j.id}
@@ -375,11 +375,8 @@ const jenjang = [
                       Syarat Dokumen
                     </div>
                     <ul class="checklist">
-                      {j.syarat.map((s, idx) => (
-                        <li
-                          key={idx}
-                          class="checklist__item"
-                        >
+                      {j.syarat.map((s) => (
+                        <li class="checklist__item">
                           <svg
                             width="13"
                             height="13"
@@ -411,11 +408,8 @@ const jenjang = [
                       Keunggulan Program
                     </div>
                     <ul class="checklist">
-                      {j.keunggulan.map((k, idx) => (
-                        <li
-                          key={idx}
-                          class="checklist__item"
-                        >
+                      {j.keunggulan.map((k) => (
+                        <li class="checklist__item">
                           <svg
                             width="13"
                             height="13"
@@ -512,7 +506,7 @@ const jenjang = [
       position: relative;
       background: var(--green-deep, #1a3a2a);
       overflow: hidden;
-      padding: 48px 24px 80px;
+      padding: 88px 24px 80px;
     }
     .daftar-hero__bg {
       position: absolute;
