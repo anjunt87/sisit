@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
 import { ClientRouter } from "astro:transitions";
-
+import PageSkeleton from "../components/landing/PageSkeleton.astro";
 import FloatingButtons from "../components/ui/FloatingButtons.astro";
 import Chatbot from "../components/ui/Chatbot.astro";
 
@@ -24,16 +24,34 @@ import ppdb from "../pages/ppdb.astro";
 ---
 
 <Layout title=" — Sekolah Islam Terpadu">
-  <Hero />
-  <!-- <About /> -->
-  <News />
-  <!-- <Programs /> -->
-  <!-- <Achievements /> -->
-  <Facilities />
-  <Testimonial />
-  <SchoolCalendar />
-  <Faq />
-  <SchoolLocation />
-  <Partnership />
-  <Contact />
+  <!-- Router (biar transisi jalan dulu) -->
+  <ClientRouter />
+
+  <!-- Skeleton (HARUS PALING ATAS) -->
+  <PageSkeleton />
+
+  <!-- UI floating -->
+  <!-- <FloatingButtons /> -->
+  <!-- <Chatbot /> -->
+
+  <!-- Navbar -->
+  <!-- <Navbar transparent /> -->
+
+  <!-- Main Content -->
+  <main>
+    <Hero />
+    <Programs />
+    <Achievements />
+    <Facilities />
+    <Testimonial />
+    <Partnership />
+    <SchoolCalendar />
+    <News />
+    <Faq />
+    <SchoolLocation />
+    <Contact />
+  </main>
+
+  <!-- Footer -->
+  <Footer />
 </Layout>
