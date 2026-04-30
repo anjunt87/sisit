@@ -91,7 +91,7 @@ const menuItems = [
 <div class="hidden md:flex items-center gap-1">
   {
     menuItems.map((item) =>
-      item.children ? (
+      item.children?.length ? (
         <div class="relative group">
           <!-- Parent -->
           <button class="nav-link flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg hover:bg-white/10 transition">
@@ -116,7 +116,7 @@ const menuItems = [
           <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 rounded-xl bg-white shadow-xl border border-gray-100 py-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             {
               item.children.map((child) =>
-                child.children ? (
+                'children' in child ? (
                   <div class="relative group/sub">
                     <!-- Has Child -->
                     <button class="w-full flex justify-between items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition">
@@ -140,20 +140,22 @@ const menuItems = [
                     <!-- Level 2 -->
                     <div class="absolute top-0 left-full ml-1 w-56 rounded-xl bg-white shadow-xl border border-gray-100 py-1.5 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
                       {
-                        child.children.map((sub) => (
+                        ('children' in child ? child.children : []).map((sub) => (
+                        'href' in sub && (
                           <a
                             href={sub.href}
                             class="dropdown-link block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition"
                           >
                             {sub.label}
                           </a>
-                        ))
+                        )
+                      ))
                       }
                     </div>
                   </div>
                 ) : (
                   <a
-                    href={child.href}
+                    href={'href' in child ? child.href : '#'}
                     class="dropdown-link block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition"
                   >
                     {child.label}
@@ -228,7 +230,7 @@ const menuItems = [
   
     {
       menuItems.map((item) =>
-        item.children ? (
+        item.children?.length ? (
           <div class="mobile-dropdown">
             <!-- Parent -->
             <button class="mobile-dropdown-toggle w-full flex justify-between items-center px-3 py-2.5 rounded-xl text-sm font-medium text-green-700 hover:bg-green-50 transition">
@@ -255,11 +257,10 @@ const menuItems = [
                 <div class="pl-2 pt-1 pb-1 space-y-1">
                   {
                     item.children.map((child) =>
-                      child.children ? (
-                        <div class="mobile-sub-dropdown">
-                          <button class="mobile-sub-toggle w-full flex justify-between items-center px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition">
-                            {child.label}
-
+                        'children' in child ? (
+                          <div class="mobile-sub-dropdown">
+                            <button class="mobile-sub-toggle w-full flex justify-between items-center px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition">
+                              {child.label}
                             <svg
                               class="mobile-sub-chevron w-4 h-4 transition-transform duration-300"
                               fill="none"
@@ -279,13 +280,15 @@ const menuItems = [
                             <div class="overflow-hidden">
                               <div class="pl-3 py-1 space-y-1">
                                 {
-                                  child.children.map((sub) => (
-                                    <a
-                                      href={sub.href}
-                                      class="mobile-link block px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 transition"
-                                    >
-                                      {sub.label}
-                                    </a>
+                                  ('children' in child ? child.children : []).map((sub) => (
+                                    'href' in sub && (
+                                      <a
+                                        href={sub.href}
+                                        class="mobile-link block px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 transition"
+                                      >
+                                        {sub.label}
+                                      </a>
+                                    )
                                   ))
                                 }
                               </div>
@@ -294,7 +297,7 @@ const menuItems = [
                         </div>
                       ) : (
                         <a
-                          href={child.href}
+                          href={'href' in child ? child.href : '#'}
                           class="mobile-link block px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-green-50 hover:text-green-700 transition"
                         >
                           {child.label}
@@ -361,10 +364,12 @@ const menuItems = [
         navbar.classList.remove("bg-transparent", "text-white");
         navbar.classList.add("bg-white/80", "backdrop-blur-md", "shadow-lg", "text-green-700");
         logo.src = colorLogo;
+        if (logo) logo.src = colorLogo;
       } else {
         navbar.classList.remove("bg-white/80", "backdrop-blur-md", "shadow-lg", "text-green-700");
         navbar.classList.add("bg-transparent", "text-white");
         logo.src = whiteLogo;
+        if (logo) logo.src = whiteLogo;
       }
     }
 
