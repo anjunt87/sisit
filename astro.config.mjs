@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // output: 'server',
+  output: 'server',
   devToolbar: { enabled: false },
 
   adapter: node({

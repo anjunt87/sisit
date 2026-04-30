@@ -155,7 +155,7 @@ export default function FormPPDB() {
             <div style={S.successRow}><span>Kontak</span><strong>{form.no_hp}</strong></div>
           </div>
           <a
-            href={`https://wa.me/6281234567890?text=Assalamualaikum%2C%20saya%20sudah%20mendaftar%20atas%20nama%20${encodeURIComponent(form.nama_lengkap)}%20untuk%20jenjang%20${encodeURIComponent(meta.nama)}`}
+            href={`https://wa.me/6283815404175?text=Assalamualaikum%2C%20saya%20sudah%20mendaftar%20atas%20nama%20${encodeURIComponent(form.nama_lengkap)}%20untuk%20jenjang%20${encodeURIComponent(meta.nama)}`}
             target="_blank" rel="noreferrer"
             style={{ ...S.btnPrimary, background: "#25d366", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginTop: 24 }}
           >
@@ -559,7 +559,23 @@ const S = {
   card:         { background: "#fff", borderRadius: 24, padding: "clamp(20px,5vw,36px)", boxShadow: "0 20px 60px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.04)" },
 
   fieldLabel:   { display: "block", marginBottom: 8, fontWeight: 700, fontSize: 13, color: "#374151" },
-  inputBase:    { width: "100%", padding: "12px 14px", borderRadius: 12, border: "2px solid #e2e8f0", boxSizing: "border-box", fontSize: 14, color: "#1e293b", transition: "all 0.2s", outline: "none", fontFamily: "inherit", background: "#fff" },
+  inputBase: {
+  width: "100%",
+  padding: "12px 14px",
+  borderRadius: 12,
+
+  borderWidth: "2px",
+  borderStyle: "solid",
+  borderColor: "#e2e8f0",
+
+  boxSizing: "border-box",
+  fontSize: 14,
+  color: "#1e293b",
+  transition: "all 0.2s",
+  outline: "none",
+  fontFamily: "inherit",
+  background: "#fff"
+},
   errMsg:       { color: "#ef4444", fontSize: 12, marginTop: 5, display: "flex", alignItems: "center" },
 
   grid2:        { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 16 },
@@ -589,7 +605,9 @@ const S = {
   summaryLabel: { fontSize: 13, color: "#64748b", flexShrink: 0 },
   summaryVal:   { fontSize: 13, fontWeight: 700, textAlign: "right", display: "flex", alignItems: "center", justifyContent: "flex-end" },
 
-  jenjangBadge: { display: "flex", alignItems: "center", padding: "11px 18px", borderRadius: 12, border: "2px solid", fontSize: 14, marginBottom: 20 },
+  jenjangBadge: { display: "flex", alignItems: "center", padding: "11px 18px", borderRadius: 12, borderWidth: "2px",
+borderStyle: "solid",
+borderColor: "#e2e8f0", fontSize: 14, marginBottom: 20 },
   errorBox:     { background: "#fef2f2",  borderWidth: "2px",
   borderStyle: "solid",
   borderColor: "#fecaca", borderRadius: 12, padding: "12px 16px", color: "#dc2626", fontSize: 14, marginBottom: 16, display: "flex", alignItems: "center" },
