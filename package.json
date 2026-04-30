@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/node": "^10.0.6",
     "@astrojs/react": "^5.0.4",
-    "@astrojs/vercel": "^10.0.6",
+    "@astrojs/vercel": "^8.0.4",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@supabase/supabase-js": "^2.105.1",
     "@tailwindcss/vite": "^4.2.2",
