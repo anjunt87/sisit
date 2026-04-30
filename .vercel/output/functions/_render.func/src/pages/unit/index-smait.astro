@@ -1,0 +1,65 @@
+---
+// src/pages/unit/smait.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import {
+  identitas,
+  stats,
+  statistik,
+  prosesPembelajaran,
+  pimpinan,
+  gallery,
+  categories,
+} from "../../data/smait";
+
+// section components
+import Hero from "./smait/Hero.astro";
+import Stats from "./smait/Stats.astro";
+import Tentang from "./smait/Tentang.astro";
+import Visimisi from "./smait/Visimisi.astro";
+import Pimpinan from "./smait/Pimpinan.astro";
+import Keunggulan from "./smait/Keunggulan.astro";
+import Kompetensi from "./smait/Kompetensi.astro";
+import Ekskul from "./smait/Ekskul.astro";
+import Gallery from "./smait/Gallery.astro";
+import Statistik from "./smait/Statistik.astro";
+import Identitas from "./smait/Identitas.astro";
+import CTA from "./smait/CTA.astro";
+---
+
+<BaseLayout
+  title="Profil SMAIT Bilingual Nurul Imam Karawang"
+  description="Profil SMAIT Bilingual Nurul Imam Karawang, sekolah menengah atas Islam terpadu bilingual dengan kurikulum merdeka dan pembelajaran full day school."
+  theme="violet"
+>
+  <Hero />
+
+  <Stats stats={stats} />
+
+  <Tentang />
+
+  <Pimpinan pimpinan={pimpinan} />
+
+  <Keunggulan />
+
+  <Visimisi />
+
+  <Kompetensi />
+
+  <Ekskul />
+
+  <Gallery
+    gallery={gallery}
+    categories={categories}
+  />
+
+  <Statistik
+    statistik={statistik}
+    proses={prosesPembelajaran}
+  />
+
+  <Identitas identitas={identitas} />
+
+  <CTA />
+</BaseLayout>

@@ -1,0 +1,64 @@
+---
+// src/pages/unit/tkit1.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import {
+  identitas,
+  stats,
+  statistik,
+  prosesPembelajaran,
+  // milestones,
+  pimpinan,
+  gallery,
+  categories,
+} from "../../data/tkit1";
+
+// section components
+import Hero from "./tkit1/Hero.astro";
+import Stats from "./tkit1/Stats.astro";
+import Tentang from "./tkit1/Tentang.astro";
+import Pimpinan from "./tkit1/Pimpinan.astro";
+import Keunggulan from "./tkit1/Keunggulan.astro";
+import Visimisi from "./tkit1/Visimisi.astro";
+import Kompetensi from "./tkit1/Kompetensi.astro";
+import Ekskul from "./tkit1/Ekskul.astro";
+import Gallery from "./tkit1/Gallery.astro";
+import Statistik from "./tkit1/Statistik.astro";
+import Identitas from "./tkit1/Identitas.astro";
+import CTA from "./tkit1/CTA.astro";
+---
+
+<BaseLayout
+  title="Profil TKIT Nurul Imam Karawang 1"
+  description="Profil lengkap TKIT Nurul Imam Karawang, sekolah dasar Islam terpadu dengan akreditasi A, kurikulum merdeka dan pembelajaran full day school."
+  theme="orange"
+>
+  <Hero />
+
+  <Stats stats={stats} />
+
+  <Tentang />
+
+  <Pimpinan pimpinan={pimpinan} />
+
+  <Keunggulan />
+
+  <Visimisi />
+
+  <Kompetensi />
+
+  <Gallery
+    gallery={gallery}
+    categories={categories}
+  />
+
+  <Statistik
+    statistik={statistik}
+    proses={prosesPembelajaran}
+  />
+
+  <Identitas identitas={identitas} />
+
+  <CTA />
+</BaseLayout>

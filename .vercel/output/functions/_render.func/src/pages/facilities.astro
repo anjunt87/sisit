@@ -1,0 +1,351 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import "../styles/pages-facilities.css";
+
+// import BaseLayout from "../layouts/BaseLayout.astro";
+import { facilities } from "../data/facilities";
+---
+
+<Layout title="Fasilitas Sekolah" description="Sarana dan prasarana lengkap untuk mendukung proses belajar mengajar yang optimal.">
+  <main>
+    <section class="facpage-section">
+
+      <!-- Dekorasi -->
+      <div class="fac-bg" aria-hidden="true"></div>
+      <div class="fac-orb fac-orb--1" aria-hidden="true"></div>
+      <div class="fac-orb fac-orb--2" aria-hidden="true"></div>
+
+      <div class="facpage-container">
+
+        <!-- Header -->
+        <div class="facpage-header">
+          <a href="/" class="facpage-back">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M13 8H3M7 4L3 8l4 4"/>
+            </svg>
+            Kembali ke Beranda
+          </a>
+          <span class="fac-badge" style="margin-top:1.5rem">
+            <span class="fac-badge-dot"></span>
+            Fasilitas Lengkap
+          </span>
+          <h1 class="facpage-title">
+            Semua <em>Fasilitas</em>
+          </h1>
+          <p class="facpage-subtitle">
+            Klik salah satu fasilitas untuk melihat detail, foto, dan fitur lengkapnya.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="facpage-tabs" role="tablist" aria-label="Filter fasilitas">
+          <button class="facpage-tab active" data-filter="all" role="tab" aria-selected="true">
+            Semua
+            <span class="facpage-tab-count">{facilities.length}</span>
+          </button>
+          <button class="facpage-tab" data-filter="unggulan" role="tab" aria-selected="false">
+            Unggulan
+            <span class="facpage-tab-count">6</span>
+          </button>
+          <button class="facpage-tab" data-filter="pendukung" role="tab" aria-selected="false">
+            Pendukung
+            <span class="facpage-tab-count">{facilities.length - 6}</span>
+          </button>
+        </div>
+
+        <!-- Grid -->
+        <div class="facpage-grid" id="facpageGrid">
+          {facilities.map((item, i) => (
+            <article
+              class="facpage-card"
+              id={`fac-card-${i}`}
+              data-index={i}
+              data-type={i < 6 ? "unggulan" : "pendukung"}
+              aria-expanded="false"
+            >
+              <!-- Card Header (selalu tampil) -->
+              <div class="facpage-card-header" onclick={`toggleCard(${i})`}>
+  <div class={`fac-icon-box ${item.bg}`}>
+    <i class={`${item.icon} ${item.color}`}></i>
+  </div>
+                <div class="facpage-card-info">
+                  <h2 class="facpage-card-title">{item.title}</h2>
+                  <p class="facpage-card-desc">{item.desc}</p>
+                </div>
+                {i < 6 && (
+                  <span class="facpage-badge-unggulan">Unggulan</span>
+                )}
+                <button
+                  class="facpage-toggle"
+                  aria-label={`Lihat detail ${item.title}`}
+                  aria-expanded="false"
+                  aria-controls={`fac-detail-${i}`}
+                >
+                  <svg class="facpage-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M4 6l4 4 4-4"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Detail Panel (expand) -->
+              <div
+                class="facpage-detail"
+                id={`fac-detail-${i}`}
+                role="region"
+                aria-labelledby={`fac-card-${i}`}
+                hidden
+              >
+                <!-- Gambar -->
+                {item.images && item.images.length > 0 ? (
+  <div class="swiper fac-swiper">
+    <div class="swiper-wrapper">
+      {item.images.map((img, idx) => (
+        <div class="swiper-slide">
+          <img 
+            src={img} 
+            alt={`Foto ${item.title}`} 
+            data-gallery={JSON.stringify(item.images)}
+            data-index={idx}
+            class="fac-img-click"
+          />
+        </div>
+      ))}
+    </div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+) : item.image ? (
+  <img
+    src={item.image}
+    alt={`Foto ${item.title}`}
+    class="facpage-detail-img fac-img-click"
+    data-gallery={JSON.stringify([item.image])}
+    data-index="0"
+  />
+) : (
+  <div class="facpage-detail-img-placeholder">
+    <i class={`${item.icon} ${item.color}`}></i>
+    <span>Foto segera hadir</span>
+  </div>
+)}
+
+                <!-- Deskripsi panjang -->
+                {item.detail && (
+                  <div class="facpage-detail-body">
+                    <p class="facpage-detail-label">Deskripsi lengkap</p>
+                    <p class="facpage-detail-text">{item.detail}</p>
+                  </div>
+                )}
+
+                <!-- Fitur -->
+                {item.features && item.features.length > 0 && (
+                  <div class="facpage-detail-body">
+                    <p class="facpage-detail-label">Fitur utama</p>
+                    <ul class="facpage-features">
+                      {item.features.map((ft) => (
+                        <li class="facpage-feature">
+                          <span class="facpage-feature-check" aria-hidden="true">✓</span>
+                          {ft}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <!-- Jika tidak ada detail sama sekali -->
+                {!item.detail && (!item.features || item.features.length === 0) && (
+                  <div class="facpage-detail-body">
+                    <p class="facpage-detail-text" style="color:#9ca3af;font-style:italic">
+                      Detail fasilitas ini sedang dalam penyusunan.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Empty state (tampil saat filter kosong) -->
+        <div class="facpage-empty" id="facpageEmpty" hidden>
+          <p>Tidak ada fasilitas dalam kategori ini.</p>
+        </div>
+
+      </div>
+      <div id="galleryOverlay" class="fac-gallery-overlay">
+  <div class="fac-gallery-modal">
+
+    <button class="fac-gallery-close" id="galleryClose">✕</button>
+
+    <div class="swiper fac-gallery-swiper">
+      <div class="swiper-wrapper" id="galleryWrapper"></div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+</div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Pagination, Autoplay } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+
+  // --- State & Elements ---
+  let gallerySwiper: Swiper | null = null;
+  const overlay = document.getElementById("galleryOverlay")!;
+  const wrapper = document.getElementById("galleryWrapper")!;
+  const closeBtn = document.getElementById("galleryClose")!;
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".facpage-tab");
+  const cards = document.querySelectorAll<HTMLElement>(".facpage-card");
+  const emptyState = document.getElementById("facpageEmpty")!;
+
+  // --- Functions ---
+
+  function initSwipers() {
+    document.querySelectorAll(".fac-swiper").forEach((el) => {
+      if ((el as any).swiper) return;
+      new Swiper(el as HTMLElement, {
+        modules: [Navigation, Pagination, Autoplay],
+        loop: true,
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        navigation: {
+          nextEl: el.querySelector(".swiper-button-next") as HTMLElement,
+          prevEl: el.querySelector(".swiper-button-prev") as HTMLElement,
+        },
+        pagination: {
+          el: el.querySelector(".swiper-pagination") as HTMLElement,
+          clickable: true,
+        },
+      });
+    });
+  }
+
+  function closeGallery() {
+    overlay.classList.remove("open");
+  }
+
+  function toggleCard(card: HTMLElement) {
+    const isOpen = card.getAttribute("aria-expanded") === "true";
+    const detail = card.querySelector<HTMLElement>(".facpage-detail")!;
+    const toggle = card.querySelector<HTMLElement>(".facpage-toggle")!;
+
+    // Close others (Accordion)
+    cards.forEach((other) => {
+      if (other !== card) {
+        other.setAttribute("aria-expanded", "false");
+        other.querySelector<HTMLElement>(".facpage-detail")!.hidden = true;
+        other
+          .querySelector<HTMLElement>(".facpage-toggle")!
+          .setAttribute("aria-expanded", "false");
+      }
+    });
+
+    if (isOpen) {
+      card.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-expanded", "false");
+      detail.hidden = true;
+    } else {
+      card.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-expanded", "true");
+      detail.hidden = false;
+
+      setTimeout(() => {
+        initSwipers();
+        card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 100);
+    }
+  }
+
+  // --- Event Listeners ---
+
+  // Card Clicks
+  cards.forEach((card) => {
+    const header = card.querySelector(".facpage-card-header")!;
+    header.addEventListener("click", () => toggleCard(card));
+  });
+
+  // Image Click (Gallery)
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains("fac-img-click")) {
+      const images = JSON.parse(target.dataset.gallery || "[]");
+      const startIndex = parseInt(target.dataset.index || "0");
+
+      wrapper.innerHTML = images
+        .map(
+          (src: string) => `
+        <div class="swiper-slide"><img src="${src}" /></div>
+      `,
+        )
+        .join("");
+
+      overlay.classList.add("open");
+
+      if (gallerySwiper) gallerySwiper.destroy(true, true);
+      gallerySwiper = new Swiper(".fac-gallery-swiper", {
+        modules: [Navigation, Pagination],
+        initialSlide: startIndex,
+        loop: images.length > 1,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        pagination: { el: ".swiper-pagination", clickable: true },
+      });
+    }
+  });
+
+  // Filter Tabs
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const filter = tab.dataset.filter!;
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const match = filter === "all" || card.dataset.type === filter;
+        card.style.display = match ? "block" : "none";
+        if (match) visibleCount++;
+      });
+      emptyState.hidden = visibleCount > 0;
+    });
+  });
+
+  // Global Helpers
+  closeBtn.addEventListener("click", closeGallery);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeGallery();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeGallery();
+  });
+
+  // URL Hash Support
+  window.addEventListener("load", () => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      cards.forEach((card) => {
+        const title = card
+          .querySelector(".facpage-card-title")
+          ?.textContent?.toLowerCase()
+          .replace(/\s+/g, "-");
+        if (title === hash) toggleCard(card);
+      });
+    }
+  });
+</script>

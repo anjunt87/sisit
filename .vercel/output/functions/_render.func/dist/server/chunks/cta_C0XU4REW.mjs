@@ -1,0 +1,27 @@
+import { c as createComponent } from './astro-component_D77M9rGE.mjs';
+import 'piccolore';
+import { m as maybeRenderHead, r as renderTemplate } from './entrypoint_uw6GGwwS.mjs';
+import 'clsx';
+
+const $$Cta = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`<!-- CTA -->${maybeRenderHead()}<section class="py-20 pb-24 bg-white"> <div data-animate="fade-up" data-delay="100" class="max-w-5xl mx-auto px-6"> <div class="relative bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-3xl p-12 text-center overflow-hidden"> <div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(circle at 10% 90%, rgba(255,255,255,0.04) 0%, transparent 50%), radial-gradient(circle at 90% 10%, rgba(16,185,129,0.1) 0%, transparent 40%)"></div> <div class="relative"> <i class="fas fa-envelope-open-text text-4xl text-amber-300 block mb-5"></i> <h3 class="font-serif text-3xl font-bold text-white mb-3">
+Tertarik Bergabung?
+</h3> <p class="text-white/75 text-base leading-relaxed max-w-md mx-auto mb-8">
+Daftarkan putra-putri Anda di Nurul Imam Islamic School dan wujudkan
+          impian bersama kami.
+</p> <div class="flex flex-wrap justify-center gap-4"> <a href="/pendaftaran" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm px-8 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-600/30"> <i class="fas fa-pen-to-square"></i> Daftar Sekarang
+</a> <a href="/kontak" class="inline-flex items-center gap-2 bg-transparent border-2 border-white/30 hover:bg-white/10 hover:border-white/60 text-white/90 font-semibold text-sm px-8 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5"> <i class="fas fa-phone-volume"></i> Hubungi Kami
+</a> </div> </div> </div> </div> </section>`;
+}, "C:/laragon/www/sisit-niis/src/pages/about/cta.astro", void 0);
+
+const $$file = "C:/laragon/www/sisit-niis/src/pages/about/cta.astro";
+const $$url = "/about/cta";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Cta,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+export { $$Cta as $, _page as _ };

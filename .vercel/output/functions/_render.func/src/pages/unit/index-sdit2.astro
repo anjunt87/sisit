@@ -1,0 +1,65 @@
+---
+// src/pages/unit/sdit2.astro
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import {
+  identitas,
+  stats,
+  statistik,
+  prosesPembelajaran,
+  pimpinan,
+  gallery,
+  categories,
+} from "../../data/sdit2";
+
+// section components
+import Hero from "./sdit2/Hero.astro";
+import Stats from "./sdit2/Stats.astro";
+import Tentang from "./sdit2/Tentang.astro";
+import Pimpinan from "./sdit2/Pimpinan.astro";
+import Keunggulan from "./sdit2/Keunggulan.astro";
+import Visimisi from "./sdit2/Visimisi.astro";
+import Kompetensi from "./sdit2/Kompetensi.astro";
+import Ekskul from "./sdit2/Ekskul.astro";
+import Gallery from "./sdit2/Gallery.astro";
+import Statistik from "./sdit2/Statistik.astro";
+import Identitas from "./sdit2/Identitas.astro";
+import CTA from "./sdit2/CTA.astro";
+---
+
+<BaseLayout
+  title="Profil SDIT Nurul Imam Karawang 1"
+  description="Profil lengkap SDIT Nurul Imam 2 Karawang, sekolah dasar Islam terpadu dengan akreditasi A, kurikulum merdeka dan pembelajaran full day school."
+  theme="green"
+>
+  <Hero />
+
+  <Stats stats={stats} />
+
+  <Tentang />
+
+  <Pimpinan pimpinan={pimpinan} />
+
+  <Keunggulan />
+
+  <Visimisi />
+
+  <Kompetensi />
+
+  <Ekskul />
+
+  <Gallery
+    gallery={gallery}
+    categories={categories}
+  />
+
+  <Statistik
+    statistik={statistik}
+    proses={prosesPembelajaran}
+  />
+
+  <Identitas identitas={identitas} />
+
+  <CTA />
+</BaseLayout>
