@@ -5,6 +5,7 @@ import { programs, colorMap } from "../../data/programs";
 import type { ColorKey } from "../../data/programs";
 
 export function getStaticPaths() {
+  console.log("Programs:", programs); // add this temporarily
   return programs.map((p) => ({
     params: { slug: p.slug },
     props: { program: p },
@@ -12,6 +13,9 @@ export function getStaticPaths() {
 }
 
 const { program } = Astro.props;
+if (!program) {
+  return Astro.redirect("/404");
+}
 const style = colorMap[program.color as ColorKey];
 ---
 
@@ -25,7 +29,6 @@ const style = colorMap[program.color as ColorKey];
       class="max-w-5xl mx-auto flex items-center gap-2 text-sm text-gray-500"
     >
       <a
-        <a
         href="/"
         class="hover:text-green-600 transition"
       >
@@ -33,7 +36,6 @@ const style = colorMap[program.color as ColorKey];
       </a>
       <span>/</span>
       <a
-        <a
         href="/#programs"
         class="hover:text-green-600 transition"
       >

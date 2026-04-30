@@ -8,7 +8,7 @@
 >
   <div class="max-w-7xl mx-auto px-6">
     <!-- Heading -->
-    <div class="text-center mb-16 fade-up delay-0">
+    <div class="text-center mb-16">
       <span
         data-animate="fade-up"
         data-delay="100"
@@ -44,7 +44,6 @@
             >
               <i class="fas fa-map-marker-alt text-green-600"></i>
             </div>
-
             <div>
               <h4 class="text-lg font-semibold text-gray-800 mb-1">
                 Alamat NIIS 1 & 2
@@ -63,7 +62,6 @@
             >
               <i class="fas fa-map-marker-alt text-green-600"></i>
             </div>
-
             <div>
               <h4 class="text-lg font-semibold text-gray-800 mb-1">
                 Alamat NIIS 3
@@ -83,7 +81,6 @@
             >
               <i class="fas fa-phone text-blue-600"></i>
             </div>
-
             <div>
               <h4 class="text-lg font-semibold text-gray-800 mb-1">Telepon</h4>
               <a
@@ -102,7 +99,6 @@
             >
               <i class="fas fa-envelope text-purple-600"></i>
             </div>
-
             <div>
               <h4 class="text-lg font-semibold text-gray-800 mb-1">Email</h4>
               <a
@@ -121,15 +117,13 @@
             >
               <i class="fas fa-globe text-yellow-600"></i>
             </div>
-
             <div>
               <h4 class="text-lg font-semibold text-gray-800 mb-1">Website</h4>
               <a
                 href="https://www.nurulimamkarawang.sch.id/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-600
-              hover:text-green-600 transition-colors"
+                class="text-gray-600 hover:text-green-600 transition-colors"
               >
                 www.nurulimamkarawang.sch.id
               </a>
@@ -146,16 +140,55 @@
       >
         <h3 class="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan</h3>
 
-        <form class="space-y-6">
+        <form
+          id="contact-form"
+          class="space-y-6"
+        >
+          <!-- Web3Forms Access Key (hidden) -->
+          <input
+            type="hidden"
+            name="access_key"
+            value="bbbc9c27-fe89-4d04-b92c-810e2256db82"
+          />
+          <input
+            type="hidden"
+            name="redirect"
+            value="false"
+          />
+          <input
+            type="hidden"
+            name="subject"
+            id="hidden-subject"
+            value="Pesan Baru dari Website NIIS"
+          />
+          <input
+            type="hidden"
+            name="from_name"
+            value="Website Nurul Imam Islamic School"
+          />
+          <!-- Honeypot anti-spam -->
+          <input
+            type="checkbox"
+            name="botcheck"
+            class="hidden"
+            style="display:none"
+          />
+
           <div class="grid md:grid-cols-2 gap-4">
             <!-- Nama -->
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
-                Nama Lengkap
+              <label
+                for="field-name"
+                class="block text-sm font-semibold text-gray-700 mb-2"
+              >
+                Nama Lengkap <span class="text-red-500">*</span>
               </label>
-
               <input
                 type="text"
+                id="field-name"
+                name="name"
+                required
+                autocomplete="name"
                 placeholder="Masukkan nama lengkap"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
@@ -163,12 +196,17 @@
 
             <!-- Telepon -->
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">
+              <label
+                for="field-phone"
+                class="block text-sm font-semibold text-gray-700 mb-2"
+              >
                 Nomor Telepon
               </label>
-
               <input
                 type="tel"
+                id="field-phone"
+                name="phone"
+                autocomplete="tel"
                 placeholder="Masukkan nomor telepon"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
@@ -177,12 +215,18 @@
 
           <!-- Email -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">
-              Email
+            <label
+              for="field-email"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Email <span class="text-red-500">*</span>
             </label>
-
             <input
               type="email"
+              id="field-email"
+              name="email"
+              required
+              autocomplete="email"
               placeholder="Masukkan alamat email"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
@@ -190,11 +234,16 @@
 
           <!-- Subjek -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">
+            <label
+              for="category-select"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
               Subjek
             </label>
-
             <select
+              name="category"
+              id="category-select"
+              autocomplete="off"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             >
               <option>Informasi Pendaftaran</option>
@@ -207,12 +256,18 @@
 
           <!-- Pesan -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">
-              Pesan
+            <label
+              for="field-message"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Pesan <span class="text-red-500">*</span>
             </label>
-
             <textarea
               rows="4"
+              id="field-message"
+              name="message"
+              required
+              autocomplete="off"
               placeholder="Tulis pesan Anda di sini..."
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             >
@@ -222,13 +277,256 @@
           <!-- Button -->
           <button
             type="submit"
-            class="w-full bg-green-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-700 transition-all hover:shadow-lg"
+            id="submit-btn"
+            class="w-full bg-green-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-700 transition-all hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            <i class="fas fa-paper-plane mr-2"></i>
-            Kirim Pesan
+            <i
+              class="fas fa-paper-plane"
+              id="btn-icon"
+            >
+            </i>
+            <span id="btn-text">Kirim Pesan</span>
           </button>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    min-width: 280px;
+    max-width: 360px;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .toast.success {
+    background: #fff;
+    border-left: 4px solid #16a34a;
+  }
+  .toast.error {
+    background: #fff;
+    border-left: 4px solid #dc2626;
+  }
+  .toast-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+  .toast.success .toast-icon {
+    background: #dcfce7;
+    color: #16a34a;
+  }
+  .toast.error .toast-icon {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+  .toast-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 14px;
+    padding: 2px;
+    line-height: 1;
+  }
+  .toast-close:hover {
+    color: #4b5563;
+  }
+  .toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    border-radius: 0 0 12px 12px;
+    width: 100%;
+    transform-origin: left;
+    animation: shrink 4s linear forwards;
+  }
+  .toast.success .toast-progress {
+    background: #16a34a;
+  }
+  .toast.error .toast-progress {
+    background: #dc2626;
+  }
+  @keyframes shrink {
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0);
+    }
+  }
+</style>
+
+<!-- Toast Container -->
+<div
+  id="toast"
+  class="toast"
+  role="alert"
+>
+  <div class="toast-icon">
+    <i
+      id="toast-icon"
+      class="fas fa-check"
+    >
+    </i>
+  </div>
+  <div>
+    <p
+      id="toast-title"
+      class="font-semibold text-gray-800 text-sm"
+    >
+    </p>
+    <p
+      id="toast-desc"
+      class="text-gray-500 text-xs mt-0.5"
+    >
+    </p>
+  </div>
+  <button
+    class="toast-close"
+    id="toast-close"
+    aria-label="Tutup"
+  >
+    <i class="fas fa-times"></i>
+  </button>
+  <div
+    class="toast-progress"
+    id="toast-progress"
+  >
+  </div>
+</div>
+
+<script>
+  window.alert = () => {}; // Override alert bawaan
+
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+  const btnText = document.getElementById("btn-text") as HTMLSpanElement;
+  const btnIcon = document.getElementById("btn-icon") as HTMLElement;
+  const categorySelect = document.getElementById(
+    "category-select",
+  ) as HTMLSelectElement;
+  const hiddenSubject = document.getElementById(
+    "hidden-subject",
+  ) as HTMLInputElement;
+  const toast = document.getElementById("toast") as HTMLDivElement;
+  const toastIcon = document.getElementById("toast-icon") as HTMLElement;
+  const toastTitle = document.getElementById(
+    "toast-title",
+  ) as HTMLParagraphElement;
+  const toastDesc = document.getElementById(
+    "toast-desc",
+  ) as HTMLParagraphElement;
+  const toastProgress = document.getElementById(
+    "toast-progress",
+  ) as HTMLDivElement;
+  const toastClose = document.getElementById(
+    "toast-close",
+  ) as HTMLButtonElement;
+
+  let toastTimer: ReturnType<typeof setTimeout>;
+
+  function showToast(type: "success" | "error") {
+    clearTimeout(toastTimer);
+
+    // Reset progress animation
+    toastProgress.style.animation = "none";
+    toastProgress.offsetHeight; // reflow
+    toastProgress.style.animation = "";
+
+    toast.classList.remove("success", "error", "show");
+
+    if (type === "success") {
+      toast.classList.add("success");
+      toastIcon.className = "fas fa-check";
+      toastTitle.textContent = "Pesan berhasil dikirim!";
+      toastDesc.textContent = "Kami akan menghubungi Anda segera.";
+    } else {
+      toast.classList.add("error");
+      toastIcon.className = "fas fa-exclamation";
+      toastTitle.textContent = "Gagal mengirim pesan.";
+      toastDesc.textContent = "Coba lagi atau hubungi kami langsung.";
+    }
+
+    requestAnimationFrame(() => {
+      toast.classList.add("show");
+    });
+
+    toastTimer = setTimeout(() => hideToast(), 4000);
+  }
+
+  function hideToast() {
+    toast.classList.remove("show");
+  }
+
+  toastClose.addEventListener("click", hideToast);
+
+  // Update subject sesuai pilihan kategori
+  categorySelect.addEventListener("change", () => {
+    hiddenSubject.value = `[NIIS] ${categorySelect.value}`;
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Loading state
+    submitBtn.disabled = true;
+    btnIcon.className = "fas fa-spinner fa-spin";
+    btnText.textContent = "Mengirim...";
+
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        showToast("success");
+        form.reset();
+      } else {
+        showToast("error");
+      }
+    } catch (err) {
+      showToast("error");
+    } finally {
+      submitBtn.disabled = false;
+      btnIcon.className = "fas fa-paper-plane";
+      btnText.textContent = "Kirim Pesan";
+    }
+  });
+</script>

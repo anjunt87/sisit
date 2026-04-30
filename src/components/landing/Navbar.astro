@@ -10,7 +10,7 @@ interface Props {
 const { transparent = false } = Astro.props;
 
 const menuItems = [
-  { label: "Beranda", href: "/" },
+  { label: "Beranda", href: "/#hero" },
 
   {
     label: "Tentang",
@@ -62,6 +62,7 @@ const menuItems = [
   { label: "Berita", href: "/berita" },
   { label: "PPDB", href: "/ppdb/index-ppdb" },
   { label: "Kontak", href: "/#contact" },
+  // { label: "Kontak", href: "/", data: { scroll: "contact" } },
 ];
 ---
 
@@ -177,19 +178,19 @@ const menuItems = [
 <!-- Right Side -->
 <div class="flex items-center gap-2">
   <!-- Desktop Button -->
-  <a
-    href="/login"
+  <!-- <a
+    href="#"
     class="hidden sm:inline-flex items-center rounded-xl bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition"
   >
     Masuk
   </a>
 
   <a
-    href="/daftar"
+    href="#"
     class="hidden sm:inline-flex items-center rounded-xl bg-yellow-400 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-yellow-500 transition"
   >
     Daftar
-  </a>
+  </a> -->
 
   <!-- Hamburger -->
   <button
@@ -317,7 +318,7 @@ const menuItems = [
     }
 
     <!-- Mobile Buttons -->
-    <div class="grid grid-cols-2 gap-2 pt-3 border-t border-gray-100">
+    <!-- <div class="grid grid-cols-2 gap-2 pt-3 border-t border-gray-100">
       <a
         href="/login"
         class="rounded-xl bg-green-600 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-green-700 transition"
@@ -331,7 +332,7 @@ const menuItems = [
       >
         Daftar
       </a>
-    </div>
+    </div> -->
     </div>
   </div>
 </div>
@@ -471,15 +472,20 @@ const menuItems = [
     }, { once: true });
 
     // Smooth scroll untuk desktop nav
+// Sudah ada ini, tinggal pastikan handle /#contact juga
 document.querySelectorAll(".nav-link, .dropdown-link").forEach((link) => {
   link.addEventListener("click", (e) => {
     const href = link.getAttribute("href");
-    if (href && href.startsWith("#")) {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+    // Handle /#contact dari halaman lain
+    if (href && href.includes("/#")) {
+      const hash = href.split("#")[1];
+      if (window.location.pathname === "/") {
+        e.preventDefault();
+        const target = document.querySelector(`#${hash}`);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+      // Kalau bukan di homepage, biarkan navigate normal ke /#contact
     }
   });
 });
