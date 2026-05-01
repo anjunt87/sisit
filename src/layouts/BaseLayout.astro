@@ -2,7 +2,7 @@
 //src\layouts\BaseLayout.astro
 import "../styles/global.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import Analytics from "@vercel/analytics/astro";
 export { initMobileMenu } from "../scripts/mobileMenu";
 export { initSmoothScroll } from "../scripts/smoothScroll";
 export { initBackToTop } from "../scripts/backToTop";
@@ -54,7 +54,7 @@ const {
       href="/favicon.png"
     />
   </head>
-
+  <Analytics />
   <body
     class={`theme-${theme} bg-white text-gray-900 antialiased overflow-x-hidden`}
   >
@@ -91,4 +91,5 @@ const {
     // initChatBot();
     initScrollAnimation();
   </script>
+
 </html>
