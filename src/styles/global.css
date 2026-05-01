@@ -4,9 +4,8 @@
 @import "tailwindcss";
 @import "swiper/css";
 @import "swiper/css/pagination";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "swiper/css";
+@import "swiper/css/pagination";
 /* ================================
    THEME SYSTEM
 ================================ */

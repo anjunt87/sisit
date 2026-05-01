@@ -1,27 +1,23 @@
 ---
-// src/pages/programs/[slug].astro
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { programs, colorMap } from "../../data/programs";
 import type { ColorKey } from "../../data/programs";
 
-export function getStaticPaths() {
-  console.log("Programs:", programs); // add this temporarily
-  return programs.map((p) => ({
-    params: { slug: p.slug },
-    props: { program: p },
-  }));
-}
+const { slug } = Astro.params;
 
-const { program } = Astro.props;
-if (!program) {
+const data = programs.find((p) => p.slug === slug);
+
+if (!data) {
   return Astro.redirect("/404");
 }
-const style = colorMap[program.color as ColorKey];
+
+const style = colorMap[data.color as ColorKey];
+console.log(colorMap);
 ---
 
 <BaseLayout
-  title={`${program.title} — Nurul Imam Islamic School`}
-  description={program.desc}
+  title={`${data.title} — Nurul Imam Islamic School`}
+  description={data.desc}
 >
   <!-- Breadcrumb -->
   <div class="bg-white border-b px-6 py-3">
@@ -42,7 +38,7 @@ const style = colorMap[program.color as ColorKey];
         Program
       </a>
       <span>/</span>
-      <span class="text-gray-800 font-medium">{program.title}</span>
+      <span class="text-gray-800 font-medium">{data.title}</span>
     </div>
   </div>
 
@@ -79,25 +75,25 @@ const style = colorMap[program.color as ColorKey];
           <div
             class={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl text-white shadow-md ${style.icon}`}
           >
-            <i class={`fa-solid ${program.icon}`}></i>
+            <i class={`fa-solid ${data.icon}`}></i>
           </div>
           <h1
             class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight"
           >
-            {program.title}
+            {data.title}
           </h1>
         </div>
 
         <!-- Headline -->
         <p class={`text-lg font-semibold ${style.text}`}>
-          {program.details.headline}
+          {data.details.headline}
         </p>
 
         <!-- Desc — nada UMMI -->
         <p class="text-gray-600 text-base leading-relaxed max-w-xl">
           Nak, di sini kami hadir dengan sepenuh hati untuk menemani perjalanan
-          belajarmu. {program.desc} Karena setiap anak adalah amanah terindah yang
-          Allah titipkan kepada kita.
+          belajarmu. {data.desc} Karena setiap anak adalah amanah terindah yang Allah
+          titipkan kepada kita.
         </p>
 
         <!-- CTA -->
@@ -117,8 +113,8 @@ const style = colorMap[program.color as ColorKey];
           class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]"
         >
           <img
-            src={`https://picsum.photos/seed/${program.slug}/800/600`}
-            alt={program.title}
+            src={`https://picsum.photos/seed/${data.slug}/800/600`}
+            alt={data.title}
             class="w-full h-full object-cover"
           />
           <!-- Overlay badge -->
@@ -172,7 +168,7 @@ const style = colorMap[program.color as ColorKey];
 
         <ul class="space-y-4">
           {
-            program.details.points.map((point) => (
+            data.details.points.map((point) => (
               <li class="flex items-start gap-3">
                 <span
                   class={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white text-xs ${style.icon}`}
@@ -202,14 +198,14 @@ const style = colorMap[program.color as ColorKey];
         <!-- Mini photo -->
         <div class="rounded-2xl overflow-hidden shadow-sm aspect-video">
           <img
-            src={`https://picsum.photos/seed/${program.slug}-2/400/250`}
+            src={`https://picsum.photos/seed/${data.slug}-2/400/250`}
             alt="Suasana program"
             class="w-full h-full object-cover"
           />
         </div>
 
         {
-          program.details.highlights.map((h) => (
+          data.details.highlights.map((h) => (
             <div
               class={`rounded-2xl border p-5 text-center bg-gradient-to-br shadow-sm ${style.bg} ${style.border}`}
             >

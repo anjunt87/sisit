@@ -1,21 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-// import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
-
+import node from '@astrojs/node';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   output: 'server',
-  devToolbar: { enabled: false },
 
-  adapter: vercel(), 
+  adapter: node({
+    mode: 'standalone'
+  }),
 
   integrations: [
     react()
   ],
 
-  // vite: {
-  //   plugins: [tailwindcss()]
-  // }
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
