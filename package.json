@@ -8,20 +8,21 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^6.2.1",
     "@astrojs/node": "^10.0.6",
     "@astrojs/react": "^5.0.4",
+    "@astrojs/vercel": "^10.0.6",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@supabase/supabase-js": "^2.105.1",
     "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "astro": "^6.2.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "swiper": "^12.1.3",
     "tailwindcss": "^4.2.2"
-    },
-    "overrides": {
+  },
+  "overrides": {
     "vite": "^7.0.0"
   }
 }
