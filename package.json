@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^6.2.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
@@ -22,7 +23,7 @@
     "tailwindcss": "^4.2.2"
   },
   "optionalDependencies": {
-    "@img/sharp-linux-x64": "*",
-    "@img/sharp-linux-arm64": "*"
+    "@img/sharp-linux-arm64": "*",
+    "@img/sharp-linux-x64": "*"
   }
 }
