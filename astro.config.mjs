@@ -6,7 +6,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   output: 'server',
-  devToolbar: { enabled: false },
 
   adapter: node({
     mode: 'standalone'
