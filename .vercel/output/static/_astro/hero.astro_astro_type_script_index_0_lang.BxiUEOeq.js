@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".stat-counter").forEach(t=>{const n=()=>{const e=+t.getAttribute("data-target"),o=t.getAttribute("data-suffix")||"",c=+t.innerText.replace(/\D/g,""),s=Math.ceil(e/100);c<e?(t.innerText=c+s+o,setTimeout(n,20)):t.innerText=e+o};n()})});

@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   devToolbar: { enabled: false },
-  output: 'server',
+  output: 'static',
   adapter: vercel(),
   integrations: [react()],
   vite: {

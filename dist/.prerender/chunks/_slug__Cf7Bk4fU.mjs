@@ -1,0 +1,73 @@
+import { c as createComponent } from './astro-component_7ETOIUHv.mjs';
+import 'piccolore';
+import { a as renderComponent, r as renderTemplate, m as maybeRenderHead, b as addAttribute } from './prerender_CQg9tqRL.mjs';
+import { $ as $$BaseLayout } from './BaseLayout_C1y3sP9t.mjs';
+import { p as programs, c as colorMap } from './programs_BejtubCD.mjs';
+
+const $$slug = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$props, $$slots);
+  Astro2.self = $$slug;
+  const { slug } = Astro2.params;
+  const data = programs.find((p) => p.slug === slug);
+  if (!data) {
+    return Astro2.redirect("/404");
+  }
+  const style = colorMap[data.color];
+  console.log(colorMap);
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": `${data.title} — Nurul Imam Islamic School`, "description": data.desc }, { "default": ($$result2) => renderTemplate`  ${maybeRenderHead()}<div class="bg-white border-b px-6 py-3"> <div class="max-w-5xl mx-auto flex items-center gap-2 text-sm text-gray-500"> <a href="/" class="hover:text-green-600 transition">
+Beranda
+</a> <span>/</span> <a href="/#programs" class="hover:text-green-600 transition">
+Program
+</a> <span>/</span> <span class="text-gray-800 font-medium">${data.title}</span> </div> </div>  <section${addAttribute(`relative overflow-hidden bg-gradient-to-br py-20 px-6 ${style.bg}`, "class")}> <!-- Decorative circles --> <div class="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-white/10"></div> <div class="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/10"></div> <div class="relative max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12"> <!-- Left: Text --> <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-5"> <!-- Badge --> <span${addAttribute(`rounded-full px-4 py-1 text-xs font-semibold tracking-wide uppercase ${style.badge}`, "class")}>
+Program Unggulan
+</span> <!-- Icon + Title --> <div class="flex items-center gap-4"> <div${addAttribute(`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl text-white shadow-md ${style.icon}`, "class")}> <i${addAttribute(`fa-solid ${data.icon}`, "class")}></i> </div> <h1 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight"> ${data.title} </h1> </div> <!-- Headline --> <p${addAttribute(`text-lg font-semibold ${style.text}`, "class")}> ${data.details.headline} </p> <!-- Desc — nada UMMI --> <p class="text-gray-600 text-base leading-relaxed max-w-xl">
+Nak, di sini kami hadir dengan sepenuh hati untuk menemani perjalanan
+          belajarmu. ${data.desc} Karena setiap anak adalah amanah terindah yang Allah
+          titipkan kepada kita.
+</p> <!-- CTA --> <a href="/contact"${addAttribute(`mt-2 inline-flex items-center gap-2 rounded-full px-6 py-3 text-white font-semibold shadow-lg transition hover:opacity-90 hover:-translate-y-1 ${style.icon}`, "class")}>
+Daftar Sekarang
+<i class="fa-solid fa-arrow-right"></i> </a> </div> <!-- Right: Hero Image --> <div class="flex-1 w-full max-w-sm md:max-w-none"> <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3]"> <img${addAttribute(`https://picsum.photos/seed/${data.slug}/800/600`, "src")}${addAttribute(data.title, "alt")} class="w-full h-full object-cover"> <!-- Overlay badge --> <div class="absolute bottom-4 left-4 right-4"> <div class="bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 flex items-center gap-3 shadow"> <div${addAttribute(`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white text-sm ${style.icon}`, "class")}> <i class="fa-solid fa-star"></i> </div> <div> <div class="text-xs text-gray-500">
+Program terpercaya sejak
+</div> <div class="text-sm font-bold text-gray-800">
+Nurul Imam Islamic School
+</div> </div> </div> </div> </div> </div> </div> </section>  <section class="py-14 px-6 bg-gray-50"> <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-3"> <!-- Points --> <div class="md:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8"> <div class="flex items-center gap-3 mb-6"> <div${addAttribute(`flex h-9 w-9 items-center justify-center rounded-xl text-white text-sm ${style.icon}`, "class")}> <i class="fa-solid fa-heart"></i> </div> <h2 class="text-xl font-bold text-gray-800">
+Yang Akan Ananda Dapatkan
+</h2> </div> <!-- UMMI intro --> <p class="text-sm text-gray-500 mb-5 leading-relaxed">
+Dengan penuh kasih sayang, kami siapkan hal-hal terbaik untuk tumbuh
+          kembang ananda di program ini:
+</p> <ul class="space-y-4"> ${data.details.points.map((point) => renderTemplate`<li class="flex items-start gap-3"> <span${addAttribute(`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white text-xs ${style.icon}`, "class")}> <i class="fa-solid fa-check"></i> </span> <span class="text-gray-700 text-sm leading-relaxed"> ${point} </span> </li>`)} </ul> <!-- UMMI closing note --> <div${addAttribute(`mt-8 rounded-xl p-4 border ${style.bg} ${style.border}`, "class")}> <p${addAttribute(`text-sm font-medium leading-relaxed ${style.text}`, "class")}>
+💚 "Kami percaya, setiap langkah kecil ananda hari ini adalah
+            investasi besar untuk masa depannya. Bersama, kita wujudkan
+            mimpi-mimpi indah itu."
+</p> </div> </div> <!-- Highlights + Foto Kecil --> <div class="flex flex-col gap-4"> <!-- Mini photo --> <div class="rounded-2xl overflow-hidden shadow-sm aspect-video"> <img${addAttribute(`https://picsum.photos/seed/${data.slug}-2/400/250`, "src")} alt="Suasana program" class="w-full h-full object-cover"> </div> ${data.details.highlights.map((h) => renderTemplate`<div${addAttribute(`rounded-2xl border p-5 text-center bg-gradient-to-br shadow-sm ${style.bg} ${style.border}`, "class")}> <div${addAttribute(`text-2xl font-bold ${style.text}`, "class")}>${h.value}</div> <div class="mt-1 text-xs text-gray-500">${h.label}</div> </div>`)} </div> </div> </section>  <section class="py-12 px-6 bg-white"> <div class="max-w-3xl mx-auto text-center"> <div class="text-4xl mb-4">🤲</div> <blockquote class="text-lg md:text-xl text-gray-700 font-medium leading-relaxed italic">
+"Mendidik anak dengan ilmu dan akhlak adalah hadiah terbaik yang bisa
+        kita berikan kepada mereka — dan kepada dunia."
+</blockquote> <p class="mt-4 text-sm text-gray-400">
+— Tim Pengajar Nurul Imam Islamic School
+</p> </div> </section>  <section${addAttribute(`py-16 px-6 bg-gradient-to-br ${style.bg}`, "class")}> <div class="max-w-2xl mx-auto text-center flex flex-col items-center gap-5"> <div class="text-3xl">✨</div> <h2 class="text-2xl font-bold text-gray-800">
+Siap Bergabung Bersama Kami?
+</h2> <p class="text-gray-600 text-base leading-relaxed">
+Yuk, jadikan sekolah ini rumah kedua ananda — tempat tumbuh dengan ilmu,
+        iman, dan cinta. Kami siap menyambut dengan tangan terbuka. 🌿
+</p> <div class="flex flex-col sm:flex-row gap-3"> <a href="/contact"${addAttribute(`inline-flex items-center gap-2 rounded-full px-7 py-3 text-white font-semibold shadow-lg transition hover:opacity-90 hover:-translate-y-1 ${style.icon}`, "class")}>
+Daftar Sekarang
+<i class="fa-solid fa-arrow-right"></i> </a> <a href="/#programs" class="inline-flex items-center gap-2 rounded-full px-7
+    py-3 bg-white text-gray-700 font-semibold shadow transition
+    hover:-translate-y-1 border border-gray-200">
+Lihat Program Lain
+<!-- <i class="fa-solid fa-arrow-right fa-grid-2"></i> --> </a> </div> </div> </section>` })}`;
+}, "C:/laragon/www/sisit-niis/src/pages/programs/[slug].astro", void 0);
+
+const $$file = "C:/laragon/www/sisit-niis/src/pages/programs/[slug].astro";
+const $$url = "/programs/[slug]";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$slug,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

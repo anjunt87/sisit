@@ -1,0 +1,41 @@
+import { c as createComponent } from './astro-component_7ETOIUHv.mjs';
+import 'piccolore';
+import { m as maybeRenderHead, r as renderTemplate } from './prerender_CQg9tqRL.mjs';
+import 'clsx';
+
+const $$Tujuan = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`<!-- Tujuan -->${maybeRenderHead()}<section id="tujuan" class="py-20 bg-white"> <div class="max-w-5xl mx-auto px-6"> <div class="text-center mb-12"> <span data-animate="fade-up" data-delay="100" class="inline-block bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-bold tracking-widest uppercase px-4 py-1 rounded-full mb-3">
+Tujuan
+</span> <h2 data-animate="fade-up" data-delay="200" class="font-serif text-3xl md:text-4xl font-bold text-slate-900">
+Tujuan Sekolah
+</h2> <p data-animate="fade-up" data-delay="300" class="text-slate-600 mt-3">
+Target capaian yang ingin diwujudkan dalam proses pendidikan
+</p> </div> <div data-animate="fade-up" data-delay="300" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> <div class="group relative bg-slate-50 border border-slate-200 rounded-2xl p-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-100 hover:border-emerald-100 hover:bg-white transition-all duration-300"> <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div> <div class="w-14 h-14 bg-emerald-50 border-2 border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all duration-300"> <i class="fas fa-book-quran"></i> </div> <h4 class="font-bold text-slate-900 mb-2">Hafalan Al-Quran</h4> <p class="text-sm text-slate-600 leading-relaxed">
+Setiap siswa mampu menghafal minimal 2 juz Al-Quran selama masa studi
+</p> </div> <div class="group relative bg-slate-50 border border-slate-200 rounded-2xl p-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-100 hover:border-emerald-100 hover:bg-white transition-all duration-300"> <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div> <div class="w-14 h-14 bg-emerald-50 border-2 border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all duration-300"> <i class="fas fa-trophy"></i> </div> <h4 class="font-bold text-slate-900 mb-2">Prestasi Akademik</h4> <p class="text-sm text-slate-600 leading-relaxed">
+Meraih nilai ujian nasional di atas rata-rata nasional secara
+          konsisten
+</p> </div> <div class="group relative bg-slate-50 border border-slate-200 rounded-2xl p-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-100 hover:border-emerald-100 hover:bg-white transition-all duration-300"> <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div> <div class="w-14 h-14 bg-emerald-50 border-2 border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all duration-300"> <i class="fas fa-language"></i> </div> <h4 class="font-bold text-slate-900 mb-2">Kemampuan Bahasa</h4> <p class="text-sm text-slate-600 leading-relaxed">
+Menguasai Bahasa Arab dan Bahasa Inggris sebagai bekal komunikasi
+          global
+</p> </div> <div class="group relative bg-slate-50 border border-slate-200 rounded-2xl p-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-100 hover:border-emerald-100 hover:bg-white transition-all duration-300"> <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div> <div class="w-14 h-14 bg-emerald-50 border-2 border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all duration-300"> <i class="fas fa-hands-helping"></i> </div> <h4 class="font-bold text-slate-900 mb-2">Jiwa Sosial</h4> <p class="text-sm text-slate-600 leading-relaxed">
+Memiliki kepekaan sosial tinggi dan aktif berkontribusi pada
+          masyarakat
+</p> </div> <div class="group relative bg-slate-50 border border-slate-200 rounded-2xl p-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-100 hover:border-emerald-100 hover:bg-white transition-all duration-300"> <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div> <div class="w-14 h-14 bg-emerald-50 border-2 border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all duration-300"> <i class="fas fa-laptop-code"></i> </div> <h4 class="font-bold text-slate-900 mb-2">Literasi Digital</h4> <p class="text-sm text-slate-600 leading-relaxed">
+Memanfaatkan teknologi secara cerdas, etis, dan bertanggung jawab
+</p> </div> <div class="group relative bg-slate-50 border border-slate-200 rounded-2xl p-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-100 hover:border-emerald-100 hover:bg-white transition-all duration-300"> <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div> <div class="w-14 h-14 bg-emerald-50 border-2 border-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all duration-300"> <i class="fas fa-user-graduate"></i> </div> <h4 class="font-bold text-slate-900 mb-2">Siap Perguruan Tinggi</h4> <p class="text-sm text-slate-600 leading-relaxed">
+Lulusan mampu masuk ke universitas terbaik dalam dan luar negeri
+</p> </div> </div> </div> </section>`;
+}, "C:/laragon/www/sisit-niis/src/pages/about/tujuan.astro", void 0);
+
+const $$file = "C:/laragon/www/sisit-niis/src/pages/about/tujuan.astro";
+const $$url = "/about/tujuan";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Tujuan,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+export { $$Tujuan as $, _page as _ };
